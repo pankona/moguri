@@ -6,9 +6,11 @@
   "license": "MIT",
   "scripts": {
     "build": "NODE_ENV=\\\"production\\\" ts-node ./build.ts",
-    "start": "NODE_ENV=\\\"production\\\" ts-node ./serve.ts"
+    "start": "NODE_ENV=\\\"development\\\" ts-node ./serve.ts"
   },
   "dependencies": {
+    "@types/firebase": "^3.2.1",
+    "firebase": "^8.2.9",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },
