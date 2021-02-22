@@ -1,0 +1,12 @@
+{
+  "name": "moguri",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "git@github.com:pankona/moguri.git",
+  "author": "pankona <yosuke.akatsuka@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}
