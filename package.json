@@ -1,12 +1,24 @@
 {
   "name": "moguri",
   "version": "0.0.1",
-  "main": "index.js",
   "repository": "git@github.com:pankona/moguri.git",
   "author": "pankona <yosuke.akatsuka@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "NODE_ENV=\\\"production\\\" ts-node ./build.ts",
+    "serve": "NODE_ENV=\\\"production\\\" ts-node ./serve.ts"
+  },
   "dependencies": {
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.31",
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "^17.0.1",
+    "esbuild": "^0.8.50",
+    "ts-loader": "^8.0.17",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.5"
   }
 }
