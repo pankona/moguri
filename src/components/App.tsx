@@ -1,13 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 
-class App extends Component {
-  render() {
-    return (
-      <>
-        <h1>Hello TS-React!!!</h1>
-      </>
-    );
-  }
-}
+const App: React.FunctionComponent = () => {
+  return <div>Hello simple FunctionComponent!</div>;
+};
 
 export default App;
