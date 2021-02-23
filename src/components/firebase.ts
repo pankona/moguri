@@ -2,13 +2,13 @@ import firebase from "firebase/app";
 import "firebase/auth";
 
 const config = {
-  apiKey: "AIzaSyDconq6_QNrXKHqs8KGqS46HsyUFCz7s3Y",
-  authDomain: "moguri-c42db.firebaseapp.com",
-  projectId: "moguri-c42db",
-  storageBucket: "moguri-c42db.appspot.com",
-  messagingSenderId: "909960395719",
-  appId: "1:909960395719:web:2fda9eaa0fcdd43288f7e2",
-  measurementId: "G-BGCLJ971FL",
+  apiKey: "AIzaSyBFuR_VwwSAaex_k9rKPCNtCIjDlgFU1-s",
+  authDomain: "moguri-mogumogu.firebaseapp.com",
+  projectId: "moguri-mogumogu",
+  storageBucket: "moguri-mogumogu.appspot.com",
+  messagingSenderId: "180738547586",
+  appId: "1:180738547586:web:9726674f479358844c399b",
+  measurementId: "G-R7NK5CPT4H",
 };
 
 firebase.initializeApp(config);
