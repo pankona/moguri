@@ -21,7 +21,7 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      <p className="App-intro">Name: {user && user.displayName}</p>
+      <p>Your Name: {user && user.displayName}</p>
 
       {user ? (
         <button onClick={logout}>Google Logout</button>
