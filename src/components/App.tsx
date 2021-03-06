@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CharacterCreateForm from "./CharacterCreateForm";
+import { CharacterStoreMemory } from "./CharacterStore";
 import firebase from "./firebase";
 
 const App: React.FC = () => {
@@ -25,7 +26,9 @@ const App: React.FC = () => {
       {user ? (
         <>
           <button onClick={logout}>Google Logout</button>
-          <CharacterCreateForm user={user} />
+          <CharacterCreateForm
+            characterStore={new CharacterStoreMemory(user)}
+          />
         </>
       ) : (
         <button onClick={login}>Google Login</button>
