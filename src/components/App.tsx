@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
+import CharacterCreateForm from "./CharacterCreateForm";
+import { CharacterStoreMemory } from "./CharacterStore";
 import firebase from "./firebase";
 
 const App: React.FC = () => {
   const [user, setUser] = useState<firebase.User | null>(null);
 
   useEffect(() => {
-    return firebase.auth().onAuthStateChanged((user) => {
+    return firebase.auth().onAuthStateChanged((user: firebase.User | null) => {
       setUser(user);
     });
   }, []);
@@ -21,10 +23,13 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      <p>Your Name: {user && user.displayName}</p>
-
       {user ? (
-        <button onClick={logout}>Google Logout</button>
+        <>
+          <button onClick={logout}>Google Logout</button>
+          <CharacterCreateForm
+            characterStore={new CharacterStoreMemory(user)}
+          />
+        </>
       ) : (
         <button onClick={login}>Google Login</button>
       )}
