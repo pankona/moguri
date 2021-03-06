@@ -8,6 +8,7 @@ export interface CharacterStore {
 
 export class CharacterStoreMemory implements CharacterStore {
   private characters: Character[];
+
   constructor(private user: firebase.User) {
     this.characters = [];
   }
