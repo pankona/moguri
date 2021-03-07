@@ -4,6 +4,7 @@ import firebase from "./firebase";
 export interface CharacterStore {
   fetchAll: () => Character[];
   add: (c: Character) => boolean;
+  remove: (id: string) => boolean;
 }
 
 export class CharacterStoreMemory implements CharacterStore {
@@ -23,6 +24,17 @@ export class CharacterStoreMemory implements CharacterStore {
     }
     newCharacter.id = this.user.uid + "_" + newCharacter.name;
     this.characters.push(newCharacter);
+    return true;
+  }
+
+  remove(id: string): boolean {
+    const newCharacters = this.characters.filter((c: Character): boolean => {
+      return c.id !== id;
+    });
+    if (newCharacters.length === this.characters.length) {
+      return false;
+    }
+    this.characters = newCharacters;
     return true;
   }
 

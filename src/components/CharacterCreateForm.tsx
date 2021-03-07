@@ -27,6 +27,13 @@ const CharacterCreateForm: React.FC<{
     }
   };
 
+  const onRemoveCharacter = (id: string) => {
+    if (characterStore.remove(id)) {
+      setCharacters([...characterStore.fetchAll()]);
+      setCharacterName("");
+    }
+  };
+
   return (
     <div>
       <div>input character name</div>
@@ -40,7 +47,16 @@ const CharacterCreateForm: React.FC<{
       </form>
       <div>characters</div>
       {characters.map((character) => (
-        <div key={character.id}>{character.name}</div>
+        <div key={character.id}>
+          {character.name}
+          <input
+            type="button"
+            value="remove"
+            onClick={(_: React.MouseEvent<HTMLInputElement>) => {
+              onRemoveCharacter(character.id);
+            }}
+          />
+        </div>
       ))}
     </div>
   );
