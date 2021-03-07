@@ -36,7 +36,7 @@ const CharacterCreateForm: React.FC<{
 
   return (
     <div>
-      <div>input character name</div>
+      <div>input new character name</div>
       <form onSubmit={onSubmitCharacterCreate}>
         <input
           type="text"
