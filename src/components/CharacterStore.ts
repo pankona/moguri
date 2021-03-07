@@ -1,5 +1,6 @@
 import { Character } from "./Character";
 import firebase from "./firebase";
+import Cookies from "js-cookie";
 
 export interface CharacterStore {
   fetchAll: () => Character[];
@@ -8,39 +9,50 @@ export interface CharacterStore {
 }
 
 export class CharacterStoreMemory implements CharacterStore {
-  private characters: Character[];
-
-  constructor(private user: firebase.User) {
-    this.characters = [];
-  }
+  constructor(private user: firebase.User) {}
 
   fetchAll(): Character[] {
-    return this.characters;
+    const characters = Cookies.getJSON("characters") as Character[];
+    if (characters) {
+      return characters;
+    }
+
+    Cookies.set("characters", []);
+    return [];
   }
 
   add(newCharacter: Character): boolean {
-    if (this.alreadyExists(newCharacter)) {
+    if (newCharacter.name === "") {
+      return false;
+    }
+    const characters = Cookies.getJSON("characters") as Character[];
+    if (this.alreadyExists(characters, newCharacter)) {
       return false;
     }
     newCharacter.id = this.user.uid + "_" + newCharacter.name;
-    this.characters.push(newCharacter);
+    characters.push(newCharacter);
+    Cookies.set("characters", characters);
     return true;
   }
 
   remove(id: string): boolean {
-    const newCharacters = this.characters.filter((c: Character): boolean => {
+    const characters = Cookies.getJSON("characters") as Character[];
+    const newCharacters = characters.filter((c: Character): boolean => {
       return c.id !== id;
     });
-    if (newCharacters.length === this.characters.length) {
+    if (newCharacters.length === characters.length) {
       return false;
     }
-    this.characters = newCharacters;
+    Cookies.set("characters", newCharacters);
     return true;
   }
 
-  private alreadyExists(character: Character): boolean {
-    return this.characters.some((c) => {
-      return c.name === character.name;
+  private alreadyExists(
+    currentCharacters: Character[],
+    newCharacter: Character
+  ): boolean {
+    return currentCharacters.some((c) => {
+      return c.name === newCharacter.name;
     });
   }
 }
