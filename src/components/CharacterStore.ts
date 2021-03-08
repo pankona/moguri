@@ -29,6 +29,9 @@ export class CharacterStoreMemory implements CharacterStore {
     if (this.alreadyExists(characters, newCharacter)) {
       return false;
     }
+    if (characters.length >= 3) {
+      return false;
+    }
     newCharacter.id = this.user.uid + "_" + newCharacter.name;
     characters.push(newCharacter);
     Cookies.set("characters", characters);
