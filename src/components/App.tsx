@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import CharacterCreateForm from "./CharacterCreateForm";
+import { Character } from "./Character";
 import { CharacterStoreMemory } from "./CharacterStore";
+import Dangeon from "./Dangeon";
 import firebase from "./firebase";
+import StartMenu from "./StartMenu";
 
 const App: React.FC = () => {
   const [user, setUser] = useState<firebase.User | null>(null);
@@ -12,6 +14,8 @@ const App: React.FC = () => {
     });
   }, []);
 
+  const [scene, setScene] = useState<string>("index");
+
   const login = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithRedirect(provider);
@@ -21,18 +25,48 @@ const App: React.FC = () => {
     firebase.auth().signOut();
   };
 
+  const [currentCharacter, setCurrentCharacter] = useState<Character | null>(
+    null
+  );
+
+  const onChangeScene = (c: Character) => {
+    setCurrentCharacter(c);
+    setScene("dangeon");
+  };
+
+  const onExitDangeon = () => {
+    setScene("index");
+  };
+
   return (
     <div className="App">
-      {user ? (
-        <>
-          <button onClick={logout}>Google Logout</button>
-          <CharacterCreateForm
-            characterStore={new CharacterStoreMemory(user)}
-          />
-        </>
-      ) : (
-        <button onClick={login}>Google Login</button>
-      )}
+      {(() => {
+        switch (scene) {
+          case "index":
+            return user ? (
+              <>
+                <button onClick={logout}>Google Logout</button>
+                <StartMenu
+                  characterStore={new CharacterStoreMemory(user)}
+                  onChangeScene={onChangeScene}
+                />
+              </>
+            ) : (
+              <button onClick={login}>Google Login</button>
+            );
+          case "dangeon":
+            return currentCharacter ? (
+              <Dangeon
+                character={currentCharacter}
+                onExitDangeon={onExitDangeon}
+              />
+            ) : (
+              <div>:(</div>
+            );
+          default:
+            return <div>unknown :(</div>;
+        }
+      })()}
     </div>
   );
 };

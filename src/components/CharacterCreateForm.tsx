@@ -4,7 +4,8 @@ import { Character } from "./Character";
 
 const CharacterCreateForm: React.FC<{
   characterStore: CharacterStore;
-}> = ({ characterStore }) => {
+  onChangeScene: (c: Character) => void;
+}> = ({ characterStore, onChangeScene }) => {
   const [characterName, setCharacterName] = React.useState<string>("");
 
   const onCharacterNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,6 +35,10 @@ const CharacterCreateForm: React.FC<{
     }
   };
 
+  const onStart = (c: Character) => {
+    onChangeScene(c);
+  };
+
   return (
     <div>
       <div>input new character name</div>
@@ -49,6 +54,14 @@ const CharacterCreateForm: React.FC<{
       {characters.map((character) => (
         <div key={character.id}>
           {character.name}
+          <input
+            type="button"
+            value="start"
+            onClick={(_: React.MouseEvent<HTMLInputElement>) => {
+              onStart(character);
+            }}
+          />
+
           <input
             type="button"
             value="remove"
