@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Character } from "./Character";
 import { CharacterStoreMemory } from "./CharacterStore";
-import Dangeon from "./Dangeon";
+import DangeonScene from "./Dangeon";
 import firebase from "./firebase";
 import StartMenu from "./StartMenu";
+
+export type Scene = "index" | "dangeon";
 
 const App: React.FC = () => {
   const [user, setUser] = useState<firebase.User | null>(null);
@@ -14,7 +16,7 @@ const App: React.FC = () => {
     });
   }, []);
 
-  const [scene, setScene] = useState<string>("index");
+  const [scene, setScene] = useState<Scene>("index");
 
   const login = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -56,7 +58,7 @@ const App: React.FC = () => {
             );
           case "dangeon":
             return currentCharacter ? (
-              <Dangeon
+              <DangeonScene
                 character={currentCharacter}
                 onExitDangeon={onExitDangeon}
               />
