@@ -17,6 +17,29 @@ export class CharacterState {
     return room.edge;
   }
 
+  move(d: Direction): boolean {
+    const newLocation = {
+      level: this.currentLocation.level,
+      x: ((): number => {
+        switch (d) {
+          case "right":
+            return this.currentLocation.x + 1;
+          case "straight":
+            return this.currentLocation.x;
+          case "left":
+            return this.currentLocation.x - 1;
+        }
+      })(),
+      y: this.currentLocation.y + 1,
+    };
+    this.currentLocation = newLocation;
+    return true;
+  }
+
+  location(): Location {
+    return { ...this.currentLocation };
+  }
+
   private getRoomByLocation(l: Location): Room {
     return this.dangeon.rooms[l.x][l.y];
   }
@@ -35,13 +58,8 @@ export class Dangeon {
   constructor() {
     this.rooms = [
       [
-        // start
-        { description: "start", edge: [] },
-        { description: "start", edge: ["right", "straight", "left"] },
-        { description: "start", edge: [] },
-      ],
-      [
         // left
+        { description: "left side", edge: [] },
         { description: "left side", edge: ["straight", "right"] },
         { description: "left side", edge: ["straight", "right"] },
         { description: "left side", edge: ["straight", "right"] },
@@ -52,9 +70,11 @@ export class Dangeon {
         { description: "left side", edge: ["straight", "right"] },
         { description: "left side", edge: ["straight", "right"] },
         { description: "left side", edge: ["right"] },
+        { description: "left side", edge: [] },
       ],
       [
         // center
+        { description: "start", edge: ["left", "straight", "right"] },
         { description: "center", edge: ["left", "straight", "right"] },
         { description: "center", edge: ["left", "straight", "right"] },
         { description: "center", edge: ["left", "straight", "right"] },
@@ -65,9 +85,11 @@ export class Dangeon {
         { description: "center", edge: ["left", "straight", "right"] },
         { description: "center", edge: ["left", "straight", "right"] },
         { description: "center", edge: ["straight"] },
+        { description: "end", edge: [] },
       ],
       [
         // right
+        { description: "right side", edge: [] },
         { description: "right side", edge: ["left", "straight"] },
         { description: "right side", edge: ["left", "straight"] },
         { description: "right side", edge: ["left", "straight"] },
@@ -78,10 +100,7 @@ export class Dangeon {
         { description: "right side", edge: ["left", "straight"] },
         { description: "right side", edge: ["left", "straight"] },
         { description: "right side", edge: ["left"] },
-      ],
-      [
-        // end
-        { description: "end", edge: [] },
+        { description: "right side", edge: [] },
       ],
     ];
   }

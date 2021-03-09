@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Character } from "./Character";
+import { Character, CharacterState, Dangeon } from "./Character";
 import { CharacterStoreMemory } from "./CharacterStore";
 import DangeonScene from "./Dangeon";
 import firebase from "./firebase";
