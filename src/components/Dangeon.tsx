@@ -10,8 +10,6 @@ const DangeonScene: React.FC<{
     new Dangeon()
   );
 
-  console.log(characterState, characterState.movableDirection());
-
   return (
     <div>
       hello, {character.name} ! you can move to{" "}
