@@ -7,7 +7,7 @@ build({
   target: "es2015",
   platform: "browser",
   entryPoints: ["src/index.tsx"],
-  outfile: "public/dist/bundle.js",
+  outdir: "public/dist",
   bundle: true,
   minify: !isDev,
   sourcemap: isDev,

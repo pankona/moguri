@@ -14,7 +14,8 @@
     "firebase": "^8.2.9",
     "js-cookie": "^2.2.1",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "ress": "^3.0.0"
   },
   "devDependencies": {
     "@types/firebase": "^3.2.1",
@@ -25,6 +26,7 @@
     "@typescript-eslint/parser": "^4.17.0",
     "@typescript-eslint/typescript-estree": "^4.17.0",
     "esbuild": "^0.8.50",
+    "esbuild-loader": "^2.10.0",
     "eslint": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "firebase-tools": "^9.5.0",

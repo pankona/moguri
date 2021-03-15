@@ -1,15 +1,17 @@
 import React from "react";
 
-export const ConfirmButton: React.FC<{
-  label: string;
-  onPress: () => void;
-}> = ({ label, onPress }) => {
+export const Button: React.FC<{
+  className: string;
+  value: string;
+  onClick: (e: React.MouseEvent<HTMLInputElement>) => void;
+}> = ({ className, value, onClick }) => {
   return (
     <input
+      className={className}
       type="button"
-      value={label}
-      onClick={() => {
-        onPress();
+      value={value}
+      onClick={(e: React.MouseEvent<HTMLInputElement>) => {
+        onClick(e);
       }}
     />
   );

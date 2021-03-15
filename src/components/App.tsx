@@ -4,6 +4,11 @@ import { CharacterStoreMemory } from "./CharacterStore";
 import DangeonScene from "./Dangeon";
 import firebase from "./firebase";
 import StartMenu from "./StartMenu";
+import "./App.css";
+import { Header } from "./Header";
+import { Button } from "./Button";
+
+import "./Button.css";
 
 export type Scene = "index" | "dangeon";
 
@@ -23,10 +28,6 @@ const App: React.FC = () => {
     firebase.auth().signInWithRedirect(provider);
   };
 
-  const logout = () => {
-    firebase.auth().signOut();
-  };
-
   const [currentCharacter, setCurrentCharacter] = useState<Character | null>(
     null
   );
@@ -41,34 +42,38 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="App">
-      {(() => {
-        switch (scene) {
-          case "index":
-            return user ? (
-              <>
-                <button onClick={logout}>Google Logout</button>
+    <div className="app">
+      <Header className="header" user={user} />
+      <div className="character_select">
+        {(() => {
+          switch (scene) {
+            case "index":
+              return user ? (
                 <StartMenu
                   characterStore={new CharacterStoreMemory(user)}
                   onChangeScene={onChangeScene}
                 />
-              </>
-            ) : (
-              <button onClick={login}>Google Login</button>
-            );
-          case "dangeon":
-            return currentCharacter ? (
-              <DangeonScene
-                character={currentCharacter}
-                onExitDangeon={onExitDangeon}
-              />
-            ) : (
-              <div>:(</div>
-            );
-          default:
-            return <div>unknown :(</div>;
-        }
-      })()}
+              ) : (
+                <Button
+                  className={"button"}
+                  value={"Google Login"}
+                  onClick={login}
+                />
+              );
+            case "dangeon":
+              return currentCharacter ? (
+                <DangeonScene
+                  character={currentCharacter}
+                  onExitDangeon={onExitDangeon}
+                />
+              ) : (
+                <div>:(</div>
+              );
+            default:
+              return <div>unknown :(</div>;
+          }
+        })()}
+      </div>
     </div>
   );
 };

@@ -1,5 +1,7 @@
 import { serve } from "esbuild";
 
+const isDev = process.env.NODE_ENV === '"development"';
+
 serve(
   { servedir: "public", port: 8000 },
   {
@@ -7,7 +9,9 @@ serve(
     target: "es2015",
     platform: "browser",
     entryPoints: ["src/index.tsx"],
-    outfile: "public/dist/bundle.js",
+    outdir: "public/dist",
+    minify: !isDev,
+    sourcemap: isDev,
     bundle: true,
   }
 ).then((server) => {

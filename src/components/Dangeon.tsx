@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "./Button";
 import {
   Character,
   CharacterState,
@@ -8,6 +9,8 @@ import {
   Location,
   Room,
 } from "./Character";
+
+import "./Dangeon.css";
 
 const DangeonScene: React.FC<{
   character: Character;
@@ -38,28 +41,25 @@ const DangeonScene: React.FC<{
   );
 
   return (
-    <div>
-      <div>hello, {character.name} !</div>
-      <div>
-        your current location is level: {currentLocation.level}, x:
-        {currentLocation.x}, y:{currentLocation.y}
-      </div>
+    <div className="dangeon">
       {eventStatus === "in_progress" ? (
-        <room.component
-          room={room}
-          character={character}
-          onEventFinished={() => {
-            setEventStatus("finished");
-          }}
-        />
+        <div className="dangeon__room">
+          <room.component
+            room={room}
+            character={character}
+            onEventFinished={() => {
+              setEventStatus("finished");
+            }}
+          />
+        </div>
       ) : (
-        <div>
+        <div className="dangeon__next">
           you can move to
           {characterState.current.movableDirection().map((d: Direction) => (
             <div key={d}>
               {d}
-              <input
-                type="button"
+              <Button
+                className="button"
                 value="move"
                 onClick={(_: React.MouseEvent<HTMLInputElement>) => {
                   onMove(d);
@@ -69,7 +69,14 @@ const DangeonScene: React.FC<{
           ))}
         </div>
       )}
-      <input type="button" value="exit" onClick={onExitDangeon} />
+      <div className="dangeon__character_status">
+        <div>hello, {character.name} !</div>
+        <div>
+          your current location is level: {currentLocation.level}, x:
+          {currentLocation.x}, y:{currentLocation.y}
+        </div>
+        <Button className="button" value="exit" onClick={onExitDangeon} />
+      </div>
     </div>
   );
 };

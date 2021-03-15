@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { CharacterStore } from "./CharacterStore";
 import { Character } from "./Character";
+import { Button } from "./Button";
+import "./Button.css";
 
 const CharacterCreateForm: React.FC<{
   characterStore: CharacterStore;
@@ -44,26 +46,27 @@ const CharacterCreateForm: React.FC<{
       <div>input new character name</div>
       <form onSubmit={onSubmitCharacterCreate}>
         <input
+          className={"textfield"}
           type="text"
           value={characterName}
           onChange={onCharacterNameChange}
         />
-        <input type="submit" name="submit" />
+        <input className={"button"} type="submit" name="submit" />
       </form>
       <div>characters</div>
       {characters.map((character) => (
         <div key={character.id}>
           {character.name}
-          <input
-            type="button"
+          <Button
+            className={"button"}
             value="start"
             onClick={(_: React.MouseEvent<HTMLInputElement>) => {
               onStart(character);
             }}
           />
 
-          <input
-            type="button"
+          <Button
+            className={"button"}
             value="remove"
             onClick={(_: React.MouseEvent<HTMLInputElement>) => {
               onRemoveCharacter(character.id);

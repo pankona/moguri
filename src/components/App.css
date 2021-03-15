@@ -1,0 +1,16 @@
+.app {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 80%;
+  height: 80%;
+}
+
+.character_select {
+  width: 100%;
+  border: 2px solid #aaaaaa;
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}

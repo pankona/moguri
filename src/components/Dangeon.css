@@ -1,0 +1,18 @@
+.dangeon {
+  width: 100%;
+}
+
+.dangeon__room {
+  border: 2px solid #aaaaaa;
+  height: 80%;
+}
+
+.dangeon__next {
+  border: 2px solid #aaaaaa;
+  height: 80%;
+}
+
+.dangeon__character_status {
+  border: 2px solid #aaaaaa;
+  height: 20%;
+}

@@ -1,5 +1,6 @@
 import React from "react";
-import { ConfirmButton } from "./button";
+import { Button } from "./Button";
+import "./Button.css";
 import { Character, Room } from "./Character";
 
 export interface RoomComponent {
@@ -15,7 +16,7 @@ export const DefaultRoomComponent: React.FC<RoomComponent> = ({
   return (
     <div>
       <div>{room.description}</div>
-      <ConfirmButton label="Confirmed" onPress={onEventFinished} />
+      <Button className="button" value="Confirmed" onClick={onEventFinished} />
     </div>
   );
 };
@@ -26,7 +27,7 @@ export const EmptyRoomComponent: React.FC<RoomComponent> = ({
   return (
     <div>
       <div>Nothing in this room</div>
-      <ConfirmButton label="Confirmed" onPress={onEventFinished} />
+      <Button className="button" value="Confirmed" onClick={onEventFinished} />
     </div>
   );
 };
@@ -86,8 +87,8 @@ export const RoundevourRoomComponent: React.FC<RoomComponent> = ({
           case 0:
             return (
               <div>
-                <input
-                  type="button"
+                <Button
+                  className="button"
                   value="Greet"
                   onClick={() => {
                     onChoice("greet");
@@ -98,7 +99,11 @@ export const RoundevourRoomComponent: React.FC<RoomComponent> = ({
           case 1:
             return (
               <div>
-                <ConfirmButton label="Confirmed" onPress={onEventFinished} />
+                <Button
+                  className="confirm_button"
+                  value="Confirmed"
+                  onClick={onEventFinished}
+                />
               </div>
             );
         }
