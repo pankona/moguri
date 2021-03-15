@@ -70,12 +70,11 @@ const DangeonScene: React.FC<{
         </div>
       )}
       <div className="dangeon__character_status">
-        <div>hello, {character.name} !</div>
+        <div>hello, {character.name}!</div>
         <div>
           your current location is level: {currentLocation.level}, x:
           {currentLocation.x}, y:{currentLocation.y}
         </div>
-        <Button className="button" value="exit" onClick={onExitDangeon} />
       </div>
     </div>
   );

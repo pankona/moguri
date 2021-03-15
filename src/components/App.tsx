@@ -43,7 +43,12 @@ const App: React.FC = () => {
 
   return (
     <div className="app">
-      <Header className="header" user={user} />
+      <Header
+        className="header"
+        user={user}
+        scene={scene}
+        onExitDangeon={onExitDangeon}
+      />
       <div className="character_select">
         {(() => {
           switch (scene) {
