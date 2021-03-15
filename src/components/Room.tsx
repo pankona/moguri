@@ -15,7 +15,7 @@ export const DefaultRoomComponent: React.FC<RoomComponent> = ({
   return (
     <div>
       <div>{room.description}</div>
-      <ConfirmButton label="confirmed" onPress={onEventFinished} />
+      <ConfirmButton label="Confirmed" onPress={onEventFinished} />
     </div>
   );
 };
@@ -25,55 +25,62 @@ export const EmptyRoomComponent: React.FC<RoomComponent> = ({
 }) => {
   return (
     <div>
-      <div>no thing in this room</div>
-      <ConfirmButton label="confirmed" onPress={onEventFinished} />
+      <div>Nothing in this room</div>
+      <ConfirmButton label="Confirmed" onPress={onEventFinished} />
     </div>
   );
 };
 
 export const RoundevourRoomComponent: React.FC<RoomComponent> = ({
+  character,
   onEventFinished,
 }) => {
   type choice = "greet" | "ignore" | "rob";
 
+  const [guest, setGuest] = React.useState<Character>({
+    id: "",
+    name: "John",
+    greet: "...",
+  });
+  React.useEffect(() => {
+    // TODO: fetch user data from firebase
+    setGuest({ id: "", name: "John", greet: "..." });
+  }, []);
+
   const [stage, setStage] = React.useState<number>(0);
-  const [text, setText] = React.useState<JSX.Element>(
-    <div>there's a person</div>
+  const [element, setElement] = React.useState<JSX.Element>(
+    <div>
+      <div>You meet someone.</div>
+      <div>There's a {guest.name}.</div>
+    </div>
   );
 
   const onChoice = (choice: choice) => {
     setStage((prev) => prev + 1);
-    let text: JSX.Element = <div></div>;
-    switch (choice) {
-      case "greet":
-        text = (
-          <div>
-            <div>you said "hi"</div>
-            <div>he said "hello"</div>
-          </div>
-        );
-        break;
-      case "ignore":
-        text = (
-          <div>
-            <div>you ignored the person.</div>
-          </div>
-        );
-        break;
-      case "rob":
-        text = (
-          <div>
-            <div>you tried to rob of his equipments.</div>
-          </div>
-        );
-        break;
-    }
-    setText(text);
+    setElement(
+      ((): JSX.Element => {
+        switch (choice) {
+          case "greet":
+            return (
+              <div>
+                <div>
+                  {character.name} {character.greet}
+                </div>
+                <div>
+                  {guest.name} {guest.greet}
+                </div>
+              </div>
+            );
+          default:
+            return <div>sorry, not implemented ;(</div>;
+        }
+      })()
+    );
   };
 
   return (
     <div>
-      {text}
+      {element}
       {((stage: number) => {
         switch (stage) {
           case 0:
@@ -81,23 +88,9 @@ export const RoundevourRoomComponent: React.FC<RoomComponent> = ({
               <div>
                 <input
                   type="button"
-                  value="greet"
+                  value="Greet"
                   onClick={() => {
                     onChoice("greet");
-                  }}
-                />
-                <input
-                  type="button"
-                  value="ignore"
-                  onClick={() => {
-                    onChoice("ignore");
-                  }}
-                />
-                <input
-                  type="button"
-                  value="rob"
-                  onClick={() => {
-                    onChoice("rob");
                   }}
                 />
               </div>
@@ -105,7 +98,7 @@ export const RoundevourRoomComponent: React.FC<RoomComponent> = ({
           case 1:
             return (
               <div>
-                <ConfirmButton label="confirmed" onPress={onEventFinished} />
+                <ConfirmButton label="Confirmed" onPress={onEventFinished} />
               </div>
             );
         }

@@ -15,6 +15,7 @@ export interface Location {
 export interface Character {
   id: string;
   name: string;
+  greet: string;
 }
 
 export class CharacterState {
