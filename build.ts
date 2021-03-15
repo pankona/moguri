@@ -13,4 +13,5 @@ build({
   sourcemap: isDev,
 }).catch((err) => {
   console.log("Error:" + JSON.stringify(err));
+  process.exit(1);
 });
