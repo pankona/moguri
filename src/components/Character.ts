@@ -1,3 +1,6 @@
+import React from "react";
+import { RoomType } from "./Room";
+
 export interface Location {
   level: number;
   x: number;
@@ -40,6 +43,10 @@ export class CharacterState {
     return { ...this.currentLocation };
   }
 
+  getRoom(): Room {
+    return this.getRoomByLocation(this.currentLocation);
+  }
+
   private getRoomByLocation(l: Location): Room {
     return this.dangeon.rooms[l.x][l.y];
   }
@@ -47,9 +54,12 @@ export class CharacterState {
 
 export type Direction = "right" | "straight" | "left";
 
+export type EventStatus = "in_progress" | "finished";
+
 export interface Room {
   description: string;
   edge: Direction[];
+  roomType: RoomType;
 }
 
 export class Dangeon {
@@ -59,48 +69,160 @@ export class Dangeon {
     this.rooms = [
       [
         // left
-        { description: "left side", edge: [] },
-        { description: "left side", edge: ["straight", "right"] },
-        { description: "left side", edge: ["straight", "right"] },
-        { description: "left side", edge: ["straight", "right"] },
-        { description: "left side", edge: ["straight", "right"] },
-        { description: "left side", edge: ["straight", "right"] },
-        { description: "left side", edge: ["straight", "right"] },
-        { description: "left side", edge: ["straight", "right"] },
-        { description: "left side", edge: ["straight", "right"] },
-        { description: "left side", edge: ["straight", "right"] },
-        { description: "left side", edge: ["right"] },
-        { description: "left side", edge: [] },
+        { roomType: "default", description: "left side", edge: [] },
+        {
+          roomType: "default",
+          description: "left side",
+          edge: ["straight", "right"],
+        },
+        {
+          roomType: "default",
+          description: "left side",
+          edge: ["straight", "right"],
+        },
+        {
+          roomType: "default",
+          description: "left side",
+          edge: ["straight", "right"],
+        },
+        {
+          roomType: "default",
+          description: "left side",
+          edge: ["straight", "right"],
+        },
+        {
+          roomType: "default",
+          description: "left side",
+          edge: ["straight", "right"],
+        },
+        {
+          roomType: "default",
+          description: "left side",
+          edge: ["straight", "right"],
+        },
+        {
+          roomType: "default",
+          description: "left side",
+          edge: ["straight", "right"],
+        },
+        {
+          roomType: "default",
+          description: "left side",
+          edge: ["straight", "right"],
+        },
+        {
+          roomType: "default",
+          description: "left side",
+          edge: ["straight", "right"],
+        },
+        { roomType: "default", description: "left side", edge: ["right"] },
+        { roomType: "default", description: "left side", edge: [] },
       ],
       [
         // center
-        { description: "start", edge: ["left", "straight", "right"] },
-        { description: "center", edge: ["left", "straight", "right"] },
-        { description: "center", edge: ["left", "straight", "right"] },
-        { description: "center", edge: ["left", "straight", "right"] },
-        { description: "center", edge: ["left", "straight", "right"] },
-        { description: "center", edge: ["left", "straight", "right"] },
-        { description: "center", edge: ["left", "straight", "right"] },
-        { description: "center", edge: ["left", "straight", "right"] },
-        { description: "center", edge: ["left", "straight", "right"] },
-        { description: "center", edge: ["left", "straight", "right"] },
-        { description: "center", edge: ["straight"] },
-        { description: "end", edge: [] },
+        {
+          roomType: "default",
+          description: "start",
+          edge: ["left", "straight", "right"],
+        },
+        {
+          roomType: "default",
+          description: "center",
+          edge: ["left", "straight", "right"],
+        },
+        {
+          roomType: "default",
+          description: "center",
+          edge: ["left", "straight", "right"],
+        },
+        {
+          roomType: "default",
+          description: "center",
+          edge: ["left", "straight", "right"],
+        },
+        {
+          roomType: "default",
+          description: "center",
+          edge: ["left", "straight", "right"],
+        },
+        {
+          roomType: "default",
+          description: "center",
+          edge: ["left", "straight", "right"],
+        },
+        {
+          roomType: "default",
+          description: "center",
+          edge: ["left", "straight", "right"],
+        },
+        {
+          roomType: "default",
+          description: "center",
+          edge: ["left", "straight", "right"],
+        },
+        {
+          roomType: "default",
+          description: "center",
+          edge: ["left", "straight", "right"],
+        },
+        {
+          roomType: "default",
+          description: "center",
+          edge: ["left", "straight", "right"],
+        },
+        { roomType: "default", description: "center", edge: ["straight"] },
+        { roomType: "default", description: "end", edge: [] },
       ],
       [
         // right
-        { description: "right side", edge: [] },
-        { description: "right side", edge: ["left", "straight"] },
-        { description: "right side", edge: ["left", "straight"] },
-        { description: "right side", edge: ["left", "straight"] },
-        { description: "right side", edge: ["left", "straight"] },
-        { description: "right side", edge: ["left", "straight"] },
-        { description: "right side", edge: ["left", "straight"] },
-        { description: "right side", edge: ["left", "straight"] },
-        { description: "right side", edge: ["left", "straight"] },
-        { description: "right side", edge: ["left", "straight"] },
-        { description: "right side", edge: ["left"] },
-        { description: "right side", edge: [] },
+        { roomType: "default", description: "right side", edge: [] },
+        {
+          roomType: "default",
+          description: "right side",
+          edge: ["left", "straight"],
+        },
+        {
+          roomType: "default",
+          description: "right side",
+          edge: ["left", "straight"],
+        },
+        {
+          roomType: "default",
+          description: "right side",
+          edge: ["left", "straight"],
+        },
+        {
+          roomType: "default",
+          description: "right side",
+          edge: ["left", "straight"],
+        },
+        {
+          roomType: "default",
+          description: "right side",
+          edge: ["left", "straight"],
+        },
+        {
+          roomType: "default",
+          description: "right side",
+          edge: ["left", "straight"],
+        },
+        {
+          roomType: "default",
+          description: "right side",
+          edge: ["left", "straight"],
+        },
+        {
+          roomType: "default",
+          description: "right side",
+          edge: ["left", "straight"],
+        },
+        {
+          roomType: "default",
+          description: "right side",
+          edge: ["left", "straight"],
+        },
+        { roomType: "default", description: "right side", edge: ["left"] },
+        { roomType: "default", description: "right side", edge: [] },
       ],
     ];
   }

@@ -4,8 +4,11 @@ import {
   CharacterState,
   Dangeon,
   Direction,
+  EventStatus,
   Location,
+  Room,
 } from "./Character";
+import { roomComponentByType } from "./Room";
 
 const DangeonScene: React.FC<{
   character: Character;
@@ -19,11 +22,21 @@ const DangeonScene: React.FC<{
     characterState.current.location()
   );
 
+  const [room, setRoom] = React.useState<Room>(
+    characterState.current.getRoom()
+  );
+
   const onMove = (d: Direction) => {
     if (characterState.current.move(d)) {
       setCurrentLocation(characterState.current.location());
+      setRoom(characterState.current.getRoom());
+      setEventStatus("in_progress");
     }
   };
+
+  const [eventStatus, setEventStatus] = React.useState<EventStatus>(
+    "in_progress"
+  );
 
   return (
     <div>
@@ -33,21 +46,30 @@ const DangeonScene: React.FC<{
         <div>x: {currentLocation.x}</div>
         <div>y: {currentLocation.y}</div>
       </div>
-      <div>
-        you can move to
-        {characterState.current.movableDirection().map((d: Direction) => (
-          <div key={d}>
-            {d}
-            <input
-              type="button"
-              value="move"
-              onClick={(_: React.MouseEvent<HTMLInputElement>) => {
-                onMove(d);
-              }}
-            />
-          </div>
-        ))}
-      </div>
+      {eventStatus === "in_progress" ? (
+        roomComponentByType(room.roomType)({
+          room,
+          onEventFinished: () => {
+            setEventStatus("finished");
+          },
+        })
+      ) : (
+        <div>
+          you can move to
+          {characterState.current.movableDirection().map((d: Direction) => (
+            <div key={d}>
+              {d}
+              <input
+                type="button"
+                value="move"
+                onClick={(_: React.MouseEvent<HTMLInputElement>) => {
+                  onMove(d);
+                }}
+              />
+            </div>
+          ))}
+        </div>
+      )}
       <input type="button" value="exit" onClick={onExitDangeon} />
     </div>
   );
