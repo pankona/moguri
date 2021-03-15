@@ -16,7 +16,7 @@ const CharacterCreateForm: React.FC<{
 
   useEffect(() => {
     setCharacters(characterStore.fetchAll());
-  }, []);
+  }, [characterStore]);
 
   const onSubmitCharacterCreate = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

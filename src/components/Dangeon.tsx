@@ -41,19 +41,17 @@ const DangeonScene: React.FC<{
     <div>
       <div>hello, {character.name} !</div>
       <div>
-        <div>
-          your current location is level: {currentLocation.level}, x:
-          {currentLocation.x}, y:{currentLocation.y}
-        </div>
+        your current location is level: {currentLocation.level}, x:
+        {currentLocation.x}, y:{currentLocation.y}
       </div>
       {eventStatus === "in_progress" ? (
-        room.component({
-          room,
-          character,
-          onEventFinished: () => {
+        <room.component
+          room={room}
+          character={character}
+          onEventFinished={() => {
             setEventStatus("finished");
-          },
-        })
+          }}
+        />
       ) : (
         <div>
           you can move to

@@ -6,7 +6,12 @@
     "esModuleInterop": true,
     "lib": ["DOM", "ES2020"],
     "strict": true,
-    "jsx": "react"
+    "jsx": "react",
+    "plugins": [
+      {
+        "name": "typescript-eslint-language-service"
+      }
+    ]
   },
   "ts-node": {
     "compilerOptions": {

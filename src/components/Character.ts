@@ -1,8 +1,9 @@
 import React from "react";
 import {
-  defaultRoomComponent,
-  emptyRoomComponent,
+  DefaultRoomComponent,
+  EmptyRoomComponent,
   RoomComponent,
+  RoundevourRoomComponent,
 } from "./Room";
 
 export interface Location {
@@ -73,180 +74,180 @@ export class Dangeon {
     this.rooms = [
       [
         // left
-        { component: defaultRoomComponent, description: "left side", edge: [] },
-        {
-          component: defaultRoomComponent,
-          description: "left side",
-          edge: ["straight", "right"],
-        },
-        {
-          component: defaultRoomComponent,
-          description: "left side",
-          edge: ["straight", "right"],
-        },
-        {
-          component: defaultRoomComponent,
-          description: "left side",
-          edge: ["straight", "right"],
-        },
-        {
-          component: defaultRoomComponent,
-          description: "left side",
-          edge: ["straight", "right"],
-        },
-        {
-          component: defaultRoomComponent,
-          description: "left side",
-          edge: ["straight", "right"],
-        },
-        {
-          component: defaultRoomComponent,
-          description: "left side",
-          edge: ["straight", "right"],
-        },
-        {
-          component: defaultRoomComponent,
-          description: "left side",
-          edge: ["straight", "right"],
-        },
-        {
-          component: defaultRoomComponent,
-          description: "left side",
-          edge: ["straight", "right"],
-        },
-        {
-          component: defaultRoomComponent,
-          description: "left side",
-          edge: ["straight", "right"],
-        },
-        {
-          component: defaultRoomComponent,
-          description: "left side",
-          edge: ["right"],
-        },
-        { component: defaultRoomComponent, description: "left side", edge: [] },
+        //{ component: DefaultRoomComponent, description: "left side", edge: [] },
+        //{
+        //  component: DefaultRoomComponent,
+        //  description: "left side",
+        //  edge: ["straight", "right"],
+        //},
+        //{
+        //  component: DefaultRoomComponent,
+        //  description: "left side",
+        //  edge: ["straight", "right"],
+        //},
+        //{
+        //  component: DefaultRoomComponent,
+        //  description: "left side",
+        //  edge: ["straight", "right"],
+        //},
+        //{
+        //  component: DefaultRoomComponent,
+        //  description: "left side",
+        //  edge: ["straight", "right"],
+        //},
+        //{
+        //  component: DefaultRoomComponent,
+        //  description: "left side",
+        //  edge: ["straight", "right"],
+        //},
+        //{
+        //  component: DefaultRoomComponent,
+        //  description: "left side",
+        //  edge: ["straight", "right"],
+        //},
+        //{
+        //  component: DefaultRoomComponent,
+        //  description: "left side",
+        //  edge: ["straight", "right"],
+        //},
+        //{
+        //  component: DefaultRoomComponent,
+        //  description: "left side",
+        //  edge: ["straight", "right"],
+        //},
+        //{
+        //  component: DefaultRoomComponent,
+        //  description: "left side",
+        //  edge: ["straight", "right"],
+        //},
+        //{
+        //  component: DefaultRoomComponent,
+        //  description: "left side",
+        //  edge: ["right"],
+        //},
+        //{ component: DefaultRoomComponent, description: "left side", edge: [] },
       ],
       [
         // center
         {
-          component: emptyRoomComponent,
+          component: EmptyRoomComponent,
           description: "start",
-          edge: ["left", "straight", "right"],
+          edge: ["straight"],
         },
         {
-          component: defaultRoomComponent,
-          description: "center",
-          edge: ["left", "straight", "right"],
-        },
-        {
-          component: defaultRoomComponent,
-          description: "center",
-          edge: ["left", "straight", "right"],
-        },
-        {
-          component: defaultRoomComponent,
-          description: "center",
-          edge: ["left", "straight", "right"],
-        },
-        {
-          component: defaultRoomComponent,
-          description: "center",
-          edge: ["left", "straight", "right"],
-        },
-        {
-          component: defaultRoomComponent,
-          description: "center",
-          edge: ["left", "straight", "right"],
-        },
-        {
-          component: defaultRoomComponent,
-          description: "center",
-          edge: ["left", "straight", "right"],
-        },
-        {
-          component: defaultRoomComponent,
-          description: "center",
-          edge: ["left", "straight", "right"],
-        },
-        {
-          component: defaultRoomComponent,
-          description: "center",
-          edge: ["left", "straight", "right"],
-        },
-        {
-          component: defaultRoomComponent,
-          description: "center",
-          edge: ["left", "straight", "right"],
-        },
-        {
-          component: defaultRoomComponent,
+          component: RoundevourRoomComponent,
           description: "center",
           edge: ["straight"],
         },
-        { component: defaultRoomComponent, description: "end", edge: [] },
+        {
+          component: DefaultRoomComponent,
+          description: "center",
+          edge: ["straight"],
+        },
+        {
+          component: DefaultRoomComponent,
+          description: "center",
+          edge: ["straight"],
+        },
+        {
+          component: DefaultRoomComponent,
+          description: "center",
+          edge: ["straight"],
+        },
+        {
+          component: DefaultRoomComponent,
+          description: "center",
+          edge: ["straight"],
+        },
+        {
+          component: DefaultRoomComponent,
+          description: "center",
+          edge: ["straight"],
+        },
+        {
+          component: DefaultRoomComponent,
+          description: "center",
+          edge: ["straight"],
+        },
+        {
+          component: DefaultRoomComponent,
+          description: "center",
+          edge: ["straight"],
+        },
+        {
+          component: DefaultRoomComponent,
+          description: "center",
+          edge: ["straight"],
+        },
+        {
+          component: DefaultRoomComponent,
+          description: "center",
+          edge: ["straight"],
+        },
+        { component: DefaultRoomComponent, description: "end", edge: [] },
       ],
       [
         // right
-        {
-          component: defaultRoomComponent,
-          description: "right side",
-          edge: [],
-        },
-        {
-          component: defaultRoomComponent,
-          description: "right side",
-          edge: ["left", "straight"],
-        },
-        {
-          component: defaultRoomComponent,
-          description: "right side",
-          edge: ["left", "straight"],
-        },
-        {
-          component: defaultRoomComponent,
-          description: "right side",
-          edge: ["left", "straight"],
-        },
-        {
-          component: defaultRoomComponent,
-          description: "right side",
-          edge: ["left", "straight"],
-        },
-        {
-          component: defaultRoomComponent,
-          description: "right side",
-          edge: ["left", "straight"],
-        },
-        {
-          component: defaultRoomComponent,
-          description: "right side",
-          edge: ["left", "straight"],
-        },
-        {
-          component: defaultRoomComponent,
-          description: "right side",
-          edge: ["left", "straight"],
-        },
-        {
-          component: defaultRoomComponent,
-          description: "right side",
-          edge: ["left", "straight"],
-        },
-        {
-          component: defaultRoomComponent,
-          description: "right side",
-          edge: ["left", "straight"],
-        },
-        {
-          component: defaultRoomComponent,
-          description: "right side",
-          edge: ["left"],
-        },
-        {
-          component: defaultRoomComponent,
-          description: "right side",
-          edge: [],
-        },
+        //{
+        //  component: DefaultRoomComponent,
+        //  description: "right side",
+        //  edge: [],
+        //},
+        //{
+        //  component: DefaultRoomComponent,
+        //  description: "right side",
+        //  edge: ["left", "straight"],
+        //},
+        //{
+        //  component: DefaultRoomComponent,
+        //  description: "right side",
+        //  edge: ["left", "straight"],
+        //},
+        //{
+        //  component: DefaultRoomComponent,
+        //  description: "right side",
+        //  edge: ["left", "straight"],
+        //},
+        //{
+        //  component: DefaultRoomComponent,
+        //  description: "right side",
+        //  edge: ["left", "straight"],
+        //},
+        //{
+        //  component: DefaultRoomComponent,
+        //  description: "right side",
+        //  edge: ["left", "straight"],
+        //},
+        //{
+        //  component: DefaultRoomComponent,
+        //  description: "right side",
+        //  edge: ["left", "straight"],
+        //},
+        //{
+        //  component: DefaultRoomComponent,
+        //  description: "right side",
+        //  edge: ["left", "straight"],
+        //},
+        //{
+        //  component: DefaultRoomComponent,
+        //  description: "right side",
+        //  edge: ["left", "straight"],
+        //},
+        //{
+        //  component: DefaultRoomComponent,
+        //  description: "right side",
+        //  edge: ["left", "straight"],
+        //},
+        //{
+        //  component: DefaultRoomComponent,
+        //  description: "right side",
+        //  edge: ["left"],
+        //},
+        //{
+        //  component: DefaultRoomComponent,
+        //  description: "right side",
+        //  edge: [],
+        //},
       ],
     ];
   }
