@@ -1,5 +1,9 @@
 import React from "react";
-import { RoomType } from "./Room";
+import {
+  defaultRoomComponent,
+  emptyRoomComponent,
+  RoomComponent,
+} from "./Room";
 
 export interface Location {
   level: number;
@@ -59,7 +63,7 @@ export type EventStatus = "in_progress" | "finished";
 export interface Room {
   description: string;
   edge: Direction[];
-  roomType: RoomType;
+  component: React.FC<RoomComponent>;
 }
 
 export class Dangeon {
@@ -69,160 +73,180 @@ export class Dangeon {
     this.rooms = [
       [
         // left
-        { roomType: "default", description: "left side", edge: [] },
+        { component: defaultRoomComponent, description: "left side", edge: [] },
         {
-          roomType: "default",
+          component: defaultRoomComponent,
           description: "left side",
           edge: ["straight", "right"],
         },
         {
-          roomType: "default",
+          component: defaultRoomComponent,
           description: "left side",
           edge: ["straight", "right"],
         },
         {
-          roomType: "default",
+          component: defaultRoomComponent,
           description: "left side",
           edge: ["straight", "right"],
         },
         {
-          roomType: "default",
+          component: defaultRoomComponent,
           description: "left side",
           edge: ["straight", "right"],
         },
         {
-          roomType: "default",
+          component: defaultRoomComponent,
           description: "left side",
           edge: ["straight", "right"],
         },
         {
-          roomType: "default",
+          component: defaultRoomComponent,
           description: "left side",
           edge: ["straight", "right"],
         },
         {
-          roomType: "default",
+          component: defaultRoomComponent,
           description: "left side",
           edge: ["straight", "right"],
         },
         {
-          roomType: "default",
+          component: defaultRoomComponent,
           description: "left side",
           edge: ["straight", "right"],
         },
         {
-          roomType: "default",
+          component: defaultRoomComponent,
           description: "left side",
           edge: ["straight", "right"],
         },
-        { roomType: "default", description: "left side", edge: ["right"] },
-        { roomType: "default", description: "left side", edge: [] },
+        {
+          component: defaultRoomComponent,
+          description: "left side",
+          edge: ["right"],
+        },
+        { component: defaultRoomComponent, description: "left side", edge: [] },
       ],
       [
         // center
         {
-          roomType: "default",
+          component: emptyRoomComponent,
           description: "start",
           edge: ["left", "straight", "right"],
         },
         {
-          roomType: "default",
+          component: defaultRoomComponent,
           description: "center",
           edge: ["left", "straight", "right"],
         },
         {
-          roomType: "default",
+          component: defaultRoomComponent,
           description: "center",
           edge: ["left", "straight", "right"],
         },
         {
-          roomType: "default",
+          component: defaultRoomComponent,
           description: "center",
           edge: ["left", "straight", "right"],
         },
         {
-          roomType: "default",
+          component: defaultRoomComponent,
           description: "center",
           edge: ["left", "straight", "right"],
         },
         {
-          roomType: "default",
+          component: defaultRoomComponent,
           description: "center",
           edge: ["left", "straight", "right"],
         },
         {
-          roomType: "default",
+          component: defaultRoomComponent,
           description: "center",
           edge: ["left", "straight", "right"],
         },
         {
-          roomType: "default",
+          component: defaultRoomComponent,
           description: "center",
           edge: ["left", "straight", "right"],
         },
         {
-          roomType: "default",
+          component: defaultRoomComponent,
           description: "center",
           edge: ["left", "straight", "right"],
         },
         {
-          roomType: "default",
+          component: defaultRoomComponent,
           description: "center",
           edge: ["left", "straight", "right"],
         },
-        { roomType: "default", description: "center", edge: ["straight"] },
-        { roomType: "default", description: "end", edge: [] },
+        {
+          component: defaultRoomComponent,
+          description: "center",
+          edge: ["straight"],
+        },
+        { component: defaultRoomComponent, description: "end", edge: [] },
       ],
       [
         // right
-        { roomType: "default", description: "right side", edge: [] },
         {
-          roomType: "default",
+          component: defaultRoomComponent,
+          description: "right side",
+          edge: [],
+        },
+        {
+          component: defaultRoomComponent,
           description: "right side",
           edge: ["left", "straight"],
         },
         {
-          roomType: "default",
+          component: defaultRoomComponent,
           description: "right side",
           edge: ["left", "straight"],
         },
         {
-          roomType: "default",
+          component: defaultRoomComponent,
           description: "right side",
           edge: ["left", "straight"],
         },
         {
-          roomType: "default",
+          component: defaultRoomComponent,
           description: "right side",
           edge: ["left", "straight"],
         },
         {
-          roomType: "default",
+          component: defaultRoomComponent,
           description: "right side",
           edge: ["left", "straight"],
         },
         {
-          roomType: "default",
+          component: defaultRoomComponent,
           description: "right side",
           edge: ["left", "straight"],
         },
         {
-          roomType: "default",
+          component: defaultRoomComponent,
           description: "right side",
           edge: ["left", "straight"],
         },
         {
-          roomType: "default",
+          component: defaultRoomComponent,
           description: "right side",
           edge: ["left", "straight"],
         },
         {
-          roomType: "default",
+          component: defaultRoomComponent,
           description: "right side",
           edge: ["left", "straight"],
         },
-        { roomType: "default", description: "right side", edge: ["left"] },
-        { roomType: "default", description: "right side", edge: [] },
+        {
+          component: defaultRoomComponent,
+          description: "right side",
+          edge: ["left"],
+        },
+        {
+          component: defaultRoomComponent,
+          description: "right side",
+          edge: [],
+        },
       ],
     ];
   }

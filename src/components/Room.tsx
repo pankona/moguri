@@ -1,33 +1,32 @@
 import React from "react";
-import { Room } from "./Character";
+import { ConfirmButton } from "./button";
+import { Character, Room } from "./Character";
 
-export type RoomType = "default";
+export interface RoomComponent {
+  room: Room;
+  character: Character;
+  onEventFinished: () => void;
+}
 
-export const roomComponentByType = (
-  roomType: RoomType
-): typeof RoomComponent => {
-  switch (roomType) {
-    case "default":
-      return RoomComponent;
-  }
-};
-
-const RoomComponent: React.FC<{ room: Room; onEventFinished: () => void }> = ({
+export const defaultRoomComponent: React.FC<RoomComponent> = ({
   room,
   onEventFinished,
 }) => {
   return (
     <div>
       <div>{room.description}</div>
-      <input
-        type="button"
-        value="event finish"
-        onClick={() => {
-          onEventFinished();
-        }}
-      />
+      <ConfirmButton label="confirmed" onPress={onEventFinished} />
     </div>
   );
 };
 
-export default RoomComponent;
+export const emptyRoomComponent: React.FC<RoomComponent> = ({
+  onEventFinished,
+}) => {
+  return (
+    <div>
+      <div>no thing in this room</div>
+      <ConfirmButton label="confirmed" onPress={onEventFinished} />
+    </div>
+  );
+};

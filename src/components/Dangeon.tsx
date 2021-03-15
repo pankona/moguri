@@ -8,7 +8,6 @@ import {
   Location,
   Room,
 } from "./Character";
-import { roomComponentByType } from "./Room";
 
 const DangeonScene: React.FC<{
   character: Character;
@@ -42,13 +41,15 @@ const DangeonScene: React.FC<{
     <div>
       <div>hello, {character.name} !</div>
       <div>
-        <div>your current location is level: {currentLocation.level}</div>
-        <div>x: {currentLocation.x}</div>
-        <div>y: {currentLocation.y}</div>
+        <div>
+          your current location is level: {currentLocation.level}, x:
+          {currentLocation.x}, y:{currentLocation.y}
+        </div>
       </div>
       {eventStatus === "in_progress" ? (
-        roomComponentByType(room.roomType)({
+        room.component({
           room,
+          character,
           onEventFinished: () => {
             setEventStatus("finished");
           },
