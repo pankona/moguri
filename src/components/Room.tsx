@@ -108,7 +108,7 @@ export const EntryRoomComponent: React.FC<RoomComponent> = ({
   );
 };
 
-export const HerbRoomComponent: React.FC<RoomComponent> = ({
+export const VegitableRoomComponent: React.FC<RoomComponent> = ({
   character,
   onCharacterChanged,
   onEventFinished,

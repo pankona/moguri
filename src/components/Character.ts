@@ -2,7 +2,7 @@ import React from "react";
 import {
   EmptyRoomComponent,
   EntryRoomComponent,
-  HerbRoomComponent,
+  VegitableRoomComponent,
   RoomComponent,
   RoundevourRoomComponent,
   TerminalRoomComponent,
@@ -118,22 +118,22 @@ export class Dangeon {
           edge: [],
         },
         {
-          component: HerbRoomComponent,
+          component: VegitableRoomComponent,
           description: "It smells green",
           edge: ["left"],
         },
         {
-          component: HerbRoomComponent,
+          component: VegitableRoomComponent,
           description: "It smells green",
           edge: ["left"],
         },
         {
-          component: HerbRoomComponent,
+          component: VegitableRoomComponent,
           description: "It smells green",
           edge: ["left"],
         },
         {
-          component: HerbRoomComponent,
+          component: VegitableRoomComponent,
           description: "It smells green",
           edge: ["left"],
         },
