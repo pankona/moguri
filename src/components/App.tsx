@@ -49,7 +49,7 @@ const App: React.FC = () => {
         scene={scene}
         onExitDangeon={onExitDangeon}
       />
-      <div className="character_select">
+      <div className="main">
         {(() => {
           switch (scene) {
             case "index":
