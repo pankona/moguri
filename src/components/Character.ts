@@ -3,6 +3,7 @@ import {
   EmptyRoomComponent,
   RoomComponent,
   RoundevourRoomComponent,
+  TerminalRoomComponent,
 } from "./Room";
 
 export interface Location {
@@ -222,7 +223,11 @@ export class Dangeon {
           description: "There is nothing",
           edge: ["center"],
         },
-        { component: EmptyRoomComponent, description: "end", edge: [] },
+        {
+          component: TerminalRoomComponent,
+          description: "It is dead end",
+          edge: [],
+        },
       ],
       [
         // right

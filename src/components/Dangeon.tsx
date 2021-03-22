@@ -76,7 +76,7 @@ const NextRoom: React.FC<{
     <>
       <div className="dangeon__next__visual">
         {characterState.movableDirection().map((d: Direction) => (
-          <div className="dangeon__next__visual_choice">
+          <div key={d} className="dangeon__next__visual_choice">
             <div
               className="dangeon__next__visual_button"
               key={d}

@@ -69,10 +69,59 @@ const RoomDescription: React.FC<{
       {description}
       <div className="room__description_buttons">
         {buttons.map((b: ButtonProps) => (
-          <Button className={b.className} value={b.value} onClick={b.onClick} />
+          <Button
+            key={b.value}
+            className={b.className}
+            value={b.value}
+            onClick={b.onClick}
+          />
         ))}
       </div>
     </div>
+  );
+};
+
+export const TerminalRoomComponent: React.FC<RoomComponent> = ({}) => {
+  const onSearch = () => {
+    setDescription(
+      <RoomDescription
+        className="room__description"
+        description={
+          <>
+            <div>You couldn't find anything.</div>
+            <div>It seems it is not implemented yet...</div>
+            <div>(Press exit to end game)</div>
+          </>
+        }
+        buttons={[]}
+      />
+    );
+  };
+
+  const searchButton: ButtonProps = {
+    className: "room__description_button",
+    value: "Search",
+    onClick: () => {
+      onSearch();
+    },
+  };
+
+  const [description, setDescription] = React.useState<JSX.Element>(
+    <RoomDescription
+      className="room__description"
+      description={<div>It is the dead end.</div>}
+      buttons={[searchButton]}
+    />
+  );
+
+  return (
+    <>
+      <RoomVisual
+        className="room__visual"
+        imgSrc="./assets/kanban_jyunbi.png"
+      />
+      {description}
+    </>
   );
 };
 
