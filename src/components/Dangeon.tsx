@@ -65,7 +65,7 @@ const DangeonScene: React.FC<{
         </div>
       )}
       <div className="dangeon__character_status">
-        <div>hello, {currentCharacter.name}!</div>
+        <div>Hello, {currentCharacter.name}!</div>
         <div>
           your current location:
           <div>
