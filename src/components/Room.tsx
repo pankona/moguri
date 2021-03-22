@@ -184,7 +184,7 @@ export const HerbRoomComponent: React.FC<RoomComponent> = ({
   const [description, setDescription] = React.useState<JSX.Element>(
     <RoomDescription
       className="room__description"
-      description={<div>Unknown grass is growing</div>}
+      description={<div>An unknown grass is growing.</div>}
       buttons={[eatButton, ignoreButton]}
     />
   );
