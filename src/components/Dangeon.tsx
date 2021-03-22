@@ -60,8 +60,12 @@ const DangeonScene: React.FC<{
       <div className="dangeon__character_status">
         <div>hello, {character.name}!</div>
         <div>
-          your current location is level: {currentLocation.level}, x:
-          {currentLocation.x}, y:{currentLocation.y}
+          your current location:
+          <div>
+            level: {currentLocation.level}, x:
+            {currentLocation.x}, y:{currentLocation.y}
+          </div>
+          <div>Health: {character.health}</div>
         </div>
       </div>
     </div>

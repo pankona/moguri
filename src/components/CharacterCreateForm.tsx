@@ -23,7 +23,12 @@ const CharacterCreateForm: React.FC<{
   const onSubmitCharacterCreate = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const newCharacter = { id: "", name: characterName, greet: "Hi!" };
+    const newCharacter = {
+      id: "",
+      name: characterName,
+      greet: "Hi!",
+      health: 10,
+    };
     if (characterStore.add(newCharacter)) {
       setCharacters([...characterStore.fetchAll()]);
       setCharacterName("");
