@@ -1,6 +1,7 @@
 import React from "react";
 import {
   EmptyRoomComponent,
+  EntryRoomComponent,
   RoomComponent,
   RoundevourRoomComponent,
   TerminalRoomComponent,
@@ -169,7 +170,7 @@ export class Dangeon {
       [
         // center
         {
-          component: EmptyRoomComponent,
+          component: EntryRoomComponent,
           description: "start",
           edge: ["left", "center", "right"],
         },
