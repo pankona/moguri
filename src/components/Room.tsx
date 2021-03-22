@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "./Button";
 import "./Button.css";
 import { Character, Room } from "./Character";
+import "./Room.css";
 
 export interface RoomComponent {
   room: Room;
@@ -25,9 +26,35 @@ export const EmptyRoomComponent: React.FC<RoomComponent> = ({
   onEventFinished,
 }) => {
   return (
-    <div>
+    <>
+      <RoomVisual className="room__visual" src="./assets/kanban_jyunbi.png" />
+      <RoomDescription
+        className="room__description"
+        onConfirm={onEventFinished}
+      />
+    </>
+  );
+};
+
+const RoomVisual: React.FC<{ className: string; src: string }> = ({
+  className,
+  src,
+}) => {
+  return (
+    <div className={className}>
+      <img src={src} style={{ maxWidth: "100%", height: "auto" }} />
+    </div>
+  );
+};
+
+const RoomDescription: React.FC<{
+  className: string;
+  onConfirm: () => void;
+}> = ({ className, onConfirm }) => {
+  return (
+    <div className={className}>
       <div>Nothing in this room</div>
-      <Button className="button" value="Confirmed" onClick={onEventFinished} />
+      <Button className="button" value="Confirmed" onClick={onConfirm} />
     </div>
   );
 };
