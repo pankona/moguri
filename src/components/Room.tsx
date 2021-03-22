@@ -26,7 +26,7 @@ export const EmptyRoomComponent: React.FC<RoomComponent> = ({
   onEventFinished,
 }) => {
   const confirmButton = {
-    className: "button",
+    className: "room__description_button",
     value: "Confirm",
     onClick: onEventFinished,
   };
@@ -67,9 +67,11 @@ const RoomDescription: React.FC<{
   return (
     <div className={className}>
       {description}
-      {buttons.map((b: ButtonProps) => (
-        <Button className={b.className} value={b.value} onClick={b.onClick} />
-      ))}
+      <div className="room__description_buttons">
+        {buttons.map((b: ButtonProps) => (
+          <Button className={b.className} value={b.value} onClick={b.onClick} />
+        ))}
+      </div>
     </div>
   );
 };
@@ -122,7 +124,7 @@ export const RoundevourRoomComponent: React.FC<RoomComponent> = ({
   };
 
   const greetButton = {
-    className: "button",
+    className: "room__description_button",
     value: "Greet",
     onClick: () => {
       onChoice("greet");
@@ -130,7 +132,7 @@ export const RoundevourRoomComponent: React.FC<RoomComponent> = ({
   };
 
   const ignoreButton = {
-    className: "button",
+    className: "room__description_button",
     value: "Ignore",
     onClick: () => {
       onChoice("ignore");
@@ -138,7 +140,7 @@ export const RoundevourRoomComponent: React.FC<RoomComponent> = ({
   };
 
   const robButton = {
-    className: "button",
+    className: "room__description_button",
     value: "Rob",
     onClick: () => {
       onChoice("rob");
@@ -146,7 +148,7 @@ export const RoundevourRoomComponent: React.FC<RoomComponent> = ({
   };
 
   const confirmButton = {
-    className: "confirm_button",
+    className: "room__description_button",
     value: "Confirmed",
     onClick: () => {
       onEventFinished();
