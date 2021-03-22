@@ -15,9 +15,13 @@ import "./Dangeon.css";
 const DangeonScene: React.FC<{
   character: Character;
   onExitDangeon: () => void;
-}> = ({ character, onExitDangeon }) => {
+}> = ({ character }) => {
   const characterState = React.useRef(
-    new CharacterState({ level: 0, x: 1, y: 0 }, new Dangeon())
+    new CharacterState(character, { level: 0, x: 1, y: 0 }, new Dangeon())
+  );
+
+  const [currentCharacter, setCurrentCharacter] = React.useState<Character>(
+    characterState.current.character()
   );
 
   const [currentLocation, setCurrentLocation] = React.useState<Location>(
@@ -46,7 +50,10 @@ const DangeonScene: React.FC<{
         <div className="dangeon__room">
           <room.component
             room={room}
-            character={character}
+            character={currentCharacter}
+            onCharacterChanged={(newCharacter: Character) => {
+              setCurrentCharacter(newCharacter);
+            }}
             onEventFinished={() => {
               setEventStatus("finished");
             }}
@@ -58,14 +65,14 @@ const DangeonScene: React.FC<{
         </div>
       )}
       <div className="dangeon__character_status">
-        <div>hello, {character.name}!</div>
+        <div>hello, {currentCharacter.name}!</div>
         <div>
           your current location:
           <div>
             level: {currentLocation.level}, x:
             {currentLocation.x}, y:{currentLocation.y}
           </div>
-          <div>Health: {character.health}</div>
+          <div>Health: {currentCharacter.health}</div>
         </div>
       </div>
     </div>

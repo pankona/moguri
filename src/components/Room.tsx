@@ -1,12 +1,13 @@
 import React, { ReactElement } from "react";
 import { Button, ButtonProps } from "./Button";
 import "./Button.css";
-import { Character, Room } from "./Character";
+import { Character, CharacterState, Room } from "./Character";
 import "./Room.css";
 
 export interface RoomComponent {
   room: Room;
   character: Character;
+  onCharacterChanged: (newCharacter: Character) => void;
   onEventFinished: () => void;
 }
 
@@ -101,6 +102,100 @@ export const EntryRoomComponent: React.FC<RoomComponent> = ({
         description={<>{description}</>}
         buttons={[confirmButton]}
       />
+    </>
+  );
+};
+
+export const HerbRoomComponent: React.FC<RoomComponent> = ({
+  character,
+  onCharacterChanged,
+  onEventFinished,
+}) => {
+  type Event = "eat" | "ignore";
+
+  //range: -3~+3
+  const effect: number = -3 + Math.floor(Math.random() * Math.floor(7));
+
+  const confirmButton = {
+    className: "room__description_button",
+    value: "Confirmed",
+    onClick: () => {
+      onEventFinished();
+    },
+  };
+
+  const onPress = (event: Event) => {
+    switch (event) {
+      case "eat":
+        onCharacterChanged({ ...character, health: character.health + effect });
+        if (effect > 0) {
+          setDescription(
+            <RoomDescription
+              className="room__description"
+              description={<div>You are feeling better.</div>}
+              buttons={[confirmButton]}
+            />
+          );
+        } else if (effect < 0) {
+          setDescription(
+            <RoomDescription
+              className="room__description"
+              description={<div>You are feeling worse.</div>}
+              buttons={[confirmButton]}
+            />
+          );
+        } else {
+          setDescription(
+            <RoomDescription
+              className="room__description"
+              description={<div>Nothing happened.</div>}
+              buttons={[confirmButton]}
+            />
+          );
+        }
+        return;
+      case "ignore":
+        setDescription(
+          <RoomDescription
+            className="room__description"
+            description={<div>You ignored the herb.</div>}
+            buttons={[confirmButton]}
+          />
+        );
+        return;
+    }
+  };
+
+  const eatButton: ButtonProps = {
+    className: "room__description_button",
+    value: "Eat",
+    onClick: () => {
+      onPress("eat");
+    },
+  };
+  const ignoreButton: ButtonProps = {
+    className: "room__description_button",
+    value: "Ignore",
+    onClick: () => {
+      onPress("ignore");
+    },
+  };
+
+  const [description, setDescription] = React.useState<JSX.Element>(
+    <RoomDescription
+      className="room__description"
+      description={<div>Unknown grass is growing</div>}
+      buttons={[eatButton, ignoreButton]}
+    />
+  );
+
+  return (
+    <>
+      <RoomVisual
+        className="room__visual"
+        imgSrc="./assets/vegetable_rucola.png"
+      />
+      {description}
     </>
   );
 };

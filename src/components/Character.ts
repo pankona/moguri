@@ -2,6 +2,7 @@ import React from "react";
 import {
   EmptyRoomComponent,
   EntryRoomComponent,
+  HerbRoomComponent,
   RoomComponent,
   RoundevourRoomComponent,
   TerminalRoomComponent,
@@ -21,7 +22,11 @@ export interface Character {
 }
 
 export class CharacterState {
-  constructor(private currentLocation: Location, private dangeon: Dangeon) {}
+  constructor(
+    private currentCharacter: Character,
+    private currentLocation: Location,
+    private dangeon: Dangeon
+  ) {}
 
   movableDirection(): Direction[] {
     const room = this.getRoomByLocation(this.currentLocation);
@@ -69,6 +74,10 @@ export class CharacterState {
     return true;
   }
 
+  character(): Character {
+    return this.currentCharacter;
+  }
+
   location(): Location {
     return { ...this.currentLocation };
   }
@@ -113,8 +122,8 @@ export class Dangeon {
           edge: [],
         },
         {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
+          component: HerbRoomComponent,
+          description: "It smells green",
           edge: ["left"],
         },
         {
