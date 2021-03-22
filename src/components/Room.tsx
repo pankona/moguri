@@ -33,6 +33,7 @@ export const EmptyRoomComponent: React.FC<RoomComponent> = ({
       />
       <RoomDescription
         className="room__description"
+        description={<div>Nothing in this room</div>}
         onConfirm={onEventFinished}
       />
     </>
@@ -45,18 +46,22 @@ const RoomVisual: React.FC<{ className: string; imgSrc: string }> = ({
 }) => {
   return (
     <div className={className}>
-      <img src={imgSrc} style={{ maxWidth: "100%", height: "auto" }} />
+      <img
+        src={imgSrc}
+        style={{ maxWidth: "100%", height: "auto", maxHeight: "100%" }}
+      />
     </div>
   );
 };
 
 const RoomDescription: React.FC<{
   className: string;
+  description: JSX.Element;
   onConfirm: () => void;
-}> = ({ className, onConfirm }) => {
+}> = ({ className, description, onConfirm }) => {
   return (
     <div className={className}>
-      <div>Nothing in this room</div>
+      {description}
       <Button className="button" value="Confirmed" onClick={onConfirm} />
     </div>
   );
@@ -110,21 +115,24 @@ export const RoundevourRoomComponent: React.FC<RoomComponent> = ({
   };
 
   return (
-    <div>
-      {element}
+    <>
       {((stage: number) => {
         switch (stage) {
           case 0:
             return (
-              <div>
-                <Button
-                  className="button"
-                  value="Greet"
-                  onClick={() => {
+              <>
+                <RoomVisual
+                  className="room__visual"
+                  imgSrc="./assets/silhouette_human05_man.png"
+                />
+                <RoomDescription
+                  className="room__description"
+                  description={element}
+                  onConfirm={() => {
                     onChoice("greet");
                   }}
                 />
-              </div>
+              </>
             );
           case 1:
             return (
@@ -138,6 +146,6 @@ export const RoundevourRoomComponent: React.FC<RoomComponent> = ({
             );
         }
       })(stage)}
-    </div>
+    </>
   );
 };
