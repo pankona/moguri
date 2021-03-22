@@ -85,7 +85,12 @@ const RoomDescription: React.FC<{
 export const EntryRoomComponent: React.FC<RoomComponent> = ({
   onEventFinished,
 }) => {
-  const description = <div>You entered a dangeon</div>;
+  const description = (
+    <>
+      <div>It is the very beginning of the adventure.</div>
+      <div>You entered the dangeon.</div>
+    </>
+  );
   const confirmButton: ButtonProps = {
     className: "room__description_button",
     value: "Confirmed",
