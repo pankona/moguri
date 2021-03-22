@@ -1,7 +1,7 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import { Button, ButtonProps } from "./Button";
 import "./Button.css";
-import { Character, CharacterState, Room } from "./Character";
+import { Character, Room } from "./Character";
 import "./Room.css";
 
 export interface RoomComponent {
@@ -52,10 +52,7 @@ const RoomVisual: React.FC<{ className: string; imgSrc: string }> = ({
 }) => {
   return (
     <div className={className}>
-      <img
-        src={imgSrc}
-        style={{ maxWidth: "100%", height: "auto", maxHeight: "100%" }}
-      />
+      <img src={imgSrc} style={{ maxWidth: "100%", maxHeight: "100%" }} />
     </div>
   );
 };
@@ -116,10 +113,7 @@ export const HerbRoomComponent: React.FC<RoomComponent> = ({
   onCharacterChanged,
   onEventFinished,
 }) => {
-  type Event = "eat" | "ignore";
-
-  //range: -3~+3
-  const effect: number = -3 + Math.floor(Math.random() * Math.floor(7));
+  const vegitableList = ["herb", "mushroom"] as const;
 
   const confirmButton = {
     className: "room__description_button",
@@ -129,11 +123,65 @@ export const HerbRoomComponent: React.FC<RoomComponent> = ({
     },
   };
 
+  const vegitable = React.useRef(
+    vegitableList[Math.floor(Math.random() * vegitableList.length)]
+  );
+
+  const imgSrc = ((v: typeof vegitableList[number]): string => {
+    switch (v) {
+      case "herb":
+        return "./assets/vegetable_rucola.png";
+      case "mushroom":
+        return "./assets/kinoko.png";
+    }
+  })(vegitable.current);
+
+  type Result = { character: Character; effect: number };
+
+  const eatRawHerb = (currentCharacter: Character): Result => {
+    //range: -3~+3
+    const effect: number = -3 + Math.floor(Math.random() * Math.floor(7));
+    return {
+      character: {
+        ...currentCharacter,
+        health: currentCharacter.health + effect,
+      },
+      effect: effect,
+    };
+  };
+
+  const eatRawMushroom = (currentCharacter: Character): Result => {
+    //range: -3~+3
+    const effect: number = -5 + Math.floor(Math.random() * Math.floor(9));
+    return {
+      character: {
+        ...currentCharacter,
+        health: currentCharacter.health + effect,
+      },
+      effect: effect,
+    };
+  };
+
+  const eatFunc = ((
+    v: typeof vegitableList[number]
+  ): ((c: Character) => Result) => {
+    switch (v) {
+      case "herb":
+        return eatRawHerb;
+      case "mushroom":
+        return eatRawMushroom;
+    }
+  })(vegitable.current);
+
+  type Event = "eat_raw" | "eat_cooked" | "ignore";
+
   const onPress = (event: Event) => {
     switch (event) {
-      case "eat":
-        onCharacterChanged({ ...character, health: character.health + effect });
-        if (effect > 0) {
+      case "eat_raw":
+        const result = eatFunc(character);
+        onCharacterChanged(result.character);
+
+        if (result.effect > 0) {
           setDescription(
             <RoomDescription
               className="room__description"
@@ -141,7 +189,7 @@ export const HerbRoomComponent: React.FC<RoomComponent> = ({
               buttons={[confirmButton]}
             />
           );
-        } else if (effect < 0) {
+        } else if (result.effect < 0) {
           setDescription(
             <RoomDescription
               className="room__description"
@@ -159,6 +207,15 @@ export const HerbRoomComponent: React.FC<RoomComponent> = ({
           );
         }
         return;
+      case "eat_cooked":
+        setDescription(
+          <RoomDescription
+            className="room__description"
+            description={<div>Not implemented ;(</div>}
+            buttons={[confirmButton]}
+          />
+        );
+        return;
       case "ignore":
         setDescription(
           <RoomDescription
@@ -173,9 +230,9 @@ export const HerbRoomComponent: React.FC<RoomComponent> = ({
 
   const eatButton: ButtonProps = {
     className: "room__description_button",
-    value: "Eat",
+    value: "Eat (Raw)",
     onClick: () => {
-      onPress("eat");
+      onPress("eat_raw");
     },
   };
   const ignoreButton: ButtonProps = {
@@ -196,10 +253,7 @@ export const HerbRoomComponent: React.FC<RoomComponent> = ({
 
   return (
     <>
-      <RoomVisual
-        className="room__visual"
-        imgSrc="./assets/vegetable_rucola.png"
-      />
+      <RoomVisual className="room__visual" imgSrc={imgSrc} />
       {description}
     </>
   );
@@ -259,10 +313,11 @@ export const RoundevourRoomComponent: React.FC<RoomComponent> = ({
     id: "",
     name: "John",
     greet: "...",
+    health: 10,
   });
   React.useEffect(() => {
     // TODO: fetch user data from firebase
-    setGuest({ id: "", name: "John", greet: "..." });
+    setGuest({ id: "", name: "John", greet: "...", health: 10 });
   }, []);
 
   const [stage, setStage] = React.useState<number>(0);

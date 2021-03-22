@@ -75,7 +75,7 @@ export class CharacterState {
   }
 
   character(): Character {
-    return this.currentCharacter;
+    return { ...this.currentCharacter };
   }
 
   location(): Location {
@@ -83,7 +83,7 @@ export class CharacterState {
   }
 
   getRoom(): Room {
-    return this.getRoomByLocation(this.currentLocation);
+    return { ...this.getRoomByLocation(this.currentLocation) };
   }
 
   private isMovable(d: Direction, r: Room): boolean {
@@ -105,10 +105,6 @@ export interface Room {
   component: React.FC<RoomComponent>;
 }
 
-export const movableDirection = (room: Room): Direction[] => {
-  return room.edge;
-};
-
 export class Dangeon {
   rooms: Room[][];
 
@@ -127,18 +123,18 @@ export class Dangeon {
           edge: ["left"],
         },
         {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
+          component: HerbRoomComponent,
+          description: "It smells green",
           edge: ["left"],
         },
         {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
+          component: HerbRoomComponent,
+          description: "It smells green",
           edge: ["left"],
         },
         {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
+          component: HerbRoomComponent,
+          description: "It smells green",
           edge: ["left"],
         },
         {
