@@ -1,10 +1,16 @@
 import React from "react";
 
-export const Button: React.FC<{
+export type ButtonProps = {
   className: string;
   value: string;
   onClick: (e: React.MouseEvent<HTMLInputElement>) => void;
-}> = ({ className, value, onClick }) => {
+};
+
+export const Button: React.FC<ButtonProps> = ({
+  className,
+  value,
+  onClick,
+}) => {
   return (
     <input
       className={className}

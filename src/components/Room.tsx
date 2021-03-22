@@ -1,5 +1,5 @@
-import React from "react";
-import { Button } from "./Button";
+import React, { ReactElement } from "react";
+import { Button, ButtonProps } from "./Button";
 import "./Button.css";
 import { Character, Room } from "./Character";
 import "./Room.css";
@@ -25,6 +25,11 @@ export const DefaultRoomComponent: React.FC<RoomComponent> = ({
 export const EmptyRoomComponent: React.FC<RoomComponent> = ({
   onEventFinished,
 }) => {
+  const confirmButton = {
+    className: "button",
+    value: "Confirm",
+    onClick: onEventFinished,
+  };
   return (
     <>
       <RoomVisual
@@ -34,7 +39,7 @@ export const EmptyRoomComponent: React.FC<RoomComponent> = ({
       <RoomDescription
         className="room__description"
         description={<div>Nothing in this room</div>}
-        onConfirm={onEventFinished}
+        buttons={[confirmButton]}
       />
     </>
   );
@@ -57,12 +62,14 @@ const RoomVisual: React.FC<{ className: string; imgSrc: string }> = ({
 const RoomDescription: React.FC<{
   className: string;
   description: JSX.Element;
-  onConfirm: () => void;
-}> = ({ className, description, onConfirm }) => {
+  buttons: ButtonProps[];
+}> = ({ className, description, buttons }) => {
   return (
     <div className={className}>
       {description}
-      <Button className="button" value="Confirmed" onClick={onConfirm} />
+      {buttons.map((b: ButtonProps) => (
+        <Button className={b.className} value={b.value} onClick={b.onClick} />
+      ))}
     </div>
   );
 };
@@ -114,6 +121,38 @@ export const RoundevourRoomComponent: React.FC<RoomComponent> = ({
     );
   };
 
+  const greetButton = {
+    className: "button",
+    value: "Greet",
+    onClick: () => {
+      onChoice("greet");
+    },
+  };
+
+  const ignoreButton = {
+    className: "button",
+    value: "Ignore",
+    onClick: () => {
+      onChoice("ignore");
+    },
+  };
+
+  const robButton = {
+    className: "button",
+    value: "Rob",
+    onClick: () => {
+      onChoice("rob");
+    },
+  };
+
+  const confirmButton = {
+    className: "confirm_button",
+    value: "Confirmed",
+    onClick: () => {
+      onEventFinished();
+    },
+  };
+
   return (
     <>
       {((stage: number) => {
@@ -128,21 +167,23 @@ export const RoundevourRoomComponent: React.FC<RoomComponent> = ({
                 <RoomDescription
                   className="room__description"
                   description={element}
-                  onConfirm={() => {
-                    onChoice("greet");
-                  }}
+                  buttons={[greetButton, ignoreButton, robButton]}
                 />
               </>
             );
           case 1:
             return (
-              <div>
-                <Button
-                  className="confirm_button"
-                  value="Confirmed"
-                  onClick={onEventFinished}
+              <>
+                <RoomVisual
+                  className="room__visual"
+                  imgSrc="./assets/silhouette_human05_man.png"
                 />
-              </div>
+                <RoomDescription
+                  className="room__description"
+                  description={element}
+                  buttons={[confirmButton]}
+                />
+              </>
             );
         }
       })(stage)}
