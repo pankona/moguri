@@ -76,15 +76,16 @@ const NextRoom: React.FC<{
     <>
       <div className="dangeon__next__visual">
         {characterState.movableDirection().map((d: Direction) => (
-          <div key={d}>
-            {d}
-            <Button
-              className="button"
-              value="move"
-              onClick={(_: React.MouseEvent<HTMLInputElement>) => {
+          <div className="dangeon__next__visual_choice">
+            <div
+              className="dangeon__next__visual_button"
+              key={d}
+              onClick={() => {
                 onMove(d);
               }}
-            />
+            >
+              {characterState.nextRoom(d).description}
+            </div>
           </div>
         ))}
       </div>

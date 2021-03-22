@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  DefaultRoomComponent,
   EmptyRoomComponent,
   RoomComponent,
   RoundevourRoomComponent,
@@ -26,17 +25,39 @@ export class CharacterState {
     return room.edge;
   }
 
+  nextRoom(d: Direction): Room {
+    const room = this.getRoomByLocation(this.currentLocation);
+    if (!this.isMovable(d, room)) {
+      throw { error: "cannot move to the direction" };
+    }
+
+    const currentLocation = this.currentLocation;
+    const nextRooms = this.dangeon.rooms.map(
+      (r: Room[]): Room => {
+        return r[currentLocation.y + 1];
+      }
+    );
+    switch (d) {
+      case "left":
+        return nextRooms[0];
+      case "center":
+        return nextRooms[1];
+      case "right":
+        return nextRooms[2];
+    }
+  }
+
   move(d: Direction): boolean {
     const newLocation = {
       level: this.currentLocation.level,
       x: ((): number => {
         switch (d) {
-          case "right":
-            return this.currentLocation.x + 1;
-          case "straight":
-            return this.currentLocation.x;
           case "left":
-            return this.currentLocation.x - 1;
+            return 0;
+          case "center":
+            return 1;
+          case "right":
+            return 2;
         }
       })(),
       y: this.currentLocation.y + 1,
@@ -53,12 +74,16 @@ export class CharacterState {
     return this.getRoomByLocation(this.currentLocation);
   }
 
+  private isMovable(d: Direction, r: Room): boolean {
+    return r.edge.includes(d);
+  }
+
   private getRoomByLocation(l: Location): Room {
     return this.dangeon.rooms[l.x][l.y];
   }
 }
 
-export type Direction = "right" | "straight" | "left";
+export type Direction = "right" | "center" | "left";
 
 export type EventStatus = "in_progress" | "finished";
 
@@ -68,6 +93,10 @@ export interface Room {
   component: React.FC<RoomComponent>;
 }
 
+export const movableDirection = (room: Room): Direction[] => {
+  return room.edge;
+};
+
 export class Dangeon {
   rooms: Room[][];
 
@@ -75,180 +104,188 @@ export class Dangeon {
     this.rooms = [
       [
         // left
-        //{ component: DefaultRoomComponent, description: "left side", edge: [] },
-        //{
-        //  component: DefaultRoomComponent,
-        //  description: "left side",
-        //  edge: ["straight", "right"],
-        //},
-        //{
-        //  component: DefaultRoomComponent,
-        //  description: "left side",
-        //  edge: ["straight", "right"],
-        //},
-        //{
-        //  component: DefaultRoomComponent,
-        //  description: "left side",
-        //  edge: ["straight", "right"],
-        //},
-        //{
-        //  component: DefaultRoomComponent,
-        //  description: "left side",
-        //  edge: ["straight", "right"],
-        //},
-        //{
-        //  component: DefaultRoomComponent,
-        //  description: "left side",
-        //  edge: ["straight", "right"],
-        //},
-        //{
-        //  component: DefaultRoomComponent,
-        //  description: "left side",
-        //  edge: ["straight", "right"],
-        //},
-        //{
-        //  component: DefaultRoomComponent,
-        //  description: "left side",
-        //  edge: ["straight", "right"],
-        //},
-        //{
-        //  component: DefaultRoomComponent,
-        //  description: "left side",
-        //  edge: ["straight", "right"],
-        //},
-        //{
-        //  component: DefaultRoomComponent,
-        //  description: "left side",
-        //  edge: ["straight", "right"],
-        //},
-        //{
-        //  component: DefaultRoomComponent,
-        //  description: "left side",
-        //  edge: ["right"],
-        //},
-        //{ component: DefaultRoomComponent, description: "left side", edge: [] },
+        {
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: [],
+        },
+        {
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: ["left"],
+        },
+        {
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: ["left"],
+        },
+        {
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: ["left"],
+        },
+        {
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: ["left"],
+        },
+        {
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: ["left"],
+        },
+        {
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: ["left"],
+        },
+        {
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: ["left"],
+        },
+        {
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: ["left"],
+        },
+        {
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: ["left"],
+        },
+        {
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: ["center"],
+        },
+        {
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: [],
+        },
       ],
       [
         // center
         {
           component: EmptyRoomComponent,
           description: "start",
-          edge: ["straight"],
+          edge: ["left", "center", "right"],
         },
         {
           component: RoundevourRoomComponent,
-          description: "center",
-          edge: ["straight"],
+          description: "Somebody is there",
+          edge: ["center"],
         },
         {
-          component: DefaultRoomComponent,
-          description: "center",
-          edge: ["straight"],
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: ["center"],
         },
         {
-          component: DefaultRoomComponent,
-          description: "center",
-          edge: ["straight"],
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: ["center"],
         },
         {
-          component: DefaultRoomComponent,
-          description: "center",
-          edge: ["straight"],
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: ["center"],
         },
         {
-          component: DefaultRoomComponent,
-          description: "center",
-          edge: ["straight"],
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: ["center"],
         },
         {
-          component: DefaultRoomComponent,
-          description: "center",
-          edge: ["straight"],
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: ["center"],
         },
         {
-          component: DefaultRoomComponent,
-          description: "center",
-          edge: ["straight"],
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: ["center"],
         },
         {
-          component: DefaultRoomComponent,
-          description: "center",
-          edge: ["straight"],
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: ["center"],
         },
         {
-          component: DefaultRoomComponent,
-          description: "center",
-          edge: ["straight"],
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: ["center"],
         },
         {
-          component: DefaultRoomComponent,
-          description: "center",
-          edge: ["straight"],
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: ["center"],
         },
-        { component: DefaultRoomComponent, description: "end", edge: [] },
+        { component: EmptyRoomComponent, description: "end", edge: [] },
       ],
       [
         // right
-        //{
-        //  component: DefaultRoomComponent,
-        //  description: "right side",
-        //  edge: [],
-        //},
-        //{
-        //  component: DefaultRoomComponent,
-        //  description: "right side",
-        //  edge: ["left", "straight"],
-        //},
-        //{
-        //  component: DefaultRoomComponent,
-        //  description: "right side",
-        //  edge: ["left", "straight"],
-        //},
-        //{
-        //  component: DefaultRoomComponent,
-        //  description: "right side",
-        //  edge: ["left", "straight"],
-        //},
-        //{
-        //  component: DefaultRoomComponent,
-        //  description: "right side",
-        //  edge: ["left", "straight"],
-        //},
-        //{
-        //  component: DefaultRoomComponent,
-        //  description: "right side",
-        //  edge: ["left", "straight"],
-        //},
-        //{
-        //  component: DefaultRoomComponent,
-        //  description: "right side",
-        //  edge: ["left", "straight"],
-        //},
-        //{
-        //  component: DefaultRoomComponent,
-        //  description: "right side",
-        //  edge: ["left", "straight"],
-        //},
-        //{
-        //  component: DefaultRoomComponent,
-        //  description: "right side",
-        //  edge: ["left", "straight"],
-        //},
-        //{
-        //  component: DefaultRoomComponent,
-        //  description: "right side",
-        //  edge: ["left", "straight"],
-        //},
-        //{
-        //  component: DefaultRoomComponent,
-        //  description: "right side",
-        //  edge: ["left"],
-        //},
-        //{
-        //  component: DefaultRoomComponent,
-        //  description: "right side",
-        //  edge: [],
-        //},
+        {
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: [],
+        },
+        {
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: ["center", "right"],
+        },
+        {
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: ["center", "right"],
+        },
+        {
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: ["center", "right"],
+        },
+        {
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: ["center", "right"],
+        },
+        {
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: ["center", "right"],
+        },
+        {
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: ["center", "right"],
+        },
+        {
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: ["center", "right"],
+        },
+        {
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: ["center", "right"],
+        },
+        {
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: ["center", "right"],
+        },
+        {
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: ["center"],
+        },
+        {
+          component: EmptyRoomComponent,
+          description: "There is nothing",
+          edge: [],
+        },
       ],
     ];
   }
