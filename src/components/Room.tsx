@@ -27,7 +27,10 @@ export const EmptyRoomComponent: React.FC<RoomComponent> = ({
 }) => {
   return (
     <>
-      <RoomVisual className="room__visual" src="./assets/kanban_jyunbi.png" />
+      <RoomVisual
+        className="room__visual"
+        imgSrc="./assets/kanban_jyunbi.png"
+      />
       <RoomDescription
         className="room__description"
         onConfirm={onEventFinished}
@@ -36,13 +39,13 @@ export const EmptyRoomComponent: React.FC<RoomComponent> = ({
   );
 };
 
-const RoomVisual: React.FC<{ className: string; src: string }> = ({
+const RoomVisual: React.FC<{ className: string; imgSrc: string }> = ({
   className,
-  src,
+  imgSrc,
 }) => {
   return (
     <div className={className}>
-      <img src={src} style={{ maxWidth: "100%", height: "auto" }} />
+      <img src={imgSrc} style={{ maxWidth: "100%", height: "auto" }} />
     </div>
   );
 };

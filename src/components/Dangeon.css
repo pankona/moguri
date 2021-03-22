@@ -12,6 +12,16 @@
   height: 80%;
 }
 
+.dangeon__next__visual {
+  border: 2px solid #bb0000;
+  height: 80%;
+}
+
+.dangeon__next__description {
+  border: 2px solid #bb0000;
+  height: 20%;
+}
+
 .dangeon__character_status {
   border: 2px solid #aaaaaa;
   height: 20%;

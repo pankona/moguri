@@ -54,19 +54,7 @@ const DangeonScene: React.FC<{
         </div>
       ) : (
         <div className="dangeon__next">
-          you can move to
-          {characterState.current.movableDirection().map((d: Direction) => (
-            <div key={d}>
-              {d}
-              <Button
-                className="button"
-                value="move"
-                onClick={(_: React.MouseEvent<HTMLInputElement>) => {
-                  onMove(d);
-                }}
-              />
-            </div>
-          ))}
+          <NextRoom characterState={characterState.current} onMove={onMove} />
         </div>
       )}
       <div className="dangeon__character_status">
@@ -77,6 +65,31 @@ const DangeonScene: React.FC<{
         </div>
       </div>
     </div>
+  );
+};
+
+const NextRoom: React.FC<{
+  characterState: CharacterState;
+  onMove: (d: Direction) => void;
+}> = ({ characterState, onMove }) => {
+  return (
+    <>
+      <div className="dangeon__next__visual">
+        {characterState.movableDirection().map((d: Direction) => (
+          <div key={d}>
+            {d}
+            <Button
+              className="button"
+              value="move"
+              onClick={(_: React.MouseEvent<HTMLInputElement>) => {
+                onMove(d);
+              }}
+            />
+          </div>
+        ))}
+      </div>
+      <div className="dangeon__next__description">choice next room</div>
+    </>
   );
 };
 
