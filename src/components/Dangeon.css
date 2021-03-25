@@ -1,18 +1,18 @@
-.dangeon {
+.dungeon {
   width: 100%;
 }
 
-.dangeon__room {
+.dungeon__room {
   border: 2px solid #aaaaaa;
   height: 80%;
 }
 
-.dangeon__next {
+.dungeon__next {
   border: 2px solid #aaaaaa;
   height: 80%;
 }
 
-.dangeon__next__visual {
+.dungeon__next__visual {
   border: 2px solid #bb0000;
   height: 80%;
   display: flex;
@@ -20,7 +20,7 @@
   align-items: center;
 }
 
-.dangeon__next__visual_choice {
+.dungeon__next__visual_choice {
   display: flex;
   flex-direction: column-reverse;
   width: 30%;
@@ -28,7 +28,7 @@
   align-items: center;
 }
 
-.dangeon__next__visual_button {
+.dungeon__next__visual_button {
   border: 2px solid #bb0000;
   cursor: pointer;
   width: 80%;
@@ -38,12 +38,12 @@
   align-items: center;
 }
 
-.dangeon__next__description {
+.dungeon__next__description {
   border: 2px solid #bb0000;
   height: 20%;
 }
 
-.dangeon__character_status {
+.dungeon__character_status {
   border: 2px solid #aaaaaa;
   height: 20%;
 }

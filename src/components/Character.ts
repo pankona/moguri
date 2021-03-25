@@ -25,7 +25,7 @@ export class CharacterState {
   constructor(
     private currentCharacter: Character,
     private currentLocation: Location,
-    private dangeon: Dangeon
+    private dungeon: Dangeon
   ) {}
 
   movableDirection(): Direction[] {
@@ -40,7 +40,7 @@ export class CharacterState {
     }
 
     const currentLocation = this.currentLocation;
-    const nextRooms = this.dangeon.rooms.map(
+    const nextRooms = this.dungeon.rooms.map(
       (r: Room[]): Room => {
         return r[currentLocation.y + 1];
       }
@@ -91,7 +91,7 @@ export class CharacterState {
   }
 
   private getRoomByLocation(l: Location): Room {
-    return this.dangeon.rooms[l.x][l.y];
+    return this.dungeon.rooms[l.x][l.y];
   }
 }
 

@@ -17,14 +17,14 @@ export const Header: React.FC<{
   return (
     <div className={className}>
       moguri v0.1.0
-      {user && scene !== "dangeon" ? (
+      {user && scene !== "dungeon" ? (
         <div>
           <div onClick={logout} style={{ cursor: "pointer" }}>
             Logout
           </div>
         </div>
       ) : null}
-      {scene === "dangeon" ? (
+      {scene === "dungeon" ? (
         <div onClick={onExitDangeon} style={{ cursor: "pointer" }}>
           Exit
         </div>

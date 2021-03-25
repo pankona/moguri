@@ -10,7 +10,7 @@ import { Button } from "./Button";
 
 import "./Button.css";
 
-export type Scene = "index" | "dangeon";
+export type Scene = "index" | "dungeon";
 
 const App: React.FC = () => {
   const [user, setUser] = useState<firebase.User | null>(null);
@@ -34,7 +34,7 @@ const App: React.FC = () => {
 
   const onChangeScene = (c: Character) => {
     setCurrentCharacter(c);
-    setScene("dangeon");
+    setScene("dungeon");
   };
 
   const onExitDangeon = () => {
@@ -65,7 +65,7 @@ const App: React.FC = () => {
                   onClick={login}
                 />
               );
-            case "dangeon":
+            case "dungeon":
               return currentCharacter ? (
                 <DangeonScene
                   character={currentCharacter}
