@@ -8,8 +8,8 @@ export const Header: React.FC<{
   className: string;
   user: firebase.User | null;
   scene: Scene;
-  onExitDangeon: () => void;
-}> = ({ className, user, scene, onExitDangeon }) => {
+  onExitDungeon: () => void;
+}> = ({ className, user, scene, onExitDungeon }) => {
   const logout = () => {
     firebase.auth().signOut();
   };
@@ -25,7 +25,7 @@ export const Header: React.FC<{
         </div>
       ) : null}
       {scene === "dungeon" ? (
-        <div onClick={onExitDangeon} style={{ cursor: "pointer" }}>
+        <div onClick={onExitDungeon} style={{ cursor: "pointer" }}>
           Exit
         </div>
       ) : null}

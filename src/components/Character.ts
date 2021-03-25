@@ -25,7 +25,7 @@ export class CharacterState {
   constructor(
     private currentCharacter: Character,
     private currentLocation: Location,
-    private dungeon: Dangeon
+    private dungeon: Dungeon
   ) {}
 
   movableDirection(): Direction[] {
@@ -105,7 +105,7 @@ export interface Room {
   component: React.FC<RoomComponent>;
 }
 
-export class Dangeon {
+export class Dungeon {
   rooms: Room[][];
 
   constructor() {

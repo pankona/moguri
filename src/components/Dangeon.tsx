@@ -3,21 +3,21 @@ import { Button } from "./Button";
 import {
   Character,
   CharacterState,
-  Dangeon,
+  Dungeon,
   Direction,
   EventStatus,
   Location,
   Room,
 } from "./Character";
 
-import "./Dangeon.css";
+import "./Dungeon.css";
 
-const DangeonScene: React.FC<{
+const DungeonScene: React.FC<{
   character: Character;
-  onExitDangeon: () => void;
+  onExitDungeon: () => void;
 }> = ({ character }) => {
   const characterState = React.useRef(
-    new CharacterState(character, { level: 0, x: 1, y: 0 }, new Dangeon())
+    new CharacterState(character, { level: 0, x: 1, y: 0 }, new Dungeon())
   );
 
   const [currentCharacter, setCurrentCharacter] = React.useState<Character>(
@@ -105,4 +105,4 @@ const NextRoom: React.FC<{
   );
 };
 
-export default DangeonScene;
+export default DungeonScene;
