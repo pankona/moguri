@@ -11,6 +11,9 @@ jobs:
     if: contains(github.event.pull_request.labels.*.name, 'ok to test')
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{github.event.pull_request.head.repo.full_name}}
       - run: yarn install
       - run: yarn build
       - uses: FirebaseExtended/action-hosting-deploy@v0
