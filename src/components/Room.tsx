@@ -85,7 +85,7 @@ export const EntryRoomComponent: React.FC<RoomComponent> = ({
   const description = (
     <>
       <div>It is the very beginning of the adventure.</div>
-      <div>You entered the dangeon.</div>
+      <div>You entered the dungeon.</div>
     </>
   );
   const confirmButton: ButtonProps = {

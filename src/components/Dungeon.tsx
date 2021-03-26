@@ -3,21 +3,21 @@ import { Button } from "./Button";
 import {
   Character,
   CharacterState,
-  Dangeon,
+  Dungeon,
   Direction,
   EventStatus,
   Location,
   Room,
 } from "./Character";
 
-import "./Dangeon.css";
+import "./Dungeon.css";
 
-const DangeonScene: React.FC<{
+const DungeonScene: React.FC<{
   character: Character;
-  onExitDangeon: () => void;
+  onExitDungeon: () => void;
 }> = ({ character }) => {
   const characterState = React.useRef(
-    new CharacterState(character, { level: 0, x: 1, y: 0 }, new Dangeon())
+    new CharacterState(character, { level: 0, x: 1, y: 0 }, new Dungeon())
   );
 
   const [currentCharacter, setCurrentCharacter] = React.useState<Character>(
@@ -45,9 +45,9 @@ const DangeonScene: React.FC<{
   );
 
   return (
-    <div className="dangeon">
+    <div className="dungeon">
       {eventStatus === "in_progress" ? (
-        <div className="dangeon__room">
+        <div className="dungeon__room">
           <room.component
             room={room}
             character={currentCharacter}
@@ -60,11 +60,11 @@ const DangeonScene: React.FC<{
           />
         </div>
       ) : (
-        <div className="dangeon__next">
+        <div className="dungeon__next">
           <NextRoom characterState={characterState.current} onMove={onMove} />
         </div>
       )}
-      <div className="dangeon__character_status">
+      <div className="dungeon__character_status">
         <div>Hello, {currentCharacter.name}!</div>
         <div>
           your current location:
@@ -85,11 +85,11 @@ const NextRoom: React.FC<{
 }> = ({ characterState, onMove }) => {
   return (
     <>
-      <div className="dangeon__next__visual">
+      <div className="dungeon__next__visual">
         {characterState.movableDirection().map((d: Direction) => (
-          <div key={d} className="dangeon__next__visual_choice">
+          <div key={d} className="dungeon__next__visual_choice">
             <div
-              className="dangeon__next__visual_button"
+              className="dungeon__next__visual_button"
               key={d}
               onClick={() => {
                 onMove(d);
@@ -100,9 +100,9 @@ const NextRoom: React.FC<{
           </div>
         ))}
       </div>
-      <div className="dangeon__next__description">choice next room</div>
+      <div className="dungeon__next__description">choice next room</div>
     </>
   );
 };
 
-export default DangeonScene;
+export default DungeonScene;

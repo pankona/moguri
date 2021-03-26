@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Character } from "./Character";
 import { CharacterStoreMemory } from "./CharacterStore";
-import DangeonScene from "./Dangeon";
+import DungeonScene from "./Dungeon";
 import firebase from "./firebase";
 import StartMenu from "./StartMenu";
 import "./App.css";
@@ -10,7 +10,7 @@ import { Button } from "./Button";
 
 import "./Button.css";
 
-export type Scene = "index" | "dangeon";
+export type Scene = "index" | "dungeon";
 
 const App: React.FC = () => {
   const [user, setUser] = useState<firebase.User | null>(null);
@@ -34,10 +34,10 @@ const App: React.FC = () => {
 
   const onChangeScene = (c: Character) => {
     setCurrentCharacter(c);
-    setScene("dangeon");
+    setScene("dungeon");
   };
 
-  const onExitDangeon = () => {
+  const onExitDungeon = () => {
     setScene("index");
   };
 
@@ -47,7 +47,7 @@ const App: React.FC = () => {
         className="header"
         user={user}
         scene={scene}
-        onExitDangeon={onExitDangeon}
+        onExitDungeon={onExitDungeon}
       />
       <div className="main">
         {(() => {
@@ -65,11 +65,11 @@ const App: React.FC = () => {
                   onClick={login}
                 />
               );
-            case "dangeon":
+            case "dungeon":
               return currentCharacter ? (
-                <DangeonScene
+                <DungeonScene
                   character={currentCharacter}
-                  onExitDangeon={onExitDangeon}
+                  onExitDungeon={onExitDungeon}
                 />
               ) : (
                 <div>:(</div>
