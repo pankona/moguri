@@ -8,7 +8,8 @@
     "build": "NODE_ENV=\\\"production\\\" ts-node ./build.ts",
     "start": "NODE_ENV=\\\"development\\\" ts-node ./serve.ts",
     "deploy": "yarn build && firebase deploy",
-    "lint": "eslint \"src/**/*.{ts,tsx}\""
+    "lint": "eslint \"src/**/*.{ts,tsx}\"",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "firebase": "^8.2.9",
