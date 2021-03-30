@@ -1,8 +1,8 @@
 import React, * as react from "react";
-import { Character } from "./Character";
-import { CharacterStoreMemory } from "./CharacterStore";
+import { Character } from "../models/Character";
+import { CharacterStoreMemory } from "../models/CharacterStore";
+import firebase from "../models/firebase";
 import DungeonScene from "./Dungeon";
-import firebase from "./firebase";
 import { Header } from "./Header";
 import { Button } from "./parts/Button";
 import StartMenu from "./StartMenu";

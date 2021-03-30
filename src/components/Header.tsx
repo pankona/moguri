@@ -1,6 +1,6 @@
 import React from "react";
 import { Scene } from "./App";
-import firebase from "./firebase";
+import firebase from "../models/firebase";
 
 export const Header: React.FC<{
   className: string;

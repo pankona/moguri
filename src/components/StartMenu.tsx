@@ -1,7 +1,7 @@
 import React from "react";
-import { Character } from "./Character";
+import { Character } from "../models/Character";
+import { CharacterStore } from "../models/CharacterStore";
 import CharacterCreateForm from "./CharacterCreateForm";
-import { CharacterStore } from "./CharacterStore";
 
 const StartMenu: React.FC<{
   characterStore: CharacterStore;

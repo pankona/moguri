@@ -7,7 +7,7 @@ import {
   EventStatus,
   Location,
   Room,
-} from "./Character";
+} from "../models/Character";
 
 const DungeonScene: React.FC<{
   character: Character;
