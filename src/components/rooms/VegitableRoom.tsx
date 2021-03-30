@@ -1,5 +1,5 @@
 import React from "react";
-import { Character } from "../Character";
+import { Character } from "../../models/Character";
 import { ButtonProps } from "../parts/Button";
 import { RoomComponent, RoomDescription, RoomVisual } from "./Room";
 
