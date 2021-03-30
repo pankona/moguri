@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import { CharacterStore } from "./CharacterStore";
 import { Character } from "./Character";
-import { Button } from "./Button";
-import "./Button.css";
+import { CharacterStore } from "./CharacterStore";
+import { Button } from "./parts/Button";
+import "./parts/Button.css";
 
 const CharacterCreateForm: React.FC<{
   characterStore: CharacterStore;

@@ -1,15 +1,13 @@
 import React from "react";
-import { Button } from "./Button";
 import {
   Character,
   CharacterState,
-  Dungeon,
   Direction,
+  Dungeon,
   EventStatus,
   Location,
   Room,
 } from "./Character";
-
 import "./Dungeon.css";
 
 const DungeonScene: React.FC<{

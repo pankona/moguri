@@ -1,36 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, * as react from "react";
+import "./App.css";
 import { Character } from "./Character";
 import { CharacterStoreMemory } from "./CharacterStore";
 import DungeonScene from "./Dungeon";
 import firebase from "./firebase";
-import StartMenu from "./StartMenu";
-import "./App.css";
 import { Header } from "./Header";
-import { Button } from "./Button";
-
-import "./Button.css";
+import { Button } from "./parts/Button";
+import "./parts/Button.css";
+import StartMenu from "./StartMenu";
 
 export type Scene = "index" | "dungeon";
 
 const App: React.FC = () => {
-  const [user, setUser] = useState<firebase.User | null>(null);
+  const [user, setUser] = react.useState<firebase.User | null>(null);
 
-  useEffect(() => {
+  react.useEffect(() => {
     return firebase.auth().onAuthStateChanged((user: firebase.User | null) => {
       setUser(user);
     });
   }, []);
 
-  const [scene, setScene] = useState<Scene>("index");
+  const [scene, setScene] = react.useState<Scene>("index");
 
   const login = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithRedirect(provider);
   };
 
-  const [currentCharacter, setCurrentCharacter] = useState<Character | null>(
-    null
-  );
+  const [
+    currentCharacter,
+    setCurrentCharacter,
+  ] = react.useState<Character | null>(null);
 
   const onChangeScene = (c: Character) => {
     setCurrentCharacter(c);

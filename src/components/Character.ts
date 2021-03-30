@@ -1,13 +1,10 @@
 import React from "react";
-import {
-  EmptyRoomComponent,
-  EntryRoomComponent,
-  VegitableRoomComponent,
-  RoomComponent,
-  RoundevourRoomComponent,
-  TerminalRoomComponent,
-} from "./Room";
-
+import { EmptyRoomComponent } from "./rooms/EmptyRoom";
+import { EntryRoomComponent } from "./rooms/EntryRoom";
+import { RoomComponent } from "./rooms/Room";
+import { RoundevourRoomComponent } from "./rooms/RoundevourRoom";
+import { TerminalRoomComponent } from "./rooms/TerminalRoom";
+import { VegitableRoomComponent } from "./rooms/VegitableRoom";
 export interface Location {
   level: number;
   x: number;

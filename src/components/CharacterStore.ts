@@ -1,6 +1,6 @@
+import Cookies from "js-cookie";
 import { Character } from "./Character";
 import firebase from "./firebase";
-import Cookies from "js-cookie";
 
 export interface CharacterStore {
   fetchAll: () => Character[];

@@ -1,6 +1,5 @@
 import React from "react";
 import { Scene } from "./App";
-import { Button } from "./Button";
 import firebase from "./firebase";
 import "./Header.css";
 
