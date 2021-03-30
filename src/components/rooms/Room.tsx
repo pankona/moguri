@@ -1,8 +1,6 @@
 import React from "react";
 import { Character, Room } from "../Character";
 import { Button, ButtonProps } from "../parts/Button";
-import "../parts/Button.css";
-import "./Room.css";
 
 export interface RoomComponent {
   room: Room;

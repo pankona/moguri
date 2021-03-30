@@ -8,3 +8,120 @@ body {
   display: flex;
   justify-content: center;
 }
+
+.app {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 80%;
+  height: 80%;
+}
+
+.main {
+  width: 100%;
+  border: 2px solid #aaaaaa;
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  border: 2px solid #aaaaaa;
+  height: fit-content;
+}
+
+.confirm_button {
+  border: 2px solid #aaaaaa;
+  height: fit-content;
+}
+
+.textfield {
+  border: 2px solid #aaaaaa;
+}
+
+.room__visual {
+  border: 2px solid #bb0000;
+  width: 100%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.room__description {
+  border: 2px solid #bb0000;
+  width: 100%;
+  height: 20%;
+  overflow-y: auto;
+  word-break: break-all;
+}
+
+.room__description_buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.room__description_button {
+  border: 2px solid #aaaaaa;
+  height: fit-content;
+  width: 25%;
+}
+
+.dungeon {
+  width: 100%;
+}
+
+.dungeon__room {
+  border: 2px solid #aaaaaa;
+  height: 80%;
+}
+
+.dungeon__next {
+  border: 2px solid #aaaaaa;
+  height: 80%;
+}
+
+.dungeon__next__visual {
+  border: 2px solid #bb0000;
+  height: 80%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.dungeon__next__visual_choice {
+  display: flex;
+  flex-direction: column-reverse;
+  width: 30%;
+  height: 20%;
+  align-items: center;
+}
+
+.dungeon__next__visual_button {
+  border: 2px solid #bb0000;
+  cursor: pointer;
+  width: 80%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dungeon__next__description {
+  border: 2px solid #bb0000;
+  height: 20%;
+}
+
+.dungeon__character_status {
+  border: 2px solid #aaaaaa;
+  height: 20%;
+}
+
+.header {
+  width: 100%;
+  border: 2px solid #aaaaaa;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}

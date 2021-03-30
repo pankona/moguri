@@ -8,7 +8,6 @@ import {
   Location,
   Room,
 } from "./Character";
-import "./Dungeon.css";
 
 const DungeonScene: React.FC<{
   character: Character;

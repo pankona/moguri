@@ -1,12 +1,10 @@
 import React, * as react from "react";
-import "./App.css";
 import { Character } from "./Character";
 import { CharacterStoreMemory } from "./CharacterStore";
 import DungeonScene from "./Dungeon";
 import firebase from "./firebase";
 import { Header } from "./Header";
 import { Button } from "./parts/Button";
-import "./parts/Button.css";
 import StartMenu from "./StartMenu";
 
 export type Scene = "index" | "dungeon";
