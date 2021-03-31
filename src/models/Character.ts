@@ -1,10 +1,10 @@
-import React from "react";
-import { EmptyRoomComponent } from "../components/rooms/EmptyRoom";
-import { EntryRoomComponent } from "../components/rooms/EntryRoom";
-import { RoomComponent } from "../components/rooms/Room";
-import { RoundevourRoomComponent } from "../components/rooms/RoundevourRoom";
-import { TerminalRoomComponent } from "../components/rooms/TerminalRoom";
-import { VegitableRoomComponent } from "../components/rooms/VegitableRoom";
+import { EmptyRoom } from "./EmptyRoom";
+import { EntryRoom } from "./EntryRoom";
+import { Room } from "./Room";
+import { RoundevourRoom } from "./RoundevourRoom";
+import { TerminalRoom } from "./TerminalRoom";
+import { VegitableRoom } from "./VegitableRoom";
+
 export interface Location {
   level: number;
   x: number;
@@ -27,7 +27,7 @@ export class CharacterState {
 
   movableDirection(): Direction[] {
     const room = this.getRoomByLocation(this.currentLocation);
-    return room.edge;
+    return room.edges();
   }
 
   nextRoom(d: Direction): Room {
@@ -80,11 +80,11 @@ export class CharacterState {
   }
 
   getRoom(): Room {
-    return { ...this.getRoomByLocation(this.currentLocation) };
+    return this.getRoomByLocation(this.currentLocation);
   }
 
   private isMovable(d: Direction, r: Room): boolean {
-    return r.edge.includes(d);
+    return r.edges().includes(d);
   }
 
   private getRoomByLocation(l: Location): Room {
@@ -96,12 +96,6 @@ export type Direction = "right" | "center" | "left";
 
 export type EventStatus = "in_progress" | "finished";
 
-export interface Room {
-  description: string;
-  edge: Direction[];
-  component: React.FC<RoomComponent>;
-}
-
 export class Dungeon {
   rooms: Room[][];
 
@@ -109,192 +103,48 @@ export class Dungeon {
     this.rooms = [
       [
         // left
-        {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
-          edge: [],
-        },
-        {
-          component: VegitableRoomComponent,
-          description: "It smells green",
-          edge: ["left"],
-        },
-        {
-          component: VegitableRoomComponent,
-          description: "It smells green",
-          edge: ["left"],
-        },
-        {
-          component: VegitableRoomComponent,
-          description: "It smells green",
-          edge: ["left"],
-        },
-        {
-          component: VegitableRoomComponent,
-          description: "It smells green",
-          edge: ["left"],
-        },
-        {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
-          edge: ["left"],
-        },
-        {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
-          edge: ["left"],
-        },
-        {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
-          edge: ["left"],
-        },
-        {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
-          edge: ["left"],
-        },
-        {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
-          edge: ["left"],
-        },
-        {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
-          edge: ["center"],
-        },
-        {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
-          edge: [],
-        },
+        new EmptyRoom([]),
+        new VegitableRoom(["left"]),
+        new VegitableRoom(["left"]),
+        new VegitableRoom(["left"]),
+        new VegitableRoom(["left"]),
+        new EmptyRoom(["left"]),
+        new EmptyRoom(["left"]),
+        new EmptyRoom(["left"]),
+        new EmptyRoom(["left"]),
+        new EmptyRoom(["left"]),
+        new EmptyRoom(["center"]),
+        new EmptyRoom([]),
       ],
       [
         // center
-        {
-          component: EntryRoomComponent,
-          description: "start",
-          edge: ["left", "center", "right"],
-        },
-        {
-          component: RoundevourRoomComponent,
-          description: "Somebody is there",
-          edge: ["center"],
-        },
-        {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
-          edge: ["center"],
-        },
-        {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
-          edge: ["center"],
-        },
-        {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
-          edge: ["center"],
-        },
-        {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
-          edge: ["center"],
-        },
-        {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
-          edge: ["center"],
-        },
-        {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
-          edge: ["center"],
-        },
-        {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
-          edge: ["center"],
-        },
-        {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
-          edge: ["center"],
-        },
-        {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
-          edge: ["center"],
-        },
-        {
-          component: TerminalRoomComponent,
-          description: "It is dead end",
-          edge: [],
-        },
+        new EntryRoom(["left", "center", "right"]),
+        new RoundevourRoom(["center"]),
+        new EmptyRoom(["center"]),
+        new EmptyRoom(["center"]),
+        new EmptyRoom(["center"]),
+        new EmptyRoom(["center"]),
+        new EmptyRoom(["center"]),
+        new EmptyRoom(["center"]),
+        new EmptyRoom(["center"]),
+        new EmptyRoom(["center"]),
+        new EmptyRoom(["center"]),
+        new TerminalRoom([]),
       ],
       [
         // right
-        {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
-          edge: [],
-        },
-        {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
-          edge: ["center", "right"],
-        },
-        {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
-          edge: ["center", "right"],
-        },
-        {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
-          edge: ["center", "right"],
-        },
-        {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
-          edge: ["center", "right"],
-        },
-        {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
-          edge: ["center", "right"],
-        },
-        {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
-          edge: ["center", "right"],
-        },
-        {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
-          edge: ["center", "right"],
-        },
-        {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
-          edge: ["center", "right"],
-        },
-        {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
-          edge: ["center", "right"],
-        },
-        {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
-          edge: ["center"],
-        },
-        {
-          component: EmptyRoomComponent,
-          description: "There is nothing",
-          edge: [],
-        },
+        new EmptyRoom([]),
+        new EmptyRoom(["center", "right"]),
+        new EmptyRoom(["center", "right"]),
+        new EmptyRoom(["center", "right"]),
+        new EmptyRoom(["center", "right"]),
+        new EmptyRoom(["center", "right"]),
+        new EmptyRoom(["center", "right"]),
+        new EmptyRoom(["center", "right"]),
+        new EmptyRoom(["center", "right"]),
+        new EmptyRoom(["center", "right"]),
+        new EmptyRoom(["center"]),
+        new EmptyRoom([]),
       ],
     ];
   }

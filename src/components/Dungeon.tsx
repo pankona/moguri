@@ -6,8 +6,9 @@ import {
   Dungeon,
   EventStatus,
   Location,
-  Room,
 } from "../models/Character";
+import { Room } from "../models/Room";
+import { RoomComponent } from "./Room";
 
 const DungeonScene: React.FC<{
   character: Character;
@@ -45,7 +46,7 @@ const DungeonScene: React.FC<{
     <div className="dungeon">
       {eventStatus === "in_progress" ? (
         <div className="dungeon__room">
-          <room.component
+          <RoomComponent
             room={room}
             character={currentCharacter}
             onCharacterChanged={(newCharacter: Character) => {
@@ -92,7 +93,7 @@ const NextRoom: React.FC<{
                 onMove(d);
               }}
             >
-              {characterState.nextRoom(d).description}
+              {characterState.nextRoom(d).description()}
             </div>
           </div>
         ))}
