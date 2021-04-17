@@ -1,6 +1,6 @@
 import React, * as react from "react";
 import { Character } from "../models/Character";
-import { CharacterStoreMemory } from "../models/CharacterStore";
+import { CharacterStoreCookie } from "../models/CharacterStore";
 import firebase from "../models/firebase";
 import DungeonScene from "./Dungeon";
 import { Header } from "./Header";
@@ -53,7 +53,7 @@ const App: React.FC = () => {
             case "index":
               return user ? (
                 <StartMenu
-                  characterStore={new CharacterStoreMemory(user)}
+                  characterStore={new CharacterStoreCookie(user)}
                   onChangeScene={onChangeScene}
                 />
               ) : (

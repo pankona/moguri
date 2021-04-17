@@ -8,7 +8,7 @@ export interface CharacterStore {
   remove: (id: string) => boolean;
 }
 
-export class CharacterStoreMemory implements CharacterStore {
+export class CharacterStoreCookie implements CharacterStore {
   constructor(private user: firebase.User) {}
 
   fetchAll(): Character[] {
