@@ -111,15 +111,7 @@ export const generateDungeon = (): Dungeon => {
       [
         // center
         newEntryRoom(["left", "center", "right"]),
-        newRoundevourRoom(
-          {
-            id: "",
-            name: "John",
-            greet: "...",
-            health: 10,
-          },
-          ["center"]
-        ),
+        newRoundevourRoom(["center"]),
         newEmptyRoom(["center"]),
         newEmptyRoom(["center"]),
         newEmptyRoom(["center"]),

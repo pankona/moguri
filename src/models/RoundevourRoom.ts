@@ -4,10 +4,17 @@ import { InteractResult } from "./Room";
 type Choice = "greet" | "ignore" | "rob" | "confirm";
 type Phase = number | string;
 
-export const newRoundevourRoom = (
-  guest: Character,
-  directions: Direction[]
-) => ({
+export const newRoundevourRoom = (d: Direction[]) => {
+  const guest = {
+    id: "",
+    name: "John",
+    greet: "...",
+    health: 10,
+  };
+  return roundevourRoom(guest, d);
+};
+
+const roundevourRoom = (guest: Character, directions: Direction[]) => ({
   firstInteraction: (c: Character): InteractResult => {
     return {
       phase: 0,
