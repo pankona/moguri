@@ -1,9 +1,9 @@
-import React from "react";
+import React, { FC } from "react";
 import { Character } from "../models/Character";
 import { Room } from "../models/Room";
 import { Button } from "./parts/Button";
 
-export const RoomComponent: React.FC<{
+export const RoomComponent: FC<{
   room: Room;
   character: Character;
   onCharacterChanged: (newCharacter: Character) => void;
@@ -35,7 +35,7 @@ export const RoomComponent: React.FC<{
   );
 };
 
-export const RoomVisual: React.FC<{ className: string; imgSrc: string }> = ({
+export const RoomVisual: FC<{ className: string; imgSrc: string }> = ({
   className,
   imgSrc,
 }) => {
@@ -46,7 +46,7 @@ export const RoomVisual: React.FC<{ className: string; imgSrc: string }> = ({
   );
 };
 
-export const RoomDescription: React.FC<{
+export const RoomDescription: FC<{
   className: string;
   interaction: {
     phase: number;
