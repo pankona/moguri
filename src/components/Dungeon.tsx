@@ -33,12 +33,15 @@ const DungeonScene: React.FC<{
   const onMove = (d: Direction) => {
     const updatedCharacterState = move(characterState, d);
     setCharacterState(updatedCharacterState);
+    // TODO: save character state here
+
     setRoom(getRoom(updatedCharacterState));
     setEventStatus("in_progress");
   };
 
   const onCharacterStateUpdated = (updatedCharacterState: CharacterState) => {
     setCharacterState(updatedCharacterState);
+    // TODO: save character state here
   };
 
   return (
