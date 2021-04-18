@@ -1,5 +1,6 @@
 import { newEmptyRoom } from "./EmptyRoom";
 import { newEntryRoom } from "./EntryRoom";
+import { newPondRoom } from "./PondRoom";
 import { Room } from "./Room";
 import { newRoundevourRoom } from "./RoundevourRoom";
 import { newTerminalRoom } from "./TerminalRoom";
@@ -126,7 +127,7 @@ export const generateDungeon = (): Dungeon => {
       [
         // right
         newEmptyRoom([]),
-        newEmptyRoom(["center", "right"]),
+        newPondRoom(["center", "right"]),
         newEmptyRoom(["center", "right"]),
         newEmptyRoom(["center", "right"]),
         newEmptyRoom(["center", "right"]),
