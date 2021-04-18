@@ -79,7 +79,7 @@ const pondRoom = (directions: Direction[], imgSrc: string) => ({
 });
 
 const drinkRawPond = (c: Character): Result => {
-  const effect: number = -1 * Math.floor(Math.random() * Math.floor(3));
+  const effect: number = -1 + -1 * Math.floor(Math.random() * Math.floor(4));
   return {
     updatedCharacter: { ...c, health: c.health + effect },
     effect: effect,

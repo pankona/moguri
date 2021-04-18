@@ -17,6 +17,7 @@ export interface Character {
 export type CharacterState = {
   currentCharacter: Character;
   currentLocation: Location;
+  currentPhase: number;
   dungeon: Dungeon;
 };
 
@@ -47,7 +48,7 @@ export const nextRoom = (cs: CharacterState, d: Direction): Room => {
   }
 };
 
-export const move = (cs: CharacterState, d: Direction): boolean => {
+export const move = (cs: CharacterState, d: Direction): CharacterState => {
   const newLocation = {
     level: cs.currentLocation.level,
     x: ((): number => {
@@ -62,8 +63,10 @@ export const move = (cs: CharacterState, d: Direction): boolean => {
     })(),
     y: cs.currentLocation.y + 1,
   };
-  cs.currentLocation = newLocation;
-  return true;
+  return {
+    ...cs,
+    currentLocation: newLocation,
+  };
 };
 
 export const getRoom = (cs: CharacterState): Room => {

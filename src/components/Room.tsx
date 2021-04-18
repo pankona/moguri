@@ -1,16 +1,16 @@
 import React, { FC } from "react";
-import { Character } from "../models/Character";
-import { Room } from "../models/Room";
+import { CharacterState } from "../models/Character";
+import { InteractResult, Room } from "../models/Room";
 import { Button } from "./parts/Button";
 
 export const RoomComponent: FC<{
   room: Room;
-  character: Character;
-  onCharacterChanged: (newCharacter: Character) => void;
+  characterState: CharacterState;
+  onCharacterStateUpdated: (updatedCharacterState: CharacterState) => void;
   onEventFinished: () => void;
-}> = ({ room, character, onCharacterChanged, onEventFinished }) => {
-  const [interaction, setInteraction] = React.useState(
-    room.firstInteraction(character)
+}> = ({ room, characterState, onCharacterStateUpdated, onEventFinished }) => {
+  const [interaction, setInteraction] = React.useState<InteractResult>(
+    room.firstInteraction(characterState.currentCharacter)
   );
 
   const onInteract = (choice: string) => {
@@ -18,8 +18,18 @@ export const RoomComponent: FC<{
       onEventFinished();
       return;
     }
-    const result = room.interact(character, interaction.phase, choice);
-    onCharacterChanged({ ...result.character });
+    const result = room.interact(
+      characterState.currentCharacter,
+      interaction.phase,
+      choice
+    );
+    onCharacterStateUpdated({
+      ...characterState,
+      ...{
+        currentCharacter: result.character,
+        currentPhase: result.phase,
+      },
+    });
     setInteraction(result);
   };
 

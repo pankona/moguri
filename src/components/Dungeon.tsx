@@ -4,7 +4,6 @@ import {
   CharacterState,
   Direction,
   EventStatus,
-  Location,
   getRoom,
   move,
   movableDirection,
@@ -18,33 +17,29 @@ const DungeonScene: React.FC<{
   character: Character;
   onExitDungeon: () => void;
 }> = ({ character }) => {
-  const characterState = React.useRef<CharacterState>({
+  const [characterState, setCharacterState] = React.useState<CharacterState>({
     currentCharacter: character,
     currentLocation: { level: 0, x: 1, y: 0 },
+    currentPhase: 0,
     dungeon: generateDungeon(),
   });
 
-  const [currentCharacter, setCurrentCharacter] = React.useState<Character>(
-    characterState.current.currentCharacter
-  );
-
-  const [currentLocation, setCurrentLocation] = React.useState<Location>(
-    characterState.current.currentLocation
-  );
-
-  const [room, setRoom] = React.useState<Room>(getRoom(characterState.current));
-
-  const onMove = (d: Direction) => {
-    if (move(characterState.current, d)) {
-      setCurrentLocation(characterState.current.currentLocation);
-      setRoom(getRoom(characterState.current));
-      setEventStatus("in_progress");
-    }
-  };
+  const [room, setRoom] = React.useState<Room>(getRoom(characterState));
 
   const [eventStatus, setEventStatus] = React.useState<EventStatus>(
     "in_progress"
   );
+
+  const onMove = (d: Direction) => {
+    const updatedCharacterState = move(characterState, d);
+    setCharacterState(updatedCharacterState);
+    setRoom(getRoom(updatedCharacterState));
+    setEventStatus("in_progress");
+  };
+
+  const onCharacterStateUpdated = (updatedCharacterState: CharacterState) => {
+    setCharacterState(updatedCharacterState);
+  };
 
   return (
     <div className="dungeon">
@@ -52,10 +47,8 @@ const DungeonScene: React.FC<{
         <div className="dungeon__room">
           <RoomComponent
             room={room}
-            character={currentCharacter}
-            onCharacterChanged={(newCharacter: Character) => {
-              setCurrentCharacter(newCharacter);
-            }}
+            characterState={characterState}
+            onCharacterStateUpdated={onCharacterStateUpdated}
             onEventFinished={() => {
               setEventStatus("finished");
             }}
@@ -63,18 +56,19 @@ const DungeonScene: React.FC<{
         </div>
       ) : (
         <div className="dungeon__next">
-          <NextRoom characterState={characterState.current} onMove={onMove} />
+          <NextRoom characterState={characterState} onMove={onMove} />
         </div>
       )}
       <div className="dungeon__character_status">
-        <div>Hello, {currentCharacter.name}!</div>
+        <div>Hello, {characterState.currentCharacter.name}!</div>
         <div>
           your current location:
           <div>
-            level: {currentLocation.level}, x:
-            {currentLocation.x}, y:{currentLocation.y}
+            level: {characterState.currentLocation.level}, x:
+            {characterState.currentLocation.x}, y:
+            {characterState.currentLocation.y}
           </div>
-          <div>Health: {currentCharacter.health}</div>
+          <div>Health: {characterState.currentCharacter.health}</div>
         </div>
       </div>
     </div>
