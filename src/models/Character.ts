@@ -1,9 +1,9 @@
-import { EmptyRoom } from "./EmptyRoom";
-import { EntryRoom } from "./EntryRoom";
+import { newEmptyRoom } from "./EmptyRoom";
+import { newEntryRoom } from "./EntryRoom";
 import { Room } from "./Room";
-import { RoundevourRoom } from "./RoundevourRoom";
-import { TerminalRoom } from "./TerminalRoom";
-import { VegitableRoom } from "./VegitableRoom";
+import { newRoundevourRoom } from "./RoundevourRoom";
+import { newTerminalRoom } from "./TerminalRoom";
+import { newVegitableRoom } from "./VegitableRoom";
 
 export interface Location {
   level: number;
@@ -18,134 +18,134 @@ export interface Character {
   health: number;
 }
 
-export class CharacterState {
-  constructor(
-    private currentCharacter: Character,
-    private currentLocation: Location,
-    private dungeon: Dungeon
-  ) {}
+export type CharacterState = {
+  currentCharacter: Character;
+  currentLocation: Location;
+  dungeon: Dungeon;
+};
 
-  movableDirection(): Direction[] {
-    const room = this.getRoomByLocation(this.currentLocation);
-    return room.edges();
+export const movableDirection = (cs: CharacterState): Direction[] => {
+  const room = roomByLocation(cs.dungeon, cs.currentLocation);
+  return room.edges();
+};
+
+export const nextRoom = (cs: CharacterState, d: Direction): Room => {
+  const room = roomByLocation(cs.dungeon, cs.currentLocation);
+  if (!isMovable(d, room)) {
+    throw { error: "cannot move to the direction" };
   }
 
-  nextRoom(d: Direction): Room {
-    const room = this.getRoomByLocation(this.currentLocation);
-    if (!this.isMovable(d, room)) {
-      throw { error: "cannot move to the direction" };
+  const currentLocation = cs.currentLocation;
+  const nextRooms = cs.dungeon.rooms.map(
+    (r: Room[]): Room => {
+      return r[currentLocation.y + 1];
     }
+  );
+  switch (d) {
+    case "left":
+      return nextRooms[0];
+    case "center":
+      return nextRooms[1];
+    case "right":
+      return nextRooms[2];
+  }
+};
 
-    const currentLocation = this.currentLocation;
-    const nextRooms = this.dungeon.rooms.map(
-      (r: Room[]): Room => {
-        return r[currentLocation.y + 1];
+export const move = (cs: CharacterState, d: Direction): boolean => {
+  const newLocation = {
+    level: cs.currentLocation.level,
+    x: ((): number => {
+      switch (d) {
+        case "left":
+          return 0;
+        case "center":
+          return 1;
+        case "right":
+          return 2;
       }
-    );
-    switch (d) {
-      case "left":
-        return nextRooms[0];
-      case "center":
-        return nextRooms[1];
-      case "right":
-        return nextRooms[2];
-    }
-  }
+    })(),
+    y: cs.currentLocation.y + 1,
+  };
+  cs.currentLocation = newLocation;
+  return true;
+};
 
-  move(d: Direction): boolean {
-    const newLocation = {
-      level: this.currentLocation.level,
-      x: ((): number => {
-        switch (d) {
-          case "left":
-            return 0;
-          case "center":
-            return 1;
-          case "right":
-            return 2;
-        }
-      })(),
-      y: this.currentLocation.y + 1,
-    };
-    this.currentLocation = newLocation;
-    return true;
-  }
+export const getRoom = (cs: CharacterState): Room => {
+  return roomByLocation(cs.dungeon, cs.currentLocation);
+};
 
-  character(): Character {
-    return { ...this.currentCharacter };
-  }
+const isMovable = (d: Direction, r: Room): boolean => {
+  return r.edges().includes(d);
+};
 
-  location(): Location {
-    return { ...this.currentLocation };
-  }
-
-  getRoom(): Room {
-    return this.getRoomByLocation(this.currentLocation);
-  }
-
-  private isMovable(d: Direction, r: Room): boolean {
-    return r.edges().includes(d);
-  }
-
-  private getRoomByLocation(l: Location): Room {
-    return this.dungeon.rooms[l.x][l.y];
-  }
-}
+const roomByLocation = (d: Dungeon, l: Location): Room => {
+  return d.rooms[l.x][l.y];
+};
 
 export type Direction = "right" | "center" | "left";
 
 export type EventStatus = "in_progress" | "finished";
 
-export class Dungeon {
+export type Dungeon = {
   rooms: Room[][];
+};
 
-  constructor() {
-    this.rooms = [
+export const generateDungeon = (): Dungeon => {
+  return {
+    rooms: [
       [
         // left
-        new EmptyRoom([]),
-        new VegitableRoom(["left"]),
-        new VegitableRoom(["left"]),
-        new VegitableRoom(["left"]),
-        new VegitableRoom(["left"]),
-        new EmptyRoom(["left"]),
-        new EmptyRoom(["left"]),
-        new EmptyRoom(["left"]),
-        new EmptyRoom(["left"]),
-        new EmptyRoom(["left"]),
-        new EmptyRoom(["center"]),
-        new EmptyRoom([]),
+        newEmptyRoom([]),
+        newVegitableRoom(["left"]),
+        newVegitableRoom(["left"]),
+        newVegitableRoom(["left"]),
+        newVegitableRoom(["left"]),
+        newEmptyRoom(["left"]),
+        newEmptyRoom(["left"]),
+        newEmptyRoom(["left"]),
+        newEmptyRoom(["left"]),
+        newEmptyRoom(["left"]),
+        newEmptyRoom(["center"]),
+        newEmptyRoom([]),
       ],
       [
         // center
-        new EntryRoom(["left", "center", "right"]),
-        new RoundevourRoom(["center"]),
-        new EmptyRoom(["center"]),
-        new EmptyRoom(["center"]),
-        new EmptyRoom(["center"]),
-        new EmptyRoom(["center"]),
-        new EmptyRoom(["center"]),
-        new EmptyRoom(["center"]),
-        new EmptyRoom(["center"]),
-        new EmptyRoom(["center"]),
-        new EmptyRoom(["center"]),
-        new TerminalRoom([]),
+        newEntryRoom(["left", "center", "right"]),
+        newRoundevourRoom(
+          {
+            id: "",
+            name: "John",
+            greet: "...",
+            health: 10,
+          },
+          ["center"]
+        ),
+        newEmptyRoom(["center"]),
+        newEmptyRoom(["center"]),
+        newEmptyRoom(["center"]),
+        newEmptyRoom(["center"]),
+        newEmptyRoom(["center"]),
+        newEmptyRoom(["center"]),
+        newEmptyRoom(["center"]),
+        newEmptyRoom(["center"]),
+        newEmptyRoom(["center"]),
+        newTerminalRoom([]),
       ],
       [
         // right
-        new EmptyRoom([]),
-        new EmptyRoom(["center", "right"]),
-        new EmptyRoom(["center", "right"]),
-        new EmptyRoom(["center", "right"]),
-        new EmptyRoom(["center", "right"]),
-        new EmptyRoom(["center", "right"]),
-        new EmptyRoom(["center", "right"]),
-        new EmptyRoom(["center", "right"]),
-        new EmptyRoom(["center", "right"]),
-        new EmptyRoom(["center", "right"]),
-        new EmptyRoom(["center"]),
-        new EmptyRoom([]),
+        newEmptyRoom([]),
+        newEmptyRoom(["center", "right"]),
+        newEmptyRoom(["center", "right"]),
+        newEmptyRoom(["center", "right"]),
+        newEmptyRoom(["center", "right"]),
+        newEmptyRoom(["center", "right"]),
+        newEmptyRoom(["center", "right"]),
+        newEmptyRoom(["center", "right"]),
+        newEmptyRoom(["center", "right"]),
+        newEmptyRoom(["center", "right"]),
+        newEmptyRoom(["center"]),
+        newEmptyRoom([]),
       ],
-    ];
-  }
-}
+    ],
+  };
+};

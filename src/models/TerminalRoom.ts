@@ -1,13 +1,11 @@
 import { Character, Direction } from "./Character";
-import { InteractResult, Room } from "./Room";
+import { InteractResult } from "./Room";
 
 type Choice = "search" | "confirm";
 type Phase = number | string;
 
-export class TerminalRoom implements Room {
-  constructor(private directions: Direction[]) {}
-
-  firstInteraction(c: Character): InteractResult {
+export const newTerminalRoom = (directions: Direction[]) => ({
+  firstInteraction: (c: Character): InteractResult => {
     return {
       phase: 0,
       imgSrc: "./assets/kanban_jyunbi.png",
@@ -15,9 +13,13 @@ export class TerminalRoom implements Room {
       character: c,
       choices: ["search"] as Choice[],
     };
-  }
+  },
 
-  interact(c: Character, currentPhase: Phase, choice: string): InteractResult {
+  interact: (
+    c: Character,
+    currentPhase: Phase,
+    choice: string
+  ): InteractResult => {
     switch (currentPhase) {
       case 0:
         switch (choice) {
@@ -35,17 +37,17 @@ export class TerminalRoom implements Room {
         }
     }
     throw { error: "should not reach here :(" };
-  }
+  },
 
-  shouldShowNext(currentPhase: Phase, choice: string): boolean {
+  shouldShowNext: (currentPhase: Phase, choice: string): boolean => {
     return currentPhase === 1 && choice === "confirm";
-  }
+  },
 
-  edges(): Direction[] {
-    return this.directions;
-  }
+  edges: (): Direction[] => {
+    return directions;
+  },
 
-  description(): string {
+  description: (): string => {
     return "It is dead end";
-  }
-}
+  },
+});

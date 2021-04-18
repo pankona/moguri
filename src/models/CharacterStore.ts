@@ -8,10 +8,8 @@ export interface CharacterStore {
   remove: (id: string) => boolean;
 }
 
-export class CharacterStoreCookie implements CharacterStore {
-  constructor(private user: firebase.User) {}
-
-  fetchAll(): Character[] {
+export const characterStoreCookie = (user: firebase.User) => ({
+  fetchAll: (): Character[] => {
     const characters = Cookies.getJSON("characters") as Character[];
     if (characters) {
       return characters;
@@ -19,26 +17,26 @@ export class CharacterStoreCookie implements CharacterStore {
 
     Cookies.set("characters", []);
     return [];
-  }
+  },
 
-  add(newCharacter: Character): boolean {
+  add: (newCharacter: Character): boolean => {
     if (newCharacter.name === "") {
       return false;
     }
     const characters = Cookies.getJSON("characters") as Character[];
-    if (this.alreadyExists(characters, newCharacter)) {
+    if (alreadyExists(characters, newCharacter)) {
       return false;
     }
     if (characters.length >= 3) {
       return false;
     }
-    newCharacter.id = this.user.uid + "_" + newCharacter.name;
+    newCharacter.id = user.uid + "_" + newCharacter.name;
     characters.push(newCharacter);
     Cookies.set("characters", characters);
     return true;
-  }
+  },
 
-  remove(id: string): boolean {
+  remove: (id: string): boolean => {
     const characters = Cookies.getJSON("characters") as Character[];
     const newCharacters = characters.filter((c: Character): boolean => {
       return c.id !== id;
@@ -48,14 +46,14 @@ export class CharacterStoreCookie implements CharacterStore {
     }
     Cookies.set("characters", newCharacters);
     return true;
-  }
+  },
+});
 
-  private alreadyExists(
-    currentCharacters: Character[],
-    newCharacter: Character
-  ): boolean {
-    return currentCharacters.some((c) => {
-      return c.name === newCharacter.name;
-    });
-  }
-}
+const alreadyExists = (
+  currentCharacters: Character[],
+  newCharacter: Character
+): boolean => {
+  return currentCharacters.some((c) => {
+    return c.name === newCharacter.name;
+  });
+};

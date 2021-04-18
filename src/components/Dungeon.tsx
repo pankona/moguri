@@ -3,9 +3,13 @@ import {
   Character,
   CharacterState,
   Direction,
-  Dungeon,
   EventStatus,
   Location,
+  generateDungeon,
+  getRoom,
+  move,
+  movableDirection,
+  nextRoom,
 } from "../models/Character";
 import { Room } from "../models/Room";
 import { RoomComponent } from "./Room";
@@ -14,26 +18,26 @@ const DungeonScene: React.FC<{
   character: Character;
   onExitDungeon: () => void;
 }> = ({ character }) => {
-  const characterState = React.useRef(
-    new CharacterState(character, { level: 0, x: 1, y: 0 }, new Dungeon())
-  );
+  const characterState = React.useRef<CharacterState>({
+    currentCharacter: character,
+    currentLocation: { level: 0, x: 1, y: 0 },
+    dungeon: generateDungeon(),
+  });
 
   const [currentCharacter, setCurrentCharacter] = React.useState<Character>(
-    characterState.current.character()
+    characterState.current.currentCharacter
   );
 
   const [currentLocation, setCurrentLocation] = React.useState<Location>(
-    characterState.current.location()
+    characterState.current.currentLocation
   );
 
-  const [room, setRoom] = React.useState<Room>(
-    characterState.current.getRoom()
-  );
+  const [room, setRoom] = React.useState<Room>(getRoom(characterState.current));
 
   const onMove = (d: Direction) => {
-    if (characterState.current.move(d)) {
-      setCurrentLocation(characterState.current.location());
-      setRoom(characterState.current.getRoom());
+    if (move(characterState.current, d)) {
+      setCurrentLocation(characterState.current.currentLocation);
+      setRoom(getRoom(characterState.current));
       setEventStatus("in_progress");
     }
   };
@@ -84,7 +88,7 @@ const NextRoom: React.FC<{
   return (
     <>
       <div className="dungeon__next__visual">
-        {characterState.movableDirection().map((d: Direction) => (
+        {movableDirection(characterState).map((d: Direction) => (
           <div key={d} className="dungeon__next__visual_choice">
             <div
               className="dungeon__next__visual_button"
@@ -93,7 +97,7 @@ const NextRoom: React.FC<{
                 onMove(d);
               }}
             >
-              {characterState.nextRoom(d).description()}
+              {nextRoom(characterState, d).description()}
             </div>
           </div>
         ))}

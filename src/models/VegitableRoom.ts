@@ -10,34 +10,35 @@ type Result = {
   effect: number;
 };
 
-export class VegitableRoom implements Room {
-  private vegitable: typeof vegitableList[number];
+export const newVegitableRoom = (d: Direction[]): Room => {
+  const v = vegitableList[Math.floor(Math.random() * vegitableList.length)];
+  return vegitableRoom(v, d);
+};
 
-  constructor(private directions: Direction[]) {
-    this.vegitable =
-      vegitableList[Math.floor(Math.random() * vegitableList.length)];
-  }
-
-  firstInteraction(c: Character): InteractResult {
+const vegitableRoom = (
+  vegitable: typeof vegitableList[number],
+  directions: Direction[]
+) => ({
+  firstInteraction: (c: Character): InteractResult => {
     return {
       phase: 0,
-      imgSrc: this.imgSrc(),
+      imgSrc: imgSrc(vegitable),
       text: "An unknown grass is growing.",
       character: c,
       choices: ["eat", "ignore"] as Choice[],
     };
-  }
+  },
 
-  interact(
+  interact: (
     character: Character,
     currentPhase: Phase,
     choice: string
-  ): InteractResult {
+  ): InteractResult => {
     switch (currentPhase) {
       case 0:
         switch (choice) {
           case "eat":
-            const result = this.eat(character, this.vegitable);
+            const result = eat(character, vegitable);
             const text = ((): string => {
               if (result.effect > 0) {
                 return "You are feeling better.";
@@ -48,7 +49,7 @@ export class VegitableRoom implements Room {
             })();
             return {
               phase: 1,
-              imgSrc: this.imgSrc(),
+              imgSrc: imgSrc(vegitable),
               text: text,
               character: result.updatedCharacter,
               choices: ["confirm"] as Choice[],
@@ -57,7 +58,7 @@ export class VegitableRoom implements Room {
           case "ignore":
             return {
               phase: 1,
-              imgSrc: this.imgSrc(),
+              imgSrc: imgSrc(vegitable),
               text: "You ignored the herb.",
               character: character,
               choices: ["confirm"] as Choice[],
@@ -67,51 +68,51 @@ export class VegitableRoom implements Room {
 
     console.log(currentPhase, choice);
     throw { error: "should not reach here :(" };
-  }
+  },
 
-  shouldShowNext(currentPhase: Phase, choice: string): boolean {
+  shouldShowNext: (currentPhase: Phase, choice: string): boolean => {
     return currentPhase === 1 && choice === "confirm";
-  }
+  },
 
-  edges(): Direction[] {
-    return this.directions;
-  }
+  edges: (): Direction[] => {
+    return directions;
+  },
 
-  description(): string {
+  description: (): string => {
     return "It smells green";
-  }
+  },
+});
 
-  private imgSrc(): string {
-    switch (this.vegitable) {
-      case "herb":
-        return "./assets/vegetable_rucola.png";
-      case "mushroom":
-        return "./assets/kinoko.png";
-    }
+const imgSrc = (vegitable: typeof vegitableList[number]): string => {
+  switch (vegitable) {
+    case "herb":
+      return "./assets/vegetable_rucola.png";
+    case "mushroom":
+      return "./assets/kinoko.png";
   }
+};
 
-  private eat(c: Character, v: typeof vegitableList[number]): Result {
-    switch (v) {
-      case "herb":
-        return this.eatHerb(c);
-      case "mushroom":
-        return this.eatMushroom(c);
-    }
+const eat = (c: Character, v: typeof vegitableList[number]): Result => {
+  switch (v) {
+    case "herb":
+      return eatHerb(c);
+    case "mushroom":
+      return eatMushroom(c);
   }
+};
 
-  private eatHerb(c: Character): Result {
-    const effect: number = -3 + Math.floor(Math.random() * Math.floor(9));
-    return {
-      updatedCharacter: { ...c, health: c.health + effect },
-      effect: effect,
-    };
-  }
+const eatHerb = (c: Character): Result => {
+  const effect: number = -3 + Math.floor(Math.random() * Math.floor(9));
+  return {
+    updatedCharacter: { ...c, health: c.health + effect },
+    effect: effect,
+  };
+};
 
-  private eatMushroom(c: Character): Result {
-    const effect: number = -5 + Math.floor(Math.random() * Math.floor(9));
-    return {
-      updatedCharacter: { ...c, health: c.health + effect },
-      effect: effect,
-    };
-  }
-}
+const eatMushroom = (c: Character): Result => {
+  const effect: number = -5 + Math.floor(Math.random() * Math.floor(9));
+  return {
+    updatedCharacter: { ...c, health: c.health + effect },
+    effect: effect,
+  };
+};

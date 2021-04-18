@@ -1,13 +1,11 @@
 import { Character, Direction } from "./Character";
-import { InteractResult, Room } from "./Room";
+import { InteractResult } from "./Room";
 
 type Choice = "confirm";
 type Phase = number | string;
 
-export class EntryRoom implements Room {
-  constructor(private directions: Direction[]) {}
-
-  firstInteraction(c: Character): InteractResult {
+export const newEntryRoom = (directions: Direction[]) => ({
+  firstInteraction: (c: Character): InteractResult => {
     return {
       phase: 0,
       imgSrc: "./assets/doukutsu.png",
@@ -17,25 +15,25 @@ export class EntryRoom implements Room {
       character: c,
       choices: ["confirm"] as Choice[],
     };
-  }
+  },
 
-  interact(
+  interact: (
     _c: Character,
     _currentPhase: Phase,
     _choice: string
-  ): InteractResult {
+  ): InteractResult => {
     throw { error: "should not reach here :(" };
-  }
+  },
 
-  shouldShowNext(currentPhase: Phase, choice: string): boolean {
+  shouldShowNext: (currentPhase: Phase, choice: string): boolean => {
     return currentPhase === 0 && choice === "confirm";
-  }
+  },
 
-  edges(): Direction[] {
-    return this.directions;
-  }
+  edges: (): Direction[] => {
+    return directions;
+  },
 
-  description(): string {
+  description: (): string => {
     return "entry room";
-  }
-}
+  },
+});
