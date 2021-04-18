@@ -5,12 +5,12 @@ import {
   Direction,
   EventStatus,
   Location,
-  generateDungeon,
   getRoom,
   move,
   movableDirection,
   nextRoom,
 } from "../models/Character";
+import { generateDungeon } from "../models/Dungeon";
 import { Room } from "../models/Room";
 import { RoomComponent } from "./Room";
 
