@@ -110,7 +110,7 @@ const loadOrInitializeCharacterState = (
   if (cs) {
     console.log("characterState loaded from store");
     console.log(cs);
-    cs.dungeon = generateDungeon();
+    cs.dungeon = generateDungeon(); // todo: restore?
     return cs;
   }
   return {

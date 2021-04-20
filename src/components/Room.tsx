@@ -10,6 +10,7 @@ export const RoomComponent: FC<{
   onEventFinished: () => void;
 }> = ({ room, characterState, onCharacterStateUpdated, onEventFinished }) => {
   const [interaction, setInteraction] = React.useState<InteractResult>(
+    // todo: don't load firstInteraction always
     room.firstInteraction(characterState.currentCharacter)
   );
 
