@@ -1,5 +1,6 @@
 import React, * as react from "react";
 import { Character } from "../models/Character";
+import { characterStateStoreCookie } from "../models/CharacterStateStore";
 import { characterStoreCookie } from "../models/CharacterStore";
 import firebase from "../models/firebase";
 import DungeonScene from "./Dungeon";
@@ -67,7 +68,7 @@ const App: React.FC = () => {
               return currentCharacter ? (
                 <DungeonScene
                   character={currentCharacter}
-                  onExitDungeon={onExitDungeon}
+                  characterStateStore={characterStateStoreCookie()}
                 />
               ) : (
                 <div>:(</div>
