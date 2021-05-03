@@ -1,5 +1,6 @@
 import { Character, Direction } from "./Character";
-import { InteractResult } from "./Room";
+import { InteractResult, Room } from "./Room";
+import { RoomList } from "./RoomList";
 
 type Choice = "drink" | "pump" | "ignore" | "confirm";
 type Phase = number | string;
@@ -14,7 +15,11 @@ export const newPondRoom = (d: Direction[]) => {
   return pondRoom(d, imgSrc);
 };
 
-const pondRoom = (directions: Direction[], imgSrc: string) => ({
+const pondRoom = (directions: Direction[], imgSrc: string): Room => ({
+  roomName: (): typeof RoomList[number]  => {
+    return "PondRoom"
+  },
+
   firstInteraction: (c: Character): InteractResult => {
     return {
       phase: 0,

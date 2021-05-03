@@ -1,5 +1,5 @@
 import { Dungeon } from "./Dungeon";
-import { Room } from "./Room";
+import { InteractResult, Room } from "./Room";
 
 export interface Location {
   level: number;
@@ -17,7 +17,7 @@ export interface Character {
 export type CharacterState = {
   currentCharacter: Character;
   currentLocation: Location;
-  currentPhase: number;
+  currentInteractResult?: InteractResult;
   dungeon: Dungeon;
 };
 

@@ -1,5 +1,6 @@
 import { Character, Direction } from "./Character";
 import { InteractResult, Room } from "./Room";
+import { RoomList } from "./RoomList";
 
 type Choice = "eat" | "ignore" | "confirm";
 type Phase = number | string;
@@ -18,7 +19,11 @@ export const newVegitableRoom = (d: Direction[]): Room => {
 const vegitableRoom = (
   vegitable: typeof vegitableList[number],
   directions: Direction[]
-) => ({
+): Room => ({
+  roomName: (): typeof RoomList[number] => {
+    return "VegitableRoom";
+  },
+
   firstInteraction: (c: Character): InteractResult => {
     return {
       phase: 0,
@@ -66,7 +71,6 @@ const vegitableRoom = (
         }
     }
 
-    console.log(currentPhase, choice);
     throw { error: "should not reach here :(" };
   },
 

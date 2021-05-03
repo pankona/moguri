@@ -1,5 +1,6 @@
 import { Character, Direction } from "./Character";
-import { InteractResult } from "./Room";
+import { InteractResult, Room } from "./Room";
+import { RoomList } from "./RoomList";
 
 type Choice = "greet" | "ignore" | "rob" | "confirm";
 type Phase = number | string;
@@ -14,7 +15,11 @@ export const newRoundevourRoom = (d: Direction[]) => {
   return roundevourRoom(guest, d);
 };
 
-const roundevourRoom = (guest: Character, directions: Direction[]) => ({
+const roundevourRoom = (guest: Character, directions: Direction[]): Room => ({
+  roomName: (): typeof RoomList[number]  => {
+    return "PondRoom"
+  },
+
   firstInteraction: (c: Character): InteractResult => {
     return {
       phase: 0,

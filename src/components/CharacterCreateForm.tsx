@@ -1,12 +1,20 @@
 import React, { useEffect } from "react";
 import { Character } from "../models/Character";
+import { CharacterStateStore } from "../models/CharacterStateStore";
 import { CharacterStore } from "../models/CharacterStore";
 import { Button } from "./parts/Button";
 
-const CharacterCreateForm: React.FC<{
+export type CharacterCreateProps = {
   characterStore: CharacterStore;
+  characterStateStore: CharacterStateStore;
   onChangeScene: (c: Character) => void;
-}> = ({ characterStore, onChangeScene }) => {
+};
+
+const CharacterCreateForm: React.FC<CharacterCreateProps> = ({
+  characterStore,
+  characterStateStore,
+  onChangeScene,
+}) => {
   const [characterName, setCharacterName] = React.useState<string>("");
 
   const onCharacterNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,6 +43,7 @@ const CharacterCreateForm: React.FC<{
   };
 
   const onRemoveCharacter = (id: string) => {
+    characterStateStore.Delete(id);
     if (characterStore.remove(id)) {
       setCharacters([...characterStore.fetchAll()]);
       setCharacterName("");

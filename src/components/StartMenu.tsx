@@ -1,18 +1,10 @@
 import React from "react";
-import { Character } from "../models/Character";
-import { CharacterStore } from "../models/CharacterStore";
-import CharacterCreateForm from "./CharacterCreateForm";
+import CharacterCreateForm, {
+  CharacterCreateProps,
+} from "./CharacterCreateForm";
 
-const StartMenu: React.FC<{
-  characterStore: CharacterStore;
-  onChangeScene: (c: Character) => void;
-}> = ({ characterStore, onChangeScene }) => {
-  return (
-    <CharacterCreateForm
-      characterStore={characterStore}
-      onChangeScene={onChangeScene}
-    />
-  );
+const StartMenu: React.FC<CharacterCreateProps> = (props) => {
+  return <CharacterCreateForm {...props} />;
 };
 
 export default StartMenu;

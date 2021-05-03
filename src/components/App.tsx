@@ -1,5 +1,6 @@
 import React, * as react from "react";
 import { Character } from "../models/Character";
+import { characterStateStoreCookie } from "../models/CharacterStateStore";
 import { characterStoreCookie } from "../models/CharacterStore";
 import firebase from "../models/firebase";
 import DungeonScene from "./Dungeon";
@@ -8,6 +9,8 @@ import { Button } from "./parts/Button";
 import StartMenu from "./StartMenu";
 
 export type Scene = "index" | "dungeon";
+
+const characterStateStore = characterStateStoreCookie()
 
 const App: React.FC = () => {
   const [user, setUser] = react.useState<firebase.User | null>(null);
@@ -54,6 +57,7 @@ const App: React.FC = () => {
               return user ? (
                 <StartMenu
                   characterStore={characterStoreCookie(user)}
+                  characterStateStore={characterStateStore}
                   onChangeScene={onChangeScene}
                 />
               ) : (
@@ -67,7 +71,7 @@ const App: React.FC = () => {
               return currentCharacter ? (
                 <DungeonScene
                   character={currentCharacter}
-                  onExitDungeon={onExitDungeon}
+                  characterStateStore={characterStateStore}
                 />
               ) : (
                 <div>:(</div>

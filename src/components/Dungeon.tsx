@@ -9,20 +9,18 @@ import {
   movableDirection,
   nextRoom,
 } from "../models/Character";
+import { CharacterStateStore } from "../models/CharacterStateStore";
 import { generateDungeon } from "../models/Dungeon";
 import { Room } from "../models/Room";
 import { RoomComponent } from "./Room";
 
 const DungeonScene: React.FC<{
   character: Character;
-  onExitDungeon: () => void;
-}> = ({ character }) => {
-  const [characterState, setCharacterState] = React.useState<CharacterState>({
-    currentCharacter: character,
-    currentLocation: { level: 0, x: 1, y: 0 },
-    currentPhase: 0,
-    dungeon: generateDungeon(),
-  });
+  characterStateStore: CharacterStateStore;
+}> = ({ character, characterStateStore }) => {
+  const [characterState, setCharacterState] = React.useState<CharacterState>(
+    loadOrInitializeCharacterState(character, characterStateStore)
+  );
 
   const [room, setRoom] = React.useState<Room>(getRoom(characterState));
 
@@ -32,8 +30,9 @@ const DungeonScene: React.FC<{
 
   const onMove = (d: Direction) => {
     const updatedCharacterState = move(characterState, d);
+    updatedCharacterState.currentInteractResult = undefined;
     setCharacterState(updatedCharacterState);
-    // TODO: save character state here
+    characterStateStore.Save(character.id, updatedCharacterState);
 
     setRoom(getRoom(updatedCharacterState));
     setEventStatus("in_progress");
@@ -41,7 +40,7 @@ const DungeonScene: React.FC<{
 
   const onCharacterStateUpdated = (updatedCharacterState: CharacterState) => {
     setCharacterState(updatedCharacterState);
-    // TODO: save character state here
+    characterStateStore.Save(character.id, updatedCharacterState);
   };
 
   return (
@@ -102,6 +101,19 @@ const NextRoom: React.FC<{
       <div className="dungeon__next__description">choice next room</div>
     </>
   );
+};
+
+const loadOrInitializeCharacterState = (
+  character: Character,
+  characterStateStore: CharacterStateStore
+): CharacterState => {
+  const cs = characterStateStore.Load(character.id);
+  return cs ? cs : {
+    currentCharacter: character,
+    currentLocation: { level: 0, x: 1, y: 0 },
+    currentInteractResult: undefined,
+    dungeon: generateDungeon(),
+  };
 };
 
 export default DungeonScene;
