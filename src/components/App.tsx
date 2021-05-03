@@ -10,6 +10,8 @@ import StartMenu from "./StartMenu";
 
 export type Scene = "index" | "dungeon";
 
+const characterStateStore = characterStateStoreCookie()
+
 const App: React.FC = () => {
   const [user, setUser] = react.useState<firebase.User | null>(null);
 
@@ -55,6 +57,7 @@ const App: React.FC = () => {
               return user ? (
                 <StartMenu
                   characterStore={characterStoreCookie(user)}
+                  characterStateStore={characterStateStore}
                   onChangeScene={onChangeScene}
                 />
               ) : (
@@ -68,7 +71,7 @@ const App: React.FC = () => {
               return currentCharacter ? (
                 <DungeonScene
                   character={currentCharacter}
-                  characterStateStore={characterStateStoreCookie()}
+                  characterStateStore={characterStateStore}
                 />
               ) : (
                 <div>:(</div>

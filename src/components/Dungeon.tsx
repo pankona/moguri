@@ -30,6 +30,7 @@ const DungeonScene: React.FC<{
 
   const onMove = (d: Direction) => {
     const updatedCharacterState = move(characterState, d);
+    updatedCharacterState.currentInteractResult = undefined;
     setCharacterState(updatedCharacterState);
     characterStateStore.Save(character.id, updatedCharacterState);
 
@@ -105,18 +106,12 @@ const NextRoom: React.FC<{
 const loadOrInitializeCharacterState = (
   character: Character,
   characterStateStore: CharacterStateStore
-) => {
+): CharacterState => {
   const cs = characterStateStore.Load(character.id);
-  if (cs) {
-    console.log("characterState loaded from store");
-    console.log(cs);
-    cs.dungeon = generateDungeon(); // todo: restore?
-    return cs;
-  }
-  return {
+  return cs ? cs : {
     currentCharacter: character,
     currentLocation: { level: 0, x: 1, y: 0 },
-    currentPhase: 0,
+    currentInteractResult: undefined,
     dungeon: generateDungeon(),
   };
 };

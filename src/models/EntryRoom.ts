@@ -1,10 +1,15 @@
 import { Character, Direction } from "./Character";
-import { InteractResult } from "./Room";
+import { InteractResult, Room } from "./Room";
+import { RoomList } from "./RoomList";
 
 type Choice = "confirm";
 type Phase = number | string;
 
-export const newEntryRoom = (directions: Direction[]) => ({
+export const newEntryRoom = (directions: Direction[]): Room => ({
+  roomName: (): typeof RoomList[number]  => {
+    return "EntryRoom"
+  },
+
   firstInteraction: (c: Character): InteractResult => {
     return {
       phase: 0,
