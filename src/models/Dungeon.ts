@@ -6,7 +6,7 @@ export type Dungeon = {
 };
 
 export const generateDungeon = (): Dungeon => {
-  const floor = generateFloor()
+  const floor = generateFloor();
   const left = floor.rooms[0].map<Room>((r) =>
     roomFactory(r.room)(r.directions)
   );
@@ -19,8 +19,7 @@ export const generateDungeon = (): Dungeon => {
   return {
     rooms: [left, center, right],
   };
-
-}
+};
 
 export const generateFloor = (): FloorInfo => {
   return {
@@ -59,14 +58,14 @@ export const generateFloor = (): FloorInfo => {
         // right
         { room: "EmptyRoom", directions: [] },
         { room: "PondRoom", directions: ["center", "right"] },
-        { room: "EmptyRoom", directions: ["center", "right"] },
-        { room: "EmptyRoom", directions: ["center", "right"] },
-        { room: "EmptyRoom", directions: ["center", "right"] },
-        { room: "EmptyRoom", directions: ["center", "right"] },
-        { room: "EmptyRoom", directions: ["center", "right"] },
-        { room: "EmptyRoom", directions: ["center", "right"] },
-        { room: "EmptyRoom", directions: ["center", "right"] },
-        { room: "EmptyRoom", directions: ["center", "right"] },
+        { room: "PondRoom", directions: ["center", "right"] },
+        { room: "PondRoom", directions: ["center", "right"] },
+        { room: "PondRoom", directions: ["center", "right"] },
+        { room: "PondRoom", directions: ["center", "right"] },
+        { room: "PondRoom", directions: ["center", "right"] },
+        { room: "PondRoom", directions: ["center", "right"] },
+        { room: "PondRoom", directions: ["center", "right"] },
+        { room: "PondRoom", directions: ["center", "right"] },
         { room: "EmptyRoom", directions: ["center"] },
         { room: "EmptyRoom", directions: [] },
       ],

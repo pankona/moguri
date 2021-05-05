@@ -21,6 +21,22 @@ export type CharacterState = {
   dungeon: Dungeon;
 };
 
+export const effect = (interactResult: InteractResult): InteractResult => {
+  if (interactResult.character.health <= 0) {
+    const character: Character = { ...interactResult.character, health: 0 };
+    const text: string =
+      interactResult.text + "... you died (press exit to return title)";
+    const choices: string[] = [];
+    return {
+      ...interactResult,
+      character: character,
+      text: text,
+      choices: choices,
+    };
+  }
+  return interactResult;
+};
+
 export const movableDirection = (cs: CharacterState): Direction[] => {
   const room = roomByLocation(cs.dungeon, cs.currentLocation);
   return room.edges();
