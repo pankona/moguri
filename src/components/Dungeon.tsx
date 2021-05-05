@@ -108,12 +108,14 @@ const loadOrInitializeCharacterState = (
   characterStateStore: CharacterStateStore
 ): CharacterState => {
   const cs = characterStateStore.Load(character.id);
-  return cs ? cs : {
-    currentCharacter: character,
-    currentLocation: { level: 0, x: 1, y: 0 },
-    currentInteractResult: undefined,
-    dungeon: generateDungeon(),
-  };
+  return cs
+    ? cs
+    : {
+        currentCharacter: character,
+        currentLocation: { level: 0, x: 1, y: 0 },
+        currentInteractResult: undefined,
+        dungeon: generateDungeon(),
+      };
 };
 
 export default DungeonScene;

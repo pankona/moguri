@@ -13,17 +13,17 @@
   },
   "dependencies": {
     "firebase": "^8.4.3",
-    "js-cookie": "^2.2.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "ress": "^4.0.0"
+    "ress": "^4.0.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/firebase": "^3.2.1",
-    "@types/js-cookie": "^2.2.6",
     "@types/node": "^15.0.2",
     "@types/react": "^17.0.5",
     "@types/react-dom": "^17.0.1",
+    "@types/uuid": "^8.3.0",
     "@typescript-eslint/parser": "^4.22.1",
     "@typescript-eslint/typescript-estree": "^4.17.0",
     "esbuild": "^0.11.18",

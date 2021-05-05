@@ -1,17 +1,15 @@
 import React, { useEffect } from "react";
-import { Character } from "../models/Character";
+import { Character, CharacterState } from "../models/Character";
 import { CharacterStateStore } from "../models/CharacterStateStore";
-import { CharacterStore } from "../models/CharacterStore";
+import { generateDungeon } from "../models/Dungeon";
 import { Button } from "./parts/Button";
 
 export type CharacterCreateProps = {
-  characterStore: CharacterStore;
   characterStateStore: CharacterStateStore;
   onChangeScene: (c: Character) => void;
 };
 
 const CharacterCreateForm: React.FC<CharacterCreateProps> = ({
-  characterStore,
   characterStateStore,
   onChangeScene,
 }) => {
@@ -21,11 +19,13 @@ const CharacterCreateForm: React.FC<CharacterCreateProps> = ({
     setCharacterName(e.target.value);
   };
 
-  const [characters, setCharacters] = React.useState<Character[]>([]);
+  const [characterStates, setCharacterStates] = React.useState<
+    CharacterState[]
+  >([]);
 
   useEffect(() => {
-    setCharacters(characterStore.fetchAll());
-  }, [characterStore]);
+    setCharacterStates(characterStateStore.fetchAll());
+  }, [characterStateStore]);
 
   const onSubmitCharacterCreate = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -36,18 +36,24 @@ const CharacterCreateForm: React.FC<CharacterCreateProps> = ({
       greet: "Hi!",
       health: 10,
     };
-    if (characterStore.add(newCharacter)) {
-      setCharacters([...characterStore.fetchAll()]);
+
+    const newCharacterState: CharacterState = {
+      currentCharacter: newCharacter,
+      currentLocation: { level: 0, x: 1, y: 0 },
+      currentInteractResult: undefined,
+      dungeon: generateDungeon(),
+    };
+
+    if (characterStateStore.add(newCharacterState)) {
+      setCharacterStates(characterStateStore.fetchAll());
       setCharacterName("");
     }
   };
 
   const onRemoveCharacter = (id: string) => {
     characterStateStore.Delete(id);
-    if (characterStore.remove(id)) {
-      setCharacters([...characterStore.fetchAll()]);
-      setCharacterName("");
-    }
+    setCharacterStates(characterStateStore.fetchAll());
+    setCharacterName("");
   };
 
   const onStart = (c: Character) => {
@@ -67,22 +73,25 @@ const CharacterCreateForm: React.FC<CharacterCreateProps> = ({
         <input className={"button"} type="submit" name="submit" />
       </form>
       <div>characters</div>
-      {characters.map((character) => (
-        <div key={character.id}>
-          {character.name}
-          <Button
-            className={"button"}
-            value="start"
-            onClick={(_: React.MouseEvent<HTMLInputElement>) => {
-              onStart(character);
-            }}
-          />
-
+      {characterStates.map((characterStatus) => (
+        <div key={characterStatus.currentCharacter.id}>
+          {characterStatus.currentCharacter.name}
+          {characterStatus.currentCharacter.health !== 0 ? (
+            <Button
+              className={"button"}
+              value="start"
+              onClick={(_: React.MouseEvent<HTMLInputElement>) => {
+                onStart(characterStatus.currentCharacter);
+              }}
+            />
+          ) : (
+            " is dead "
+          )}
           <Button
             className={"button"}
             value="remove"
             onClick={(_: React.MouseEvent<HTMLInputElement>) => {
-              onRemoveCharacter(character.id);
+              onRemoveCharacter(characterStatus.currentCharacter.id);
             }}
           />
         </div>
