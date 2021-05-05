@@ -75,16 +75,18 @@ const CharacterCreateForm: React.FC<CharacterCreateProps> = ({
       <div>characters</div>
       {characterStates.map((characterStatus) => (
         <div key={characterStatus.currentCharacter.id}>
-          {((): string => {
-            return characterStatus.currentCharacter.name;
-          })()}
-          <Button
-            className={"button"}
-            value="start"
-            onClick={(_: React.MouseEvent<HTMLInputElement>) => {
-              onStart(characterStatus.currentCharacter);
-            }}
-          />
+          {characterStatus.currentCharacter.name}
+          {characterStatus.currentCharacter.health !== 0 ? (
+            <Button
+              className={"button"}
+              value="start"
+              onClick={(_: React.MouseEvent<HTMLInputElement>) => {
+                onStart(characterStatus.currentCharacter);
+              }}
+            />
+          ) : (
+            " is dead "
+          )}
           <Button
             className={"button"}
             value="remove"
