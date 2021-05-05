@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { CharacterState } from "../models/Character";
+import { CharacterState, effect } from "../models/Character";
 import { InteractResult, Room } from "../models/Room";
 import { Button } from "./parts/Button";
 
@@ -25,14 +25,15 @@ export const RoomComponent: FC<{
       interaction.phase,
       choice
     );
+    const effectedResult = effect(result);
     onCharacterStateUpdated({
       ...characterState,
       ...{
-        currentCharacter: result.character,
-        currentInteractResult: result,
+        currentCharacter: effectedResult.character,
+        currentInteractResult: effectedResult,
       },
     });
-    setInteraction(result);
+    setInteraction(effectedResult);
   };
 
   return (
