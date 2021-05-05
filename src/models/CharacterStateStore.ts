@@ -1,4 +1,4 @@
-import Cookies from "js-cookie";
+import { v4 as uuidv4 } from "uuid";
 import { CharacterState } from "./Character";
 import { Dungeon } from "./Dungeon";
 import { Room } from "./Room";
@@ -8,6 +8,8 @@ export interface CharacterStateStore {
   Save: (id: string, c: CharacterState) => void;
   Load: (id: string) => CharacterState | undefined;
   Delete: (id: string) => void;
+  add: (c: CharacterState) => boolean;
+  fetchAll: () => CharacterState[];
 }
 
 const serializeDungeon = (cs: CharacterState): FloorInfo => {
@@ -47,20 +49,126 @@ type serializedCharacterState = Omit<CharacterState, "dungeon"> & {
   floor: FloorInfo;
 };
 
+const LOCALSTORAGE_KEY_CHARACTER_STATES = "characterStates";
+
 export const characterStateStoreCookie = () => ({
   Save: (id: string, c: CharacterState) => {
-    const floor = serializeDungeon(c);
-    const serializedState: serializedCharacterState = { ...c, floor: floor };
-    Cookies.set(id, serializedState);
-  },
-  Load: (id: string): CharacterState | undefined => {
-    const ret = Cookies.getJSON(id) as serializedCharacterState;
-    if (ret) {
-      return { ...ret, dungeon: deserializeFloor(ret.floor) };
+    const serializedState: serializedCharacterState = {
+      ...c,
+      floor: serializeDungeon(c),
+    };
+
+    const storedCharacterStatesJSON = localStorage.getItem(
+      LOCALSTORAGE_KEY_CHARACTER_STATES
+    );
+    if (!storedCharacterStatesJSON) {
+      localStorage.setItem(
+        LOCALSTORAGE_KEY_CHARACTER_STATES,
+        JSON.stringify([serializedState])
+      );
+      return;
     }
-    return undefined;
+
+    const storedCharacterStates: serializedCharacterState[] = JSON.parse(
+      storedCharacterStatesJSON
+    );
+
+    const serializedCharacterStates = storedCharacterStates.filter(
+      (cs) => cs.currentCharacter.id !== id
+    );
+    serializedCharacterStates.push(serializedState);
+
+    localStorage.setItem(
+      LOCALSTORAGE_KEY_CHARACTER_STATES,
+      JSON.stringify(serializedCharacterStates)
+    );
   },
+
+  Load: (id: string): CharacterState | undefined => {
+    const storedCharacterStatesJSON = localStorage.getItem(
+      LOCALSTORAGE_KEY_CHARACTER_STATES
+    );
+    if (!storedCharacterStatesJSON) {
+      return undefined;
+    }
+
+    const storedCharacterStates: serializedCharacterState[] = JSON.parse(
+      storedCharacterStatesJSON
+    );
+    const ret = storedCharacterStates.find((cs) => {
+      return cs.currentCharacter.id === id;
+    });
+    if (!ret) {
+      return undefined;
+    }
+    return { ...ret, dungeon: deserializeFloor(ret.floor) };
+  },
+
   Delete: (id: string) => {
-    Cookies.remove(id);
+    const storedCharacterStatesJSON = localStorage.getItem(
+      LOCALSTORAGE_KEY_CHARACTER_STATES
+    );
+    if (!storedCharacterStatesJSON) {
+      return;
+    }
+
+    const storedCharacterStates: serializedCharacterState[] = JSON.parse(
+      storedCharacterStatesJSON
+    );
+    const result = storedCharacterStates.filter(
+      (cs) => cs.currentCharacter.id !== id
+    );
+
+    localStorage.setItem(
+      LOCALSTORAGE_KEY_CHARACTER_STATES,
+      JSON.stringify(result)
+    );
+  },
+
+  add: (c: CharacterState): boolean => {
+    const serializedCharacterState: serializedCharacterState = {
+      ...c,
+      currentCharacter: { ...c.currentCharacter, id: uuidv4() },
+      floor: serializeDungeon(c),
+    };
+
+    const storedCharacterStatesJSON = localStorage.getItem(
+      LOCALSTORAGE_KEY_CHARACTER_STATES
+    );
+    if (!storedCharacterStatesJSON) {
+      localStorage.setItem(
+        LOCALSTORAGE_KEY_CHARACTER_STATES,
+        JSON.stringify([serializedCharacterState])
+      );
+      return true;
+    }
+
+    const storedCharacterStates: serializedCharacterState[] = JSON.parse(
+      storedCharacterStatesJSON
+    );
+    storedCharacterStates.push(serializedCharacterState);
+    localStorage.setItem(
+      LOCALSTORAGE_KEY_CHARACTER_STATES,
+      JSON.stringify(storedCharacterStates)
+    );
+
+    return true;
+  },
+
+  fetchAll: (): CharacterState[] => {
+    const storedCharacterStatesJSON = localStorage.getItem(
+      LOCALSTORAGE_KEY_CHARACTER_STATES
+    );
+    if (!storedCharacterStatesJSON) {
+      return [];
+    }
+
+    const storedCharacterStates: Array<serializedCharacterState> = JSON.parse(
+      storedCharacterStatesJSON
+    );
+    return storedCharacterStates.map<CharacterState>((cs) => ({
+      ...cs,
+      dungeon: deserializeFloor(cs.floor),
+    }));
   },
 });
