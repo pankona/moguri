@@ -45,7 +45,7 @@ const deserializeFloor = (floor: FloorInfo): Dungeon => {
   };
 };
 
-type serializedCharacterState = Omit<CharacterState, "dungeon"> & {
+type SerializedCharacterState = Omit<CharacterState, "dungeon"> & {
   floor: FloorInfo;
 };
 
@@ -53,7 +53,7 @@ const LOCALSTORAGE_KEY_CHARACTER_STATES = "characterStates";
 
 export const characterStateStoreLocalStorage = () => ({
   save: (id: string, c: CharacterState) => {
-    const serializedState: serializedCharacterState = {
+    const serializedState: SerializedCharacterState = {
       ...c,
       floor: serializeDungeon(c),
     };
@@ -69,7 +69,7 @@ export const characterStateStoreLocalStorage = () => ({
       return;
     }
 
-    const storedCharacterStates: serializedCharacterState[] = JSON.parse(
+    const storedCharacterStates: SerializedCharacterState[] = JSON.parse(
       storedCharacterStatesJSON
     );
 
@@ -92,7 +92,7 @@ export const characterStateStoreLocalStorage = () => ({
       return undefined;
     }
 
-    const storedCharacterStates: serializedCharacterState[] = JSON.parse(
+    const storedCharacterStates: SerializedCharacterState[] = JSON.parse(
       storedCharacterStatesJSON
     );
     const ret = storedCharacterStates.find((cs) => {
@@ -112,7 +112,7 @@ export const characterStateStoreLocalStorage = () => ({
       return;
     }
 
-    const storedCharacterStates: serializedCharacterState[] = JSON.parse(
+    const storedCharacterStates: SerializedCharacterState[] = JSON.parse(
       storedCharacterStatesJSON
     );
     const result = storedCharacterStates.filter(
@@ -126,7 +126,7 @@ export const characterStateStoreLocalStorage = () => ({
   },
 
   add: (c: CharacterState): boolean => {
-    const serializedCharacterState: serializedCharacterState = {
+    const serializedCharacterState: SerializedCharacterState = {
       ...c,
       currentCharacter: { ...c.currentCharacter, id: uuidv4() },
       floor: serializeDungeon(c),
@@ -143,7 +143,7 @@ export const characterStateStoreLocalStorage = () => ({
       return true;
     }
 
-    const storedCharacterStates: serializedCharacterState[] = JSON.parse(
+    const storedCharacterStates: SerializedCharacterState[] = JSON.parse(
       storedCharacterStatesJSON
     );
     storedCharacterStates.push(serializedCharacterState);
@@ -163,7 +163,7 @@ export const characterStateStoreLocalStorage = () => ({
       return [];
     }
 
-    const storedCharacterStates: Array<serializedCharacterState> = JSON.parse(
+    const storedCharacterStates: Array<SerializedCharacterState> = JSON.parse(
       storedCharacterStatesJSON
     );
     return storedCharacterStates.map<CharacterState>((cs) => ({
