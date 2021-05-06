@@ -27,7 +27,7 @@
     "@typescript-eslint/parser": "^4.22.1",
     "@typescript-eslint/typescript-estree": "^4.17.0",
     "esbuild": "^0.11.18",
-    "esbuild-loader": "^2.10.0",
+    "esbuild-loader": "^2.13.0",
     "eslint": "^7.25.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "firebase-tools": "^9.5.0",

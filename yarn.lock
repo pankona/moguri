@@ -1756,27 +1756,22 @@ es6-weak-map@^2.0.3:
     es6-iterator "^2.0.3"
     es6-symbol "^3.1.1"
 
-esbuild-loader@^2.10.0:
-  version "2.12.0"
-  resolved "https://registry.yarnpkg.com/esbuild-loader/-/esbuild-loader-2.12.0.tgz#ebdfd0e1131ba0d2166d3cb6f0592cabbb02a602"
-  integrity sha512-wQJ8tryOYC5CsG62scwX92HIlY0kgH+28xPz+3pxGZlexkQJYZF0kN97iVR6pyzGzfGhTPD7pabdqVnYF7HMVw==
+esbuild-loader@^2.13.0:
+  version "2.13.0"
+  resolved "https://registry.yarnpkg.com/esbuild-loader/-/esbuild-loader-2.13.0.tgz#f5a3602a89a3b728506ae3e1887304fffeef9270"
+  integrity sha512-gC9lML8RGkTSWG2pJVEOZRLMoIluq1Jd7OzzVkOZKMzbMDMWDhXEwXLs60n+aglnAYa9GVrD/UXjTHkM51nBsg==
   dependencies:
-    esbuild "^0.10.2"
+    esbuild "^0.11.19"
     joycon "^3.0.1"
     json5 "^2.2.0"
     loader-utils "^2.0.0"
     type-fest "^1.0.1"
     webpack-sources "^2.2.0"
 
-esbuild@^0.10.2:
-  version "0.10.2"
-  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.10.2.tgz#caa65a8f3096d547d89159918039df6c5c6c90be"
-  integrity sha512-/5vsZD7wTJJHC3yNXLUjXNvUDwqwNoIMvFvLd9tcDQ9el5l13pspYm3yufavjIeYvNtAbo+6N/6uoWx9dGA6ug==
-
-esbuild@^0.11.18:
-  version "0.11.18"
-  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.11.18.tgz#b587ec9e84d2e291b545e3c6342b5b703fd009cb"
-  integrity sha512-KD7v4N9b5B8bxPUNn/3GA9r0HWo4nJk3iwjZ+2zG1ffg+r8ig+wqj7sW6zgI6Sn4/B2FnbzqWxcAokAGGM5zwQ==
+esbuild@^0.11.18, esbuild@^0.11.19:
+  version "0.11.19"
+  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.11.19.tgz#59289d9c6ee3f45d0db289a662c31473da25c199"
+  integrity sha512-X2h8UThAwKLxmc1OChHVegIScphS/qU9cUB5vCEV2T0A024E8Ptpg9xssXXcs+j1uEgXrDJZuVRzx2JsmGzq7A==
 
 escalade@^3.1.1:
   version "3.1.1"
