@@ -5,9 +5,9 @@ import { Room } from "./Room";
 import { FloorInfo, roomFactory, RoomInfo } from "./RoomList";
 
 export interface CharacterStateStore {
-  Save: (id: string, c: CharacterState) => void;
-  Load: (id: string) => CharacterState | undefined;
-  Delete: (id: string) => void;
+  save: (id: string, c: CharacterState) => void;
+  load: (id: string) => CharacterState | undefined;
+  remove: (id: string) => void;
   add: (c: CharacterState) => boolean;
   fetchAll: () => CharacterState[];
 }
@@ -52,7 +52,7 @@ type serializedCharacterState = Omit<CharacterState, "dungeon"> & {
 const LOCALSTORAGE_KEY_CHARACTER_STATES = "characterStates";
 
 export const characterStateStoreLocalStorage = () => ({
-  Save: (id: string, c: CharacterState) => {
+  save: (id: string, c: CharacterState) => {
     const serializedState: serializedCharacterState = {
       ...c,
       floor: serializeDungeon(c),
@@ -84,7 +84,7 @@ export const characterStateStoreLocalStorage = () => ({
     );
   },
 
-  Load: (id: string): CharacterState | undefined => {
+  load: (id: string): CharacterState | undefined => {
     const storedCharacterStatesJSON = localStorage.getItem(
       LOCALSTORAGE_KEY_CHARACTER_STATES
     );
@@ -104,7 +104,7 @@ export const characterStateStoreLocalStorage = () => ({
     return { ...ret, dungeon: deserializeFloor(ret.floor) };
   },
 
-  Delete: (id: string) => {
+  remove: (id: string) => {
     const storedCharacterStatesJSON = localStorage.getItem(
       LOCALSTORAGE_KEY_CHARACTER_STATES
     );

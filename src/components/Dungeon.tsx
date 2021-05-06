@@ -32,7 +32,7 @@ const DungeonScene: React.FC<{
     const updatedCharacterState = move(characterState, d);
     updatedCharacterState.currentInteractResult = undefined;
     setCharacterState(updatedCharacterState);
-    characterStateStore.Save(character.id, updatedCharacterState);
+    characterStateStore.save(character.id, updatedCharacterState);
 
     setRoom(getRoom(updatedCharacterState));
     setEventStatus("in_progress");
@@ -40,7 +40,7 @@ const DungeonScene: React.FC<{
 
   const onCharacterStateUpdated = (updatedCharacterState: CharacterState) => {
     setCharacterState(updatedCharacterState);
-    characterStateStore.Save(character.id, updatedCharacterState);
+    characterStateStore.save(character.id, updatedCharacterState);
   };
 
   return (
@@ -107,7 +107,7 @@ const loadOrInitializeCharacterState = (
   character: Character,
   characterStateStore: CharacterStateStore
 ): CharacterState => {
-  const cs = characterStateStore.Load(character.id);
+  const cs = characterStateStore.load(character.id);
   return cs
     ? cs
     : {

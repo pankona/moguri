@@ -51,7 +51,7 @@ const CharacterCreateForm: React.FC<CharacterCreateProps> = ({
   };
 
   const onRemoveCharacter = (id: string) => {
-    characterStateStore.Delete(id);
+    characterStateStore.remove(id);
     setCharacterStates(characterStateStore.fetchAll());
     setCharacterName("");
   };
