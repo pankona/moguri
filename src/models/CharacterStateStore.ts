@@ -51,7 +51,7 @@ type serializedCharacterState = Omit<CharacterState, "dungeon"> & {
 
 const LOCALSTORAGE_KEY_CHARACTER_STATES = "characterStates";
 
-export const characterStateStoreCookie = () => ({
+export const characterStateStoreLocalStorage = () => ({
   Save: (id: string, c: CharacterState) => {
     const serializedState: serializedCharacterState = {
       ...c,

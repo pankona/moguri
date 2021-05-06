@@ -1,6 +1,6 @@
 import React, * as react from "react";
 import { Character } from "../models/Character";
-import { characterStateStoreCookie } from "../models/CharacterStateStore";
+import { characterStateStoreLocalStorage } from "../models/CharacterStateStore";
 import firebase from "../models/firebase";
 import DungeonScene from "./Dungeon";
 import { Header } from "./Header";
@@ -9,7 +9,7 @@ import StartMenu from "./StartMenu";
 
 export type Scene = "index" | "dungeon";
 
-const characterStateStore = characterStateStoreCookie();
+const characterStateStore = characterStateStoreLocalStorage();
 
 const App: React.FC = () => {
   const [user, setUser] = react.useState<firebase.User | null>(null);
