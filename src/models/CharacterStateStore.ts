@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 import { CharacterState } from "./Character";
 import { Dungeon } from "./Dungeon";
 import { Room } from "./Room";
-import { FloorInfo, roomFactory, RoomInfo } from "./RoomList";
+import { SerializedDungeon, roomFactory, RoomInfo } from "./RoomList";
 
 export interface CharacterStateStore {
   save: (id: string, c: CharacterState) => void;
@@ -12,7 +12,7 @@ export interface CharacterStateStore {
   fetchAll: () => CharacterState[];
 }
 
-const serializeDungeon = (cs: CharacterState): FloorInfo => {
+const serializeDungeon = (cs: CharacterState): SerializedDungeon => {
   const left = cs.dungeon.rooms[0].map<RoomInfo>((r) => ({
     room: r.roomName(),
     directions: r.edges(),
@@ -30,14 +30,14 @@ const serializeDungeon = (cs: CharacterState): FloorInfo => {
   };
 };
 
-const deserializeFloor = (floor: FloorInfo): Dungeon => {
-  const left = floor.rooms[0].map<Room>((r) =>
+const deserializeDungeon = (dungeon: SerializedDungeon): Dungeon => {
+  const left = dungeon.rooms[0].map<Room>((r) =>
     roomFactory(r.room)(r.directions)
   );
-  const center = floor.rooms[1].map<Room>((r) =>
+  const center = dungeon.rooms[1].map<Room>((r) =>
     roomFactory(r.room)(r.directions)
   );
-  const right = floor.rooms[2].map<Room>((r) =>
+  const right = dungeon.rooms[2].map<Room>((r) =>
     roomFactory(r.room)(r.directions)
   );
   return {
@@ -46,7 +46,7 @@ const deserializeFloor = (floor: FloorInfo): Dungeon => {
 };
 
 type SerializedCharacterState = Omit<CharacterState, "dungeon"> & {
-  floor: FloorInfo;
+  dungeon: SerializedDungeon;
 };
 
 const LOCALSTORAGE_KEY_CHARACTER_STATES = "characterStates";
@@ -55,7 +55,7 @@ export const characterStateStoreLocalStorage = () => ({
   save: (id: string, c: CharacterState) => {
     const serializedState: SerializedCharacterState = {
       ...c,
-      floor: serializeDungeon(c),
+      dungeon: serializeDungeon(c),
     };
 
     const storedCharacterStatesJSON = localStorage.getItem(
@@ -101,7 +101,7 @@ export const characterStateStoreLocalStorage = () => ({
     if (!ret) {
       return undefined;
     }
-    return { ...ret, dungeon: deserializeFloor(ret.floor) };
+    return { ...ret, dungeon: deserializeDungeon(ret.dungeon) };
   },
 
   remove: (id: string) => {
@@ -129,7 +129,7 @@ export const characterStateStoreLocalStorage = () => ({
     const serializedCharacterState: SerializedCharacterState = {
       ...c,
       currentCharacter: { ...c.currentCharacter, id: uuidv4() },
-      floor: serializeDungeon(c),
+      dungeon: serializeDungeon(c),
     };
 
     const storedCharacterStatesJSON = localStorage.getItem(
@@ -168,7 +168,7 @@ export const characterStateStoreLocalStorage = () => ({
     );
     return storedCharacterStates.map<CharacterState>((cs) => ({
       ...cs,
-      dungeon: deserializeFloor(cs.floor),
+      dungeon: deserializeDungeon(cs.dungeon),
     }));
   },
 });

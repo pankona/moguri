@@ -1,19 +1,19 @@
 import { Room } from "./Room";
-import { FloorInfo, RoomInfo, roomFactory } from "./RoomList";
+import { SerializedDungeon, roomFactory } from "./RoomList";
 
 export type Dungeon = {
   rooms: Room[][];
 };
 
 export const generateDungeon = (): Dungeon => {
-  const floor = generateFloor();
-  const left = floor.rooms[0].map<Room>((r) =>
+  const dungeon = generateSerializedDungeon();
+  const left = dungeon.rooms[0].map<Room>((r) =>
     roomFactory(r.room)(r.directions)
   );
-  const center = floor.rooms[1].map<Room>((r) =>
+  const center = dungeon.rooms[1].map<Room>((r) =>
     roomFactory(r.room)(r.directions)
   );
-  const right = floor.rooms[2].map<Room>((r) =>
+  const right = dungeon.rooms[2].map<Room>((r) =>
     roomFactory(r.room)(r.directions)
   );
   return {
@@ -21,7 +21,7 @@ export const generateDungeon = (): Dungeon => {
   };
 };
 
-export const generateFloor = (): FloorInfo => {
+export const generateSerializedDungeon = (): SerializedDungeon => {
   return {
     rooms: [
       [

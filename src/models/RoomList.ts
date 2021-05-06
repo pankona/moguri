@@ -40,6 +40,6 @@ export type RoomInfo = {
   directions: Direction[];
 };
 
-export type FloorInfo = {
+export type SerializedDungeon = {
   rooms: RoomInfo[][];
 };
