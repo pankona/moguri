@@ -30,7 +30,7 @@
     "esbuild-loader": "^2.13.1",
     "eslint": "^7.26.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "firebase-tools": "^9.10.2",
+    "firebase-tools": "^9.11.0",
     "prettier": "^2.3.0",
     "ts-loader": "^9.1.2",
     "ts-node": "^9.1.1",
