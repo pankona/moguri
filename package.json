@@ -22,7 +22,7 @@
     "@types/firebase": "^3.2.1",
     "@types/node": "^15.12.2",
     "@types/react": "^17.0.9",
-    "@types/react-dom": "^17.0.6",
+    "@types/react-dom": "^17.0.7",
     "@types/uuid": "^8.3.0",
     "@typescript-eslint/parser": "^4.26.1",
     "@typescript-eslint/typescript-estree": "^4.26.1",
