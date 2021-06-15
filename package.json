@@ -25,7 +25,7 @@
     "@types/react-dom": "^17.0.7",
     "@types/uuid": "^8.3.0",
     "@typescript-eslint/parser": "^4.26.1",
-    "@typescript-eslint/typescript-estree": "^4.26.1",
+    "@typescript-eslint/typescript-estree": "^4.27.0",
     "esbuild": "^0.12.8",
     "esbuild-loader": "^2.13.1",
     "eslint": "^7.28.0",
