@@ -28,7 +28,7 @@
     "@typescript-eslint/typescript-estree": "^4.27.0",
     "esbuild": "^0.12.9",
     "esbuild-loader": "^2.13.1",
-    "eslint": "^7.28.0",
+    "eslint": "^7.29.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "firebase-tools": "^9.13.1",
     "prettier": "^2.3.1",
