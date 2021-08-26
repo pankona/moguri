@@ -12,7 +12,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "firebase": "^8.10.0",
+    "firebase": "^9.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "ress": "^4.0.0",
