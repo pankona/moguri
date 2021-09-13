@@ -17,11 +17,11 @@ const App: React.FC = () => {
   const [user, setUser] = react.useState<firebase.auth.User | null>(null);
 
   react.useEffect(() => {
-    return firebase.auth.onAuthStateChanged(() => {
+    return firebase.auth.onAuthStateChanged(
       (user: firebase.auth.User | null) => {
         setUser(user);
-      };
-    });
+      }
+    );
   }, []);
 
   const [scene, setScene] = react.useState<Scene>("index");

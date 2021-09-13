@@ -29,7 +29,9 @@ export namespace firebase.auth {
     firebaseAuth.getAuth().signOut();
   };
 
-  export const onAuthStateChanged = (f: () => void) => {
+  export const onAuthStateChanged = (
+    f: (user: firebaseAuth.User | null) => void
+  ) => {
     firebaseAuth.onAuthStateChanged(firebaseAuth.getAuth(), f);
   };
 }
