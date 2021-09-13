@@ -34,6 +34,7 @@ export const effect = (interactResult: InteractResult): InteractResult => {
       choices: choices,
     };
   }
+
   return interactResult;
 };
 
@@ -49,11 +50,9 @@ export const nextRoom = (cs: CharacterState, d: Direction): Room => {
   }
 
   const currentLocation = cs.currentLocation;
-  const nextRooms = cs.dungeon.rooms.map(
-    (r: Room[]): Room => {
-      return r[currentLocation.y + 1];
-    }
-  );
+  const nextRooms = cs.dungeon.rooms.map((r: Room[]): Room => {
+    return r[currentLocation.y + 1];
+  });
   switch (d) {
     case "left":
       return nextRooms[0];
