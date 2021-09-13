@@ -1,15 +1,15 @@
+import { getAuth, User } from "firebase/auth";
 import React from "react";
 import { Scene } from "./App";
-import firebase from "../models/firebase";
 
 export const Header: React.FC<{
   className: string;
-  user: firebase.User | null;
+  user: User | null;
   scene: Scene;
   onExitDungeon: () => void;
 }> = ({ className, user, scene, onExitDungeon }) => {
   const logout = () => {
-    firebase.auth().signOut();
+    getAuth().signOut();
   };
 
   return (
