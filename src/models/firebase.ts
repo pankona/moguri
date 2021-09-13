@@ -1,4 +1,5 @@
-import firebase from "firebase/app";
+import * as firebaseApp from "firebase/app";
+import * as firebaseAuth from "firebase/auth";
 
 const config = {
   apiKey: "AIzaSyBFuR_VwwSAaex_k9rKPCNtCIjDlgFU1-s",
@@ -10,4 +11,27 @@ const config = {
   measurementId: "G-R7NK5CPT4H",
 };
 
-firebase.initializeApp(config);
+export namespace firebase.app {
+  export const initializeApp = () => {
+    firebaseApp.initializeApp(config);
+  };
+}
+
+export namespace firebase.auth {
+  export type User = firebaseAuth.User;
+
+  export const login = () => {
+    const provider = new firebaseAuth.GoogleAuthProvider();
+    firebaseAuth.signInWithRedirect(firebaseAuth.getAuth(), provider);
+  };
+
+  export const logout = () => {
+    firebaseAuth.getAuth().signOut();
+  };
+
+  export const onAuthStateChanged = (
+    f: (user: firebaseAuth.User | null) => void
+  ) => {
+    firebaseAuth.onAuthStateChanged(firebaseAuth.getAuth(), f);
+  };
+}

@@ -1,12 +1,7 @@
-import {
-  getAuth,
-  GoogleAuthProvider,
-  signInWithRedirect,
-  User,
-} from "firebase/auth";
 import React, * as react from "react";
 import { Character } from "../models/Character";
 import { characterStateStoreLocalStorage } from "../models/CharacterStateStore";
+import { firebase } from "../models/firebase";
 import DungeonScene from "./Dungeon";
 import { Header } from "./Header";
 import { Button } from "./parts/Button";
@@ -15,23 +10,21 @@ import StartMenu from "./StartMenu";
 export type Scene = "index" | "dungeon";
 
 const characterStateStore = characterStateStoreLocalStorage();
-const auth = getAuth();
+
+firebase.app.initializeApp();
 
 const App: React.FC = () => {
-  const [user, setUser] = react.useState<User | null>(null);
+  const [user, setUser] = react.useState<firebase.auth.User | null>(null);
 
   react.useEffect(() => {
-    return auth.onAuthStateChanged((user: User | null) => {
-      setUser(user);
-    });
+    return firebase.auth.onAuthStateChanged(
+      (user: firebase.auth.User | null) => {
+        setUser(user);
+      }
+    );
   }, []);
 
   const [scene, setScene] = react.useState<Scene>("index");
-
-  const login = () => {
-    const provider = new GoogleAuthProvider();
-    signInWithRedirect(auth, provider);
-  };
 
   const [currentCharacter, setCurrentCharacter] =
     react.useState<Character | null>(null);
@@ -66,7 +59,7 @@ const App: React.FC = () => {
                 <Button
                   className={"button"}
                   value={"Google Login"}
-                  onClick={login}
+                  onClick={() => firebase.auth.login()}
                 />
               );
             case "dungeon":
