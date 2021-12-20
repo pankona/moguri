@@ -26,7 +26,7 @@
     "@types/uuid": "^8.3.3",
     "@typescript-eslint/parser": "^5.8.0",
     "@typescript-eslint/typescript-estree": "^5.7.0",
-    "esbuild": "^0.14.5",
+    "esbuild": "^0.14.6",
     "esbuild-loader": "^2.17.0",
     "eslint": "^8.5.0",
     "eslint-plugin-react-hooks": "^4.3.0",
