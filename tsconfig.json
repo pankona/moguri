@@ -10,6 +10,9 @@
     "plugins": [
       {
         "name": "typescript-eslint-language-service"
+      },
+      {
+        "name": "typescript-styled-plugin"
       }
     ]
   },
