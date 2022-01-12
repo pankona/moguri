@@ -31,7 +31,7 @@
     "esbuild-loader": "^2.18.0",
     "eslint": "^8.6.0",
     "eslint-plugin-react-hooks": "^4.3.0",
-    "firebase-tools": "^10.0.1",
+    "firebase-tools": "^10.1.0",
     "prettier": "^2.5.1",
     "styled-components": "^5.3.3",
     "ts-loader": "^9.2.6",
