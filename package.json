@@ -26,7 +26,7 @@
     "@types/styled-components": "^5.1.23",
     "@types/uuid": "^8.3.4",
     "@typescript-eslint/parser": "^5.12.1",
-    "@typescript-eslint/typescript-estree": "^5.11.0",
+    "@typescript-eslint/typescript-estree": "^5.13.0",
     "esbuild": "^0.14.23",
     "esbuild-loader": "^2.18.0",
     "eslint": "^8.10.0",
