@@ -16,8 +16,8 @@ export const newPondRoom = (d: Direction[]) => {
 };
 
 const pondRoom = (directions: Direction[], imgSrc: string): Room => ({
-  roomName: (): typeof RoomList[number]  => {
-    return "PondRoom"
+  roomName: (): typeof RoomList[number] => {
+    return "PondRoom";
   },
 
   firstInteraction: (c: Character): InteractResult => {
