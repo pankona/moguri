@@ -36,7 +36,7 @@
     "firebase-tools": "^10.7.1",
     "prettier": "^2.6.2",
     "styled-components": "^5.3.5",
-    "ts-loader": "^9.2.8",
+    "ts-loader": "^9.2.9",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.3",
     "typescript-eslint-language-service": "^5.0.0",
