@@ -30,7 +30,7 @@
     "@types/ws": "^8.5.3",
     "@typescript-eslint/parser": "^5.41.0",
     "@typescript-eslint/typescript-estree": "^5.40.0",
-    "@vitejs/plugin-react": "^2.1.0",
+    "@vitejs/plugin-react": "^2.2.0",
     "eslint": "^8.26.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "firebase-tools": "^11.15.0",
