@@ -28,7 +28,7 @@
     "@types/styled-components": "^5.1.26",
     "@types/uuid": "^8.3.4",
     "@types/ws": "^8.5.3",
-    "@typescript-eslint/parser": "^5.41.0",
+    "@typescript-eslint/parser": "^5.42.0",
     "@typescript-eslint/typescript-estree": "^5.40.0",
     "@vitejs/plugin-react": "^2.2.0",
     "eslint": "^8.26.0",
