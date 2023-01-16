@@ -34,7 +34,7 @@
     "eslint": "^8.31.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "firebase-tools": "^11.20.0",
-    "prettier": "^2.8.2",
+    "prettier": "^2.8.3",
     "styled-components": "^5.3.6",
     "typescript": "^4.9.4",
     "typescript-eslint-language-service": "^5.0.0",
