@@ -20,7 +20,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "@types/babel__core": "^7.1.20",
+    "@types/babel__core": "^7.20.0",
     "@types/firebase": "^3.2.1",
     "@types/node": "^18.11.18",
     "@types/react": "^18.0.26",
