@@ -5563,10 +5563,10 @@ typedarray-to-buffer@^3.1.5:
   dependencies:
     is-typedarray "^1.0.0"
 
-typescript-eslint-language-service@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/typescript-eslint-language-service/-/typescript-eslint-language-service-5.0.0.tgz#c8a77b109a25d9908ad2d0c994a282c7494318c3"
-  integrity sha512-QB3YsL+lDOpKwblXuqD9GkzpHhJC2D02e/3OIj38kIe6LSL97cEsUtnsVPqIaofnOsV2glj2T5VLxp5gmLTERQ==
+typescript-eslint-language-service@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/typescript-eslint-language-service/-/typescript-eslint-language-service-5.0.2.tgz#cc5df0977eb71c8d099fb0db1240c1784c396e6d"
+  integrity sha512-1cCq5GoFVLIKqnZO+CjCXzNMgksEDJJnxJfQcWUxoaQTxlGUrJphrDz+TEJqXNqXMJgAAH1Q7lXJV0ahlBZNxQ==
 
 typescript-styled-plugin@^0.18.2:
   version "0.18.2"

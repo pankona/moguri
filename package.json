@@ -37,7 +37,7 @@
     "prettier": "^2.8.7",
     "styled-components": "^5.3.9",
     "typescript": "^5.0.2",
-    "typescript-eslint-language-service": "^5.0.0",
+    "typescript-eslint-language-service": "^5.0.2",
     "typescript-styled-plugin": "^0.18.2",
     "vite": "^4.2.1"
   }
