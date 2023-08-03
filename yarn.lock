@@ -3781,10 +3781,10 @@ find-up@^5.0.0:
     locate-path "^6.0.0"
     path-exists "^4.0.0"
 
-firebase-tools@^12.4.6:
-  version "12.4.6"
-  resolved "https://registry.yarnpkg.com/firebase-tools/-/firebase-tools-12.4.6.tgz#1ff97b7742cb25134a828576f17452ca5df16b0c"
-  integrity sha512-WcHCxBsmFschPDdiKrVQla7kGdTDHuDBKbL01yYEVXCQA3lPXUUfTRS5D1LKi/8RH3Kv0MkvO2eXNuxIGo2qmg==
+firebase-tools@^12.4.7:
+  version "12.4.7"
+  resolved "https://registry.yarnpkg.com/firebase-tools/-/firebase-tools-12.4.7.tgz#3c581b9ef32d39221eaa11735bbb59a299d6d74a"
+  integrity sha512-L5nULzh0PElm2OK5lXsj7zkIwBBB4KsGOg0CvCnjdvJ1ROMN2IqffJ0KR/8paXuGWf5SA0VJj2QjG37jFxrAjg==
   dependencies:
     "@google-cloud/pubsub" "^3.0.1"
     abort-controller "^3.0.0"
@@ -6066,12 +6066,7 @@ semver@^5.5.0, semver@^5.6.0:
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.7.1.tgz#a954f931aeba508d307bbf069eff0c01c96116f7"
   integrity sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==
 
-semver@^6.0.0, semver@^6.1.1, semver@^6.1.2, semver@^6.3.0:
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/semver/-/semver-6.3.0.tgz#ee0a64c8af5e8ceea67687b133761e1becbd1d3d"
-  integrity sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==
-
-semver@^6.3.1:
+semver@^6.0.0, semver@^6.1.1, semver@^6.1.2, semver@^6.3.0, semver@^6.3.1:
   version "6.3.1"
   resolved "https://registry.yarnpkg.com/semver/-/semver-6.3.1.tgz#556d2ef8689146e46dcea4bfdd095f3434dffcb4"
   integrity sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==
