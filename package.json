@@ -33,7 +33,7 @@
     "@vitejs/plugin-react": "^4.0.4",
     "eslint": "^8.47.0",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "firebase-tools": "^12.4.8",
+    "firebase-tools": "^12.5.0",
     "prettier": "^3.0.2",
     "styled-components": "^6.0.7",
     "typescript": "^5.1.6",
